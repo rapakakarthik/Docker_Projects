@@ -1,0 +1,154 @@
+.color_list{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px 0;
+  margin: 0;
+
+  li{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    list-style: none;
+  }
+}
+.filter_category{
+  .sidenav_cat{
+    padding: 0;
+    margin: 0;
+
+    .sidenav_cat_list{
+      list-style: none;
+      padding: 10px 0;
+    }
+
+    .sidenav_cat_name{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding-bottom: 10px;
+        cursor: pointer;
+    }
+  }
+
+  .sidenav_subcat{
+    padding-left: 10px;
+    margin: 0;
+
+    .sidenav_subcat_list{
+      list-style: none;
+      padding-bottom: 10px;
+      cursor: pointer;
+
+      &:last-child{
+        padding: 0;
+      }
+
+      &:hover{
+        color: #017DB9;
+      }
+    }
+
+    .grey_stroked_btn{
+      font-size: 12px;
+      padding: 4px 10px;
+    }
+  }
+}
+
+.sidenavbar-category-list {
+  margin: 1px;
+  height: auto !important;
+}
+
+.sidenavbar-list-heading {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  height: auto !important;
+  font-weight: 500;
+  color: black;
+  font-size: 15px;
+}
+
+.sidenavbar-category-list {
+  padding-left: 0px;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+span.sidenavbar-list-ls {
+  font-size: 14px;
+  color: #676767;
+}
+
+.sidenavbar-category-list.checked {
+  /* background: red; */
+  margin-bottom: 0px;
+  margin-left: -10px;
+}
+
+.sidenavbar-main-list {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.sidenavbar-collaspe-header {
+  padding-left: 0px;
+}
+
+.sidenavbar-collapse {
+  box-shadow: none!important;
+  height: auto;
+}
+
+span.checked-text-span {
+  color: #676767;
+  font-weight: revert;
+  font-size: 14px;
+}
+
+input.form-control.sidenavbar-inputs {
+  margin-right: 10px;
+  border-radius: 4px !important;
+  font-size: 14px;
+}
+
+.innerfilter {
+  width: 230px;
+  position: sticky;
+  top: 150px;
+  max-height: calc(100vh - 155px);
+  overflow: auto;
+}
+
+.color-section {
+  & h3 {
+    margin-bottom: 0px;
+  }
+  & mat-list-item {
+    padding: 0px;
+    width: 25px;
+    height: 25px;
+    margin-right: 20px;
+    text-align: center;
+    border-radius: 50%;
+  }
+  & mat-list {
+    display: -webkit-inline-box;
+    margin-left: -6px;
+  }
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #9b9f9f !important;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: white !important;
+}
+
+
+.sub-category {
+  margin-left: 15px;
+}

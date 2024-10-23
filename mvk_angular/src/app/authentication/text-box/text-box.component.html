@@ -1,0 +1,9 @@
+<form [formGroup]="form">
+    <section>
+        <mat-form-field  appearance="outline" class="smallfiled">
+            <input matInput [type]="type" [formControlName]="name" [placeholder]="name">
+            <mat-error *ngIf="name1?.hasError('required')">{{name}}  is required</mat-error>
+        </mat-form-field>
+    </section>
+    <button mat-raised-button class="primaryBtn bigbtn"  color="primary" (click)="submitName($event)">Next</button>
+</form>

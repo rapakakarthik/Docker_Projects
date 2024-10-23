@@ -1,0 +1,83 @@
+<section *ngIf="false">
+  <div class="tab-heading-banner">
+    <h2>Top charts</h2>
+  </div>
+  <div class="tab-banner-chips">
+    <mat-chip-listbox aria-label="Dog selection" class="chips-banners">
+      <mat-chip class="tab-chips-banner active">
+        <span> Top free </span>
+      </mat-chip>
+      <mat-chip class="tab-chips-banner">
+        <span> Top grossing </span>
+      </mat-chip>
+      <mat-chip class="tab-chips-banner"> <span>Top paid </span></mat-chip>
+    </mat-chip-listbox>
+  </div>
+</section>
+
+<section *ngIf="mainCategoryData.length > 0">
+  <div *ngIf="mainCategoryInfo" class="tab-heading-banner">
+    <h2 class="smallTitle">{{ mainCategoryInfo.title }}</h2>
+    <h4>{{ mainCategoryInfo.sub_title }}</h4>
+  </div>
+
+  <div class="tab-banner-chips">
+    <mat-tab-group (selectedIndexChange)="getSubCategory1($event)">
+      <mat-tab *ngFor="let category of mainCategoryData">
+        <ng-template mat-tab-label>
+          <div class="chipcls">{{ category.school_name }}</div>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+    <h4 *ngIf="false && subCategoryInfo">{{ subCategoryInfo.description }}</h4>
+  </div>
+</section>
+<!-- Sub Category Loader -->
+<section *ngIf="loader" class="loader-wrap mobilehomeload1">
+  <section class="manu-loader">
+    <section class="loader-img">
+      <section class="text-img"></section>
+    </section>
+    <section class="loader-desc">
+      <section class="smart text"></section>
+    </section>
+  </section>
+  <section class="manu-loader">
+    <section class="loader-img">
+      <section class="text-img"></section>
+    </section>
+    <section class="loader-desc">
+      <section class="smart text"></section>
+    </section>
+  </section>
+
+  <section class="manu-loader">
+    <section class="loader-img">
+      <section class="text-img"></section>
+    </section>
+    <section class="loader-desc">
+      <section class="smart text"></section>
+    </section>
+  </section>
+  <section class="manu-loader">
+    <section class="loader-img">
+      <section class="text-img"></section>
+    </section>
+    <section class="loader-desc">
+      <section class="smart text"></section>
+    </section>
+  </section>
+</section>
+
+<div *ngIf="subCategoryData.length > 0" class="media-grid-banner-div">
+  <section class="media-grid-banner">
+    <ng-container *ngFor="let category of subCategoryData">
+      <div (click)="goTo(category.category_id)" class="media-card">
+        <div class="card-circle-imgs">
+          <img [lazyLoad]="category.image" />
+        </div>
+        <p class="circle-p">{{ category.category_name }}</p>
+      </div>
+    </ng-container>
+  </section>
+</div>

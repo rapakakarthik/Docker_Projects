@@ -1,0 +1,249 @@
+img.number-one-batch {
+  width: 50px;
+  float: left;
+  margin-top: 20px;
+}
+
+svg.filled-star {
+  fill: #fec835;
+  margin-right: 2px;
+  width: 12px;
+  height: 12px;
+}
+
+svg.filled-star-gray {
+  fill: #cac8c8;
+  margin-left: 2px;
+  width: 12px;
+  height: 12px;
+}
+
+h2.manufacture-heading {
+  margin-top: 0px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--foundation-shades-shades-500);
+  word-break: break-word;
+}
+
+span.manufacture-icons {
+  margin-left: 0px;
+  position: relative;
+}
+
+svg.verfi-icons {
+  fill: #008400;
+  margin-right: 70px;
+}
+
+svg.diamond-icons {
+  margin-left: 3px;
+  margin-right: 3px;
+  fill: #de4545;
+}
+
+span.staff {
+  font-size: 12px;
+  font-weight: 500 !important;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: left;
+  color: #2e3231;
+  margin-left: 10px;
+}
+
+span.years-card {
+  border: 1px solid #9b9f9f;
+  font-size: 12px;
+  padding: 2px;
+  margin: 0 5px;
+
+  border-radius: 3px;
+}
+
+h3.manf-list-heading {
+  margin-bottom: 0px;
+  font-weight: 500;
+  font-size: 14px;
+  margin-left: 6px;
+  margin-top: 5px;
+}
+
+.manf-list {
+  height: auto !important;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: -4px;
+}
+
+span.manf-list-sublist {
+  font-size: 14px;
+  color: #2e3231;
+  font-weight: 400;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+h3.second-sub-title {
+  & span {
+    color: #242424;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: bold !important;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.36;
+    letter-spacing: normal;
+    text-align: left;
+    color: var(--foundation-neutral-veutral-base);
+  }
+
+  margin-bottom: 0px;
+  font-size: 14px;
+  font-weight: 400;
+  padding-left: 14px;
+  color: #525454;
+  margin-bottom: 0px !important;
+  padding-left: 2px !important;
+  margin-top: 8px !important;
+}
+
+svg.filled-star.star {
+  margin-right: 5px;
+  position: relative;
+  top: -2px;
+}
+
+.verfi-img {
+  width: 90px !important;
+  float: left;
+  margin-top: -8px;
+  margin-left: -5px;
+}
+
+svg.filled-star.star {
+  fill: #fec835;
+}
+
+.verfi-img {
+  width: 90px !important;
+}
+
+.diamond {
+  font-size: 18px;
+  width: 18px;
+  height: 15px;
+  color: #ed5e0d;
+}
+
+.company-credits {
+  display: flex;
+  align-items: center;
+}
+
+.diamondwrap {
+  display: flex;
+  align-items: center;
+}
+
+.yrs {
+  border: 1px solid #9b9f9f;
+  color: #2e3231;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 5px;
+}
+
+.ratingWrap {
+  display: flex;
+  padding-top: 10px;
+  font-size: 12px;
+  color: #525454;
+
+  & .ratecount {
+    color: #242424;
+    font-weight: 500;
+    padding-right: 5px;
+    font-size: 13px;
+  }
+}
+
+.star_icon {
+  font-size: 18px;
+  color: #fec835;
+  width: 16px;
+  height: 16px;
+  margin-right: 3px;
+}
+
+.credits_list{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+
+  li{
+    list-style: none;
+    margin-right: 20px;
+    font-weight: 500;
+    color: #5d5e5e;
+    padding: 5px 0;
+
+    .verified_img{
+      width: 65px;
+    }
+
+    .years{
+      padding: 1px 5px;
+      border: 1px solid #5D5E5E;
+      font-weight: 500;
+      font-size: 12px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .company-credits {
+    flex-wrap: wrap;
+    & > div {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.fav-icons-s {
+  background: white;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  border-radius: 50%;
+  padding-top: 6px;
+  position: absolute;
+  z-index: 1;
+  top: -8px;
+  margin-left: 10px;
+}
+.fav-active {
+  color: #8d8d8d;
+  z-index: 99999;
+}
+.mfg-lists {
+  position: relative;
+}

@@ -1,0 +1,114 @@
+// .example-card {
+//     margin-top: 150px;
+//     margin-left: 10px;
+//     .img-container {
+//         width: 180px;
+//         height: 180px;
+//         border-radius: 20%;
+//         background-color: #F5F5F5;
+//         margin-left: -8px;
+//         img {
+//             height: inherit;
+//             width: inherit;
+//         }
+//     }
+// }
+
+// .bi {
+//     color: gold;
+//     margin-right: 1px;
+// }
+
+// .mat-mdc-card {
+//     box-shadow: none;
+// }
+
+a {
+  text-decoration: none;
+}
+mat-card {
+  box-shadow: none !important;
+}
+.card-imagewrap {
+  height: 110px;
+  width: 100%;
+}
+.card-img {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  position: relative;
+  left: 0px;
+  object-fit: contain;
+}
+
+// .card-imagewrap:hover {
+//   transform: scale(1.1);
+//   transition: 0.4s ease;
+// }
+
+mat-card-title.card-price {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 0px;
+  margin-top: 0;
+  color: #0e0e0e;
+  line-height: 1;
+  margin-bottom: 8px;
+  font-family: "Inter";
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+}
+
+mat-card-content.card-content {
+  padding-left: 0px;
+  padding-top: 15px;
+}
+
+mat-card-actions.card-rating {
+  padding: 0px;
+  min-height: unset;
+  position: relative;
+  margin-top: 2px;
+  // margin-left: 2px;
+  justify-content: center;
+}
+
+svg.filled-star {
+  fill: #fec835;
+  margin-right: 2px;
+  width: 12px;
+  height: 12px;
+}
+
+svg.filled-star-gray {
+  fill: #cac8c8;
+  margin-left: 2px;
+  width: 12px;
+  height: 12px;
+}
+
+span.rating-number {
+  font-weight: normal;
+  margin-left: 5px;
+  font-size: 12px;
+  position: relative;
+  top: 2px;
+  color: #242424;
+}
+
+.re-label {
+  font-size: 13px;
+  color: #525454;
+  font-weight: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  font-family: "Inter";
+}
+.label-1 {
+  font-size: 13px;
+  color: #0e0e0e;
+  font-weight: bold;
+}

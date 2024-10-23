@@ -1,0 +1,96 @@
+<app-header></app-header>
+
+<section class="rfq_quote">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="search_product">
+                    <h1 class="rfq_title">Request for Quotation</h1>
+                    @if (isSignedIn) {
+                    <h2 class="name_title">{{userName}}, <br>Check your latest quotes or post a new request</h2>
+                    }
+                    @else {
+                    <h2 class="name_title">Post the RFQ and get Quotation from suppliers</h2>
+                    }
+                    <div class="counts">
+                        @if (isSignedIn) {
+                            <p (click)="goToRfq('quote')" class="quotes_count pointer"> {{quotationCount}} <span>New Quotes</span></p>
+                            <p (click)="goToRfq('all')" class="rfq_count pointer"> {{rfqCount}} <span>Requests</span></p>
+                            <!-- <p class="total_quotes_count">just received <span>1,990</span> new quotes </p> -->
+                        }
+                        @else {
+                            <p class="response">Get Responses in <span>24</span> hours</p>
+                            <p class="response">Recieve upto <span>15</span> quotes</p>
+                        }
+                        </div>
+                    <div class="getquote_form">
+                        <div class="search">
+                            <input [(ngModel)]="productName" type="search" maxlength="30" class="form-control">
+                            @if (false){
+                            <div class="search_dropdown">
+                                <ul class="list">
+                                    @for (item of [0,0,0,0,0,0,0,0,0,0]; track $index) {
+                                        <li>Text Books</li>
+                                    }
+                                </ul>
+                            </div>
+                            }
+                        </div>
+                        <button class="primary_btn" (click)="quoteNow()">Get Quotes Now</button>
+                    </div>
+                </div>
+            </div>
+
+            @if (isSignedIn) {
+            <div class="col-sm-12">
+                <div class="browsed_products">
+                    <h1 class="title">{{browsedProductTitle}}</h1>
+ 
+                    <div class="product_row">
+                        @for (product of browsed_products; track product.id) {
+                        <div class="product_col">
+                            <img (click)="goToProduct(product.id, product.name)" class="pointer" [appSafeImage]="''" [src]="product.image">
+                            <h2 class="heading-name">{{product.name}}</h2>
+                            <button (click)="updateRfqName(product.name, product.image, product.category_id)" class="underline_btn">Get quotes now</button>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="browsed_products">
+                    <h1 class="title">Post a request from these recommended products</h1>
+ 
+                    <div class="product_row">
+                        @for (product of recommendationProducts; track product.product_id) {
+                        <div class="product_col">
+                            <img (click)="goToProduct(product.product_id, product.product_name)" class="pointer" [src]="product.product_image">
+                            <h2 class="heading-name">{{product.product_name}}</h2>
+                            <button (click)="updateRfqName(product.product_name, product.product_image, product.category_id)" class="underline_btn">Get quotes now</button>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            }
+            @else {
+                <div class="col-sm-12">
+                    <div class="browsed_products">
+                        <h1 class="title">{{titlewithoutsignin}}</h1>
+    
+                        <div class="product_row">
+                            @for (product of recommendationProducts; track product.product_id) {
+                            <div class="product_col">
+                                <img (click)="goToProduct(product.product_id, product.product_name)" class="pointer" [src]="product.image">
+                                <h2 class="heading-name">{{product.product_name}}</h2>
+                                <button (click)="updateRfqName(product.product_name, product.image, product.category_id)" class="underline_btn">Get quotes now</button>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

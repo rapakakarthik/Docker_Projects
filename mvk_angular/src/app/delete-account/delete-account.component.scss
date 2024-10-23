@@ -1,0 +1,14 @@
+.card.card-delect-account {
+  box-shadow: none;
+  width: 80%;
+  margin: auto;
+  margin-top: 60px;
+  & h1 {
+    text-align: center;
+    font-weight: 600;
+  }
+  & h2 {
+    text-align: center;
+    font-weight: 400;
+  }
+}

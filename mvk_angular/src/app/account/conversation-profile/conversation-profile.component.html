@@ -1,0 +1,97 @@
+<section class="sidenavbar-works">
+  <div class="sidenavbar-works-top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none">
+      <g clip-path="url(#clip0_95_610)">
+        <path d="M22.4729 24.1938L15.7937 17.5L22.4729 10.8062L20.4167 8.75L11.6667 17.5L20.4167 26.25L22.4729 24.1938Z" fill="#666666"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_95_610">
+          <rect width="35" height="35" fill="white" transform="matrix(0 -1 -1 0 35 35)"/>
+        </clipPath>
+      </defs>
+    </svg>
+    <h3>Profile</h3>
+  </div>
+  <section *ngIf="companyDetails.seller_details" class="message-box">
+    <div class="">
+      <img [src]="companyDetails.seller_details.seller_profile" />
+    </div>
+    <div class="message-details">
+      <h4>{{ companyDetails.seller_details.seller_name }}</h4>
+      <p>{{ companyDetails.seller_account_name }}</p>
+      <div class="country">
+        <img
+          class="flag"
+          src="https://static.vecteezy.com/system/resources/previews/011/571/519/original/circle-flag-of-india-free-png.png"
+        />
+        <span> IND </span>
+      </div>
+      <div class="action_btns">
+        <button type="button" class="primary_btn">Add Contact</button>
+        <button (click)="showMore()" class="text_btn">View More</button>
+      </div>
+    </div>
+  </section>
+  <section class="details-cards">
+    <!-- <mat-tab-group> -->
+      <!-- <mat-tab label="Quotation"> -->
+        <h3>Quotation</h3>
+        <section *ngFor="let rfq of rfqlist" class="inquiry-card">
+          <section class="id-number">
+            <span> Quotation ID: {{ rfq.rfq_code }} </span>
+            <span> {{ rfq.rfq_created_at }} </span>
+          </section>
+          <section class="inquiry-img-media">
+            <span>
+              <img
+                src="https://assets.ajio.com/medias/sys_master/root/20221215/9hWy/639a245df997ddfdbdd3f267/-473Wx593H-460754561-grey-MODEL.jpg"
+              />
+            </span>
+            <span>
+              <p>{{ rfq.product_name }}</p>
+              <h4>₹641.03 <span> / piece </span></h4>
+            </span>
+          </section>
+        </section>
+
+        <!-- <section class="inquiry-card">
+          <section class="id-number">
+            <span> Quotation ID: 1168534694 </span>
+            <span> 2023-04-19 20:30 </span>
+          </section>
+          <section class="inquiry-img-media">
+            <span>
+              <img
+                src="https://assets.ajio.com/medias/sys_master/root/20221215/9hWy/639a245df997ddfdbdd3f267/-473Wx593H-460754561-grey-MODEL.jpg"
+              />
+            </span>
+            <span>
+              <p>Schoolbag in custom or customized</p>
+              <h4>₹641.03 <span> / piece </span></h4>
+            </span>
+          </section>
+        </section> -->
+
+        <section *ngIf="false" class="inquiry-card">
+          <section class="id-number">
+            <span> Quotation ID: 1168534694 </span>
+            <span> 2023-04-19 20:30 </span>
+          </section>
+          <section class="inquiry-img-media">
+            <span>
+              <img
+                src="https://assets.ajio.com/medias/sys_master/root/20221215/9hWy/639a245df997ddfdbdd3f267/-473Wx593H-460754561-grey-MODEL.jpg"
+              />
+            </span>
+            <span>
+              <p>Schoolbag in custom or customized</p>
+              <h4>₹641.03 <span> / piece </span></h4>
+            </span>
+          </section>
+        </section>
+      <!-- </mat-tab> -->
+      <!-- <mat-tab label="Inquiry"> No Enquiry Data </mat-tab> -->
+      <!-- <mat-tab label="Orders"> No Orders data </mat-tab> -->
+    <!-- </mat-tab-group> -->
+  </section>
+</section>

@@ -1,0 +1,122 @@
+.flex-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  & li {
+    width: 12.5%;
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    margin: auto;
+  }
+}
+.imagewrapper:before {
+  content: "";
+  background: #def0fc;
+  border-radius: 50%;
+  margin: 0 auto;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.imagewrapper {
+  width: 120px;
+  height: 120px;
+
+  border-radius: 50%;
+  position: relative;
+  & a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  & img {
+    max-width: 100%;
+    max-height: 100%;
+
+    position: relative;
+    z-index: 99;
+  }
+}
+
+.text-box-filter {
+  margin-bottom: 30px;
+  display: flex;
+  column-gap: 30px;
+  flex-wrap: wrap;
+}
+
+.box-1 {
+  height: 120px;
+  width: 10%;
+  border-radius: 50%;
+}
+
+.head {
+  height: 15px;
+  width: 100px;
+  margin-bottom: 15px;
+}
+
+button {
+  border: 0;
+  background: none;
+  margin-top: 5px;
+}
+button a {
+  color: #000;
+  font-weight: 500;
+}
+
+
+@media screen and (max-width: 770px) {
+  .flex-wrapper li {
+    width: 50%;
+    list-style: none;
+  }
+  .imagewrapper {
+    margin: 0 auto;
+  }
+  .box-1 {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+  }
+}
+
+section.arrow-search img {
+  position: absolute;
+  margin-left: 8px;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.hover-container {
+  display: inline-block; /* Make the container inline */
+  // position: relative; /* Required for positioning the menu */
+}
+
+.img-container{ height: 250px; padding-left: 80px; padding-top: 0px; margin-bottom: 30px;}
+h1{ font-family: "Open Sans", sans-serif !important;
+  font-size: 26px !important;
+  line-height: 1.3;
+  margin: 0 0 10px 0;
+  font-weight: 700; color: #fff;}
+  .contentslider{ height: 100%; display: flex; flex-direction: column; justify-content: center;}
+.redirect-link {
+  color: #0172a8!important;
+  font-weight: 500;
+  text-decoration: 1px underline!important;
+  text-underline-offset: 3px;
+}

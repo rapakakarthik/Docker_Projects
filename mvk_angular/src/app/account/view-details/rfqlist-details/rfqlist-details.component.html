@@ -1,0 +1,115 @@
+<section *ngIf="rfqDetails" class="rfq-main-contain">
+  <p>
+    {{ rfqDetails.product_name }}
+  </p>
+  <div class="status-approved">Status: <span>
+      {{ rfqDetails.status }}
+    </span></div>
+    <div>
+      <button (click)="editRfq()" class="grey_stroked_btn ms-2 me-2">Add details</button>
+      <button (click)="postRfqAgain()" class="grey_stroked_btn me-2">Post again</button>
+      <button (click)="closeRfq(rfqDetails.status)" class="grey_stroked_btn"> {{rfqDetails.status.toLowerCase() == 'approved' ? 'Close' : 'Delete'}} </button>
+    </div>
+  <!-- <mat-chip-listbox aria-label="Fish selection" class="rfq-selections">
+    <mat-chip (click)="editRfq()" class="chips-mat"> Add details </mat-chip>
+    <mat-chip (click)="postRfqAgain()" class="chips-mat"> Post again </mat-chip>
+    <mat-chip (click)="closeRfq(rfqDetails.status)" class="chips-mat"> Close </mat-chip>
+  </mat-chip-listbox> -->
+  <div>
+    <img *ngFor="let img of rfqDetails.files" [src]="img.file_url" class="rfq_sideimg"/>
+  </div>
+  <h3>Product Basic Information</h3>
+  <ul class="list-group section1">
+    <li class="list-group-item">
+      <div class="rfq-list-div">Product Name:</div>
+      <div class="rfq-prg text-change">
+        {{ rfqDetails.product_name }}
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="rfq-list-div">Category:</div>
+      <div class="text-change">
+        {{ rfqDetails.category ? rfqDetails.category : "-" }}
+        <!-- {{ rfqDetails.category_id ? rfqDetails.category_id : "-" }} -->
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="rfq-list-div">Quantity:</div>
+      <div class="text-change">{{ rfqDetails.quantity }} Piece/Pieces</div>
+    </li>
+    <li class="list-group-item">
+      <div class="rfq-list-div">Status:</div>
+      <div class="text-change">
+        {{ rfqDetails.status ? rfqDetails.status : "-" }}
+      </div>
+    </li>
+  </ul>
+
+  <ul [@toggleSection]="showMore ? 'visible' : 'hidden'" *ngIf="showMore" class="list-group section2">
+    <li class="list-group-item">
+      <div class="rfq-list-div">Description:</div>
+      <div class="rfq-prg text-change">
+        {{ rfqDetails.description }}
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="rfq-list-div">Expiry Date:</div>
+      <div class="rfq-prg text-change">
+        {{ rfqDetails.valid_to }}
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="rfq-list-div">Units:</div>
+      <div class="rfq-prg text-change">
+        {{ rfqDetails.units }}
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="rfq-list-div">Country:</div>
+      <div class="rfq-prg text-change">
+        {{ rfqDetails.country }}
+      </div>
+    </li>
+  </ul>
+  <span (click)="showMoreDetails()" class="sh-mr pointer">
+   {{showMoreText}} <i class="show-more" [ngClass]="!showMore ? 'fa fa-angle-down' : 'fa fa-angle-up'" aria-hidden="true"></i>
+  </span>
+  <hr />
+</section>
+<!-- Quotes Section -->
+<section *ngIf="rfqDetails" class="prouct-details-inf">
+  <h3>Quotations from supplier : {{ rfqDetails.quote_count }}</h3>
+  <ng-container *ngIf="rfqDetails.quote_count > 0">
+  <ng-container *ngFor="let q of rfqDetails.quotes">
+    <section class="prd-bs-infrm">
+      <div class="product-infrom-img">
+        <img [src]="q.company_logo" />
+      </div>
+      <div class="qu-p">
+        <h5>{{ q.company_name }}</h5>
+        <p>{{ q.company_name }}</p>
+      </div>
+    </section>
+    <section class="card-in-quo">
+      <div class="img-quotations">
+        <img [src]="q.product_image" appSafeImage=""/>
+      </div>
+      <p>
+        {{ q.product_name }}
+      </p>
+    </section>
+    <p class="price-quo">
+      <span>
+        <b> ₹ {{ q.price }} </b> / piece
+      </span>
+      <span>
+        <b> {{ q.min_order_value }} </b>  pieces
+      </span>
+    </p>
+    <section class="buttons-rfss-s">
+      <app-chat-now [det]="q"></app-chat-now>
+      <button mat-raised-button color="primary" (click)="goTo(rfqDetails.id)">View Details</button>
+    </section>
+  </ng-container>
+  </ng-container>
+</section>

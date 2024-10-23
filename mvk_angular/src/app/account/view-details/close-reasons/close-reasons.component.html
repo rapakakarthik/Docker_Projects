@@ -1,0 +1,32 @@
+<!-- Delete Rfq -->
+<ng-container *ngIf="type != 'approved';else reason">
+  <h2 class="poptitle">
+    You are Going to Delete this RFQ
+    <a (click)="closeRFQpopup()"><mat-icon>close</mat-icon></a>
+  </h2>
+  <mat-dialog-actions align="end">
+    <button  (click)="closeRFQpopup()" color="accent" mat-raised-button
+      class="btn-danger btn">Cancel</button>
+    <button  (click)="deleteRfq()" color="warn" mat-raised-button
+      class="btn-danger btn">OK</button>
+  </mat-dialog-actions>
+</ng-container>
+<ng-template #reason>
+  <ng-container *ngIf="rfqCloseReasons && rfqCloseReasons.length > 1">
+    <h2 class="poptitle">
+      Please Select atleast one reason
+      <a (click)="closeRFQpopup()"><mat-icon>close</mat-icon></a>
+    </h2>
+    <section class="closedailogpopup">
+      <section  class="closeList">
+        <mat-radio-group aria-label="Select an option" [(ngModel)]="closedReason">
+          <mat-radio-button style="display: block;" *ngFor="let reason of rfqCloseReasons" [value]="reason">{{ reason }}</mat-radio-button>
+        </mat-radio-group>
+      </section>
+      <mat-dialog-actions align="end">
+        <button [disabled]="!closedReason" (click)="deleteRfq()" color="primary" mat-raised-button
+          class="btn-danger btn">Close this Rfq</button>
+      </mat-dialog-actions>
+    </section>
+  </ng-container>
+</ng-template>

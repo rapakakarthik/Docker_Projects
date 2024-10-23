@@ -1,0 +1,74 @@
+<ng-container *ngIf="bannerDetails">
+  <section class="big-banner" [ngClass]="bannertype == 'single' ? 'singlebanner' : 'multibanner'">
+    <owl-carousel-o [options]="customOptions" class="">
+      <ng-container *ngFor="let banner of bannerDetails">
+        <ng-template carouselSlide>
+          <section (click)="goTo(banner)" [ngClass]="{'pointer': banner.have_link == 1}" class="gradient-imgs">
+            <div class="grd-bg-img" [ngStyle]="{
+                'background-image': 'url(' + setImageEncode(banner.banner_image) + ')',
+                'background-color': banner.background_color
+              }">
+              <div class="baner-text-content-t">
+                <section *ngIf="bannertype == 'single'">
+                  <h2 [ngStyle]="{ 'color': banner.banner_title_color }">
+                    {{ banner.banner_title }}
+                  </h2>
+                  <h3 [ngStyle]="{ 'color': banner.banner_sub_title_color }">
+                    {{ banner.banner_sub_title }}
+                  </h3>
+                </section>
+                <!-- <button
+                  *ngIf="banner.have_button == 1"
+                  [ngStyle]="{ 
+                    'color': banner.button_text_color, 
+                    'border-color': banner.button_border_color ,
+                    'background-color': 'transparent'
+                  }"
+                  class="check-out-btn"
+                  mat-raised-button
+                  color="primary"
+                  (click)="goTo(banner)"
+                  >
+                  {{banner.button_text}}
+                </button> -->
+                <!-- 'background-color': banner.button_bg_color  -->
+              </div>
+            </div>
+            @if(showGetQuote) {
+              <button (click)="goToRfqQuote()" class="img_btn">Get a Quote</button>
+            }
+          </section>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </section>
+</ng-container>
+
+<!-- Solid Banner -->
+<ng-container *ngIf="!bannerDetails && solidBanner">
+<section class="big-banner">
+  <owl-carousel-o [options]="customOptions" class="">
+    <ng-container *ngFor="let banner of solidBanner">
+      <ng-template carouselSlide>
+      <section (click)="goTo(banner)" [ngClass]="{'pointer': banner.have_link == 1}" class="halfimg" [style.backgroundColor]="banner.background_color">
+          <div [style.backgroundColor]="banner.background_color" [style.backgroundImage]="'none'"
+            class="baner-text-content-t-new">
+            <h2 [style.color]="banner.text_color">{{banner.banner_title}}</h2>
+            <h3 [ngStyle]="{ 'color': banner.banner_sub_title_color }">
+              {{ banner.banner_sub_title }}
+            </h3>
+            <!-- hide the button -->
+            <button *ngIf="false" class="check-out-btn" mat-raised-button color="primary">
+              Check it out
+            </button>
+          </div>
+
+          <div class="grd-bg-img-half">
+            <img [src]="banner.banner_image" />
+          </div>
+        </section>
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+</section>
+</ng-container>

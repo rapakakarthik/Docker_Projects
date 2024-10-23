@@ -1,0 +1,219 @@
+.loginlogo {
+  max-width: 300px;
+}
+
+.signformwrapper{
+  width: 470px;
+}
+
+.form_label{
+  padding-bottom: 5px;
+  color: #333333;
+  font-weight: 500;
+}
+
+.formTitles {
+  font-family: Inter;
+  font-size: 22px;
+  font-weight: 500;
+
+  line-height: 1.5;
+
+  text-align: left;
+  color: #333;
+  letter-spacing: -1px;
+  margin: 0;
+}
+.logslogan {
+  color: #5D5E5E;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 5px 0 40px 0;
+}
+.formslogan {
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.57;
+  letter-spacing: 0.1px;
+  color: #545454;
+}
+
+.terms_font {
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333333;
+
+  & a {
+    color: #017db9 !important;
+    text-decoration: none;
+  }
+}
+
+.marT20 {
+  margin-top: 20px;
+}
+
+.selectedImg {
+  height: 25px;
+  width: 19px;
+  margin-right: 10px;
+  object-fit: contain;
+}
+
+.countrycode {
+  border: 0;
+}
+.text-btn {
+  color: #017db9 !important;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.breakline {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  & span {
+    background: #fff;
+    display: inline-block;
+    position: relative;
+    z-index: 9;
+    padding: 0 10px;
+  }
+  &::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 9px;
+    height: 1.5px;
+    background: #02a8df;
+    content: "";
+  }
+}
+.socail_icons {
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  text-align: center;
+  & a {
+    margin: 0 10px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.otpbtnsec{
+
+  .stroked_btn{
+    height: 44px;
+    white-space: nowrap;
+  }
+}
+
+.login-button {
+  background: #02a8df !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  border-radius: 4px !important;
+}
+.btnswrap {
+  padding-top: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.btnswrap a {
+  color: #017db9;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.submitBtn {
+  background: #017db9 !important;
+  color: #fff !important;
+}
+
+.smalltxt a {
+  cursor: pointer;
+  color: #017db9 !important;
+}
+.text_btn{
+  font-weight: 500;
+}
+.gapbtn {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+.mobilefiled.emailfield {
+  & mat-form-field {
+    width: 100% !important;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .signformwrapper{
+    width: 100%;
+    padding-left: 20px;
+  }
+}
+@media screen and (max-width: 770px) {
+  .flex-row-sign {
+    flex-wrap: wrap;
+
+    & .otpbtnsec {
+      margin-top: 20px;
+      width: 100%;
+      & button {
+        width: 100%;
+        margin: 0;
+      }
+    }
+  }
+  .btnswrap {
+    flex-wrap: wrap;
+    & a {
+      // background: #02a8df;
+      // text-align: center;
+      // margin-top: 20px;
+      // display: block;
+      // width: 100%;
+      // padding: 10px;
+      // border-radius: 8px;
+      // color: #fff!important;
+    }
+  }
+
+  .login-button {
+    width: 100%;
+    margin-top: 30px;
+  }
+}
+
+.otpbtn:not(:disabled) {
+  border-color: #b0d7e9;
+  color: #0172a8;
+}
+
+.bluelink {
+  color: #0172a8 !important;
+}
+.bluelink:disabled {
+  opacity: 0.5 !important;
+}
+
+::ng-deep .smallfiled .mdc-floating-label--float-above mat-label {
+  display: block !important;
+}
+::ng-deep circle {
+  stroke: #147dae !important;
+}
+.mat-mdc-progress-spinner.mdc-circular-progress {
+  width: 35px !important;
+  height: 35px !important;
+}

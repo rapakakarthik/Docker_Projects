@@ -1,0 +1,179 @@
+
+<section class="v3_wishlist">
+    <div class="index_row">
+        <div class="index_rightcol">
+
+            <div class="top_filter">
+                <div class="left">
+                    @if(productDataFound) {
+                    <div [formGroup]="selectForm" class="checkbox">
+                        <input formControlName="selectAll" type="checkbox"/>
+                    </div>
+                    }
+                    <button (click)="multipleEnquiry()" class="primary_btn" [disabled]="!oneSelected">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" viewBox="0 0 24 25" fill="none">
+                            <path d="M18.9307 20.5C17.2449 20.5 15.5167 20.0779 13.7462 19.2337C11.9757 18.3894 10.3308 17.2044 8.8115 15.6788C7.29233 14.1532 6.11058 12.5084 5.26625 10.7443C4.42208 8.98008 4 7.25508 4 5.56925C4 5.26375 4.1 5.00917 4.3 4.8055C4.5 4.60183 4.75 4.5 5.05 4.5H7.523C7.79483 4.5 8.032 4.58558 8.2345 4.75675C8.43717 4.92792 8.57442 5.1475 8.64625 5.4155L9.14225 7.8C9.18842 8.0795 9.18008 8.32375 9.11725 8.53275C9.05442 8.74175 8.9435 8.91292 8.7845 9.04625L6.5905 11.0923C7.00067 11.8371 7.45417 12.5291 7.951 13.1683C8.44783 13.8074 8.97767 14.4128 9.5405 14.9845C10.1212 15.5653 10.7462 16.1054 11.4155 16.6048C12.0847 17.1041 12.8193 17.5756 13.6193 18.0193L15.7578 15.8422C15.9206 15.6666 16.1036 15.5509 16.3068 15.4952C16.5099 15.4394 16.7346 15.4282 16.9808 15.4615L19.0845 15.8923C19.3563 15.9589 19.5769 16.0958 19.7462 16.303C19.9154 16.51 20 16.7475 20 17.0155V19.45C20 19.75 19.8982 20 19.6945 20.2C19.4908 20.4 19.2362 20.5 18.9307 20.5ZM6.12125 10.1538L8.0405 8.3885C8.1045 8.33717 8.14617 8.26667 8.1655 8.177C8.18467 8.08717 8.18142 8.00383 8.15575 7.927L7.7115 5.80775C7.68583 5.70508 7.641 5.62817 7.577 5.577C7.51283 5.52567 7.4295 5.5 7.327 5.5H5.275C5.198 5.5 5.13392 5.52567 5.08275 5.577C5.03142 5.62817 5.00575 5.69225 5.00575 5.76925C5.02492 6.45258 5.132 7.166 5.327 7.9095C5.52183 8.65317 5.78658 9.40125 6.12125 10.1538ZM14.5712 18.4885C15.2467 18.8232 15.9669 19.0706 16.7318 19.2308C17.4964 19.3911 18.1627 19.477 18.7308 19.4885C18.8077 19.4885 18.8718 19.4628 18.923 19.4115C18.9743 19.3602 19 19.2961 19 19.2193V17.2115C19 17.109 18.9743 17.0257 18.923 16.9615C18.8718 16.8975 18.7949 16.8527 18.6923 16.827L16.8422 16.448C16.7654 16.4223 16.6982 16.4192 16.6405 16.4385C16.5827 16.4577 16.5218 16.4993 16.4578 16.5635L14.5712 18.4885Z" fill="#fff"/>
+                        </svg>
+                        <span>Contact Supplier</span>
+                    </button>
+    
+                    @if(oneSelected) {
+                    <select [formControl]="moveToGroup" class="select_control">
+                        <option [value]="'default'" disabled>Move to</option>
+                        @for (folder of wishListFolders; track folder.id) {
+                            <option *ngIf="folder.id != activeId" [value]="folder.id">{{folder.name}}</option>
+                        }
+                    </select>
+                    }
+    
+                    <button [disabled]="!oneSelected" (click)="deleteProductsFromWishlist()" class="grey_stroked_btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                            <path d="M7.93245 20.8333C7.46718 20.8333 7.0703 20.6694 6.74183 20.3417C6.41405 20.0139 6.25016 19.617 6.25016 19.151V6.25H5.2085V5.20833H9.37516V4.40625H15.6252V5.20833H19.7918V6.25H18.7502V19.151C18.7502 19.6302 18.5897 20.0302 18.2689 20.351C17.9474 20.6726 17.547 20.8333 17.0679 20.8333H7.93245ZM17.7085 6.25H7.29183V19.151C7.29183 19.3378 7.3519 19.4913 7.47204 19.6115C7.59218 19.7316 7.74565 19.7917 7.93245 19.7917H17.0679C17.2276 19.7917 17.3745 19.725 17.5085 19.5917C17.6418 19.4576 17.7085 19.3108 17.7085 19.151V6.25ZM10.2168 17.7083H11.2585V8.33333H10.2168V17.7083ZM13.7418 17.7083H14.7835V8.33333H13.7418V17.7083Z" fill="#333333"/>
+                        </svg>
+                        <span>Delete</span>
+                    </button>
+                </div>
+                <!-- <div class="right">
+                    @if(productDataFound) {
+                    <button class="text_hoverbtn" (click)="clickShare()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M18 16.08C17.24 16.08 16.56 16.38 16.04 16.85L8.91 12.7C8.96 12.47 9 12.24 9 12C9 11.76 8.96 11.53 8.91 11.3L15.96 7.19C16.5 7.69 17.21 8 18 8C19.66 8 21 6.66 21 5C21 3.34 19.66 2 18 2C16.34 2 15 3.34 15 5C15 5.24 15.04 5.47 15.09 5.7L8.04 9.81C7.5 9.31 6.79 9 6 9C4.34 9 3 10.34 3 12C3 13.66 4.34 15 6 15C6.79 15 7.5 14.69 8.04 14.19L15.16 18.35C15.11 18.56 15.08 18.78 15.08 19C15.08 20.61 16.39 21.92 18 21.92C19.61 21.92 20.92 20.61 20.92 19C20.92 17.39 19.61 16.08 18 16.08Z" fill="#017DB9"/>
+                        </svg>
+                        <span class="text">Share list To Others</span>
+                    </button>
+                    }
+                    <button class="text_hoverbtn" (click)="clickMore()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <g clip-path="url(#clip0_4566_686)">
+                              <path d="M5 10C5.53043 10 6.03914 10.2107 6.41421 10.5858C6.78929 10.9609 7 11.4696 7 12C7 12.5304 6.78929 13.0391 6.41421 13.4142C6.03914 13.7893 5.53043 14 5 14C4.46957 14 3.96086 13.7893 3.58579 13.4142C3.21071 13.0391 3 12.5304 3 12C3 11.4696 3.21071 10.9609 3.58579 10.5858C3.96086 10.2107 4.46957 10 5 10ZM12 10C12.5304 10 13.0391 10.2107 13.4142 10.5858C13.7893 10.9609 14 11.4696 14 12C14 12.5304 13.7893 13.0391 13.4142 13.4142C13.0391 13.7893 12.5304 14 12 14C11.4696 14 10.9609 13.7893 10.5858 13.4142C10.2107 13.0391 10 12.5304 10 12C10 11.4696 10.2107 10.9609 10.5858 10.5858C10.9609 10.2107 11.4696 10 12 10ZM19 10C19.5304 10 20.0391 10.2107 20.4142 10.5858C20.7893 10.9609 21 11.4696 21 12C21 12.5304 20.7893 13.0391 20.4142 13.4142C20.0391 13.7893 19.5304 14 19 14C18.4696 14 17.9609 13.7893 17.5858 13.4142C17.2107 13.0391 17 12.5304 17 12C17 11.4696 17.2107 10.9609 17.5858 10.5858C17.9609 10.2107 18.4696 10 19 10Z" fill="#017DB9"/>
+                            </g>
+                            <defs>
+                              <clipPath id="clip0_4566_686">
+                                <rect width="24" height="24" fill="white"/>
+                              </clipPath>
+                            </defs>
+                        </svg>
+                        <span class="text">More</span>
+                    </button>
+                </div> -->
+            </div>
+
+            @if (products.length > 2) {
+            <div class="selected">
+                @for (product of products; track product.product_id; let i = $index) {
+                <div class="img">
+                    <img class="product_img" [src]="product.prod_img"/>
+
+                    <!-- close icon -->
+                    <img (click)="unselectProduct(i)" class="close_icon" src="/assets/svg/close_icon.svg"/>
+                </div>
+                }
+            </div>
+            }
+            @else {
+                <div class="selected">
+                    @for (product of products; track product.product_id) {
+                    <div class="img">
+                        <img class="product_img" [src]="product.prod_img"/>
+    
+                        <!-- close icon -->
+                        <img (click)="hide.emit()" class="close_icon" src="/assets/svg/close_icon.svg"/>
+                    </div>
+                    }
+                </div>
+            }
+
+            <div [formGroup]="selectForm" class="products_compare">
+                <ul class="compare_list">
+                    <li class="border-0"></li>
+                    @for (product of products; track product.product_id) {
+                    <li>
+                        <img class="product_img" [src]="product.prod_img"/>
+                        <p>{{product.prod_name}}</p>
+                        <!-- <button class="primary_btn">
+                            <span>Contact Supplier</span>
+                        </button> -->
+                        <!-- <app-contactsupplier [sellerDetails]="getSellerDetails(product)" class="products_compare_btn"></app-contactsupplier> -->
+                    </li>
+                    }
+                </ul>
+                <div class="products_compare_lists">
+                    <h1 class="title">Trade Capability</h1>
+                    <ul class="compare_list">
+                        <li>Chat with supplier</li>
+                        @for (product of products; track product.product_id;) {
+                        <li *ngIf="product.buyer_seller_status == 1">
+                            <!-- <button class="sec_btn">Chat Now</button> -->
+                            <app-chat-now [sellerDetails]="getSellerDetails(product)" [class]="'sec_btn products_compare_btn'"></app-chat-now>
+                        </li>
+                        <li *ngIf="product.buyer_seller_status == 0">
+                            -
+                        </li>
+                        }
+                    </ul>
+                    <ul formArrayName="select" class="compare_list">
+                        <li>Select to Contact</li>
+                        @for (product of products; track product.product_id; let i = $index) {
+                        <li><input [formControlName]="i" type="checkbox"></li>
+                        }
+                    </ul>
+                </div>
+
+                <div class="products_compare_lists">
+                    <h1 class="title">Product Features</h1>
+                    <ul class="compare_list">
+                        <li>Product Features</li>
+                        @for (product of products; track product.product_id) {
+                        <li>{{product.min_quantity}} {{product.unit_type}}</li>
+                        }
+                    </ul>
+                    <ul class="compare_list">
+                        <li>FOB Price</li>
+                        @for (product of products; track product.product_id) {
+                            @if(product.price_list.length > 0) {
+                                <li>IND ₹ {{product.price_list[0].price}} / {{product.price_list[0].minimum_order}}</li>
+                            }
+                            @else {
+                               <li>-</li>
+                            }
+                        }
+                    </ul>
+                </div>
+
+                <div class="products_compare_lists">
+                    <h1 class="title">Supplier Features</h1>
+                    <ul class="compare_list">
+                        <li>Company Name</li>
+                        @for (product of products; track product.product_id) {
+                        <li>{{product.admin_user_company_name}}</li>
+                        }
+                    </ul>
+                    <ul class="compare_list">
+                        <li>Payment Terms</li>
+                        @for (product of products; track product.product_id) {
+                        <li>IND ₹{{product.prod_pricing}}/{{product.unit_type}}</li>
+                        }
+                    </ul>
+                    <ul class="compare_list">
+                        <li>Main Products</li>
+                        @for (product of products; track product.product_id) {
+                        <li> {{product.main_products || '-'}} </li>
+                        }
+                    </ul>
+                    <ul class="compare_list">
+                        <li>Supplier Location</li>
+                        @for (product of products; track product.product_id) {
+                        <li> {{product.country}} </li>
+                        }
+                    </ul>
+                    <ul class="compare_list">
+                        <li>Number of years</li>
+                        @for (product of products; track product.product_id) {
+                        <li> {{product.experience}} </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

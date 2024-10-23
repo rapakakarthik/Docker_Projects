@@ -1,0 +1,49 @@
+<svg
+    class="grid"
+    id="Layer_1"
+    data-name="Layer 1"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 89 88.6"
+>
+    <defs>
+        <style>
+        .cls-1 {
+            fill: #fff;
+            stroke: #9b9e9f;
+            stroke-miterlimit: 10;
+        }
+        </style>
+    </defs>
+    <rect
+        class="cls-1"
+        x="0.5"
+        y="0.5"
+        width="37.46"
+        height="37.46"
+        rx="2.54"
+    />
+    <rect
+        class="cls-1"
+        x="51.04"
+        y="0.5"
+        width="37.46"
+        height="37.46"
+        rx="2.54"
+    />
+    <rect
+        class="cls-1"
+        x="0.5"
+        y="50.64"
+        width="37.46"
+        height="37.46"
+        rx="2.54"
+    />
+    <rect
+        class="cls-1"
+        x="51.04"
+        y="50.64"
+        width="37.46"
+        height="37.46"
+        rx="2.54"
+    />
+</svg>

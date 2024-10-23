@@ -1,0 +1,72 @@
+.col-lg-6.contact-section {
+  margin-top: 120px;
+  margin-bottom: 120px;
+  margin-left: 80px;
+}
+h2.contact-section {
+  color: #3f4d71;
+  font-size: 26px;
+  font-family: inherit;
+  font-weight: bold;
+  // margin-left: -45px;
+}
+p.contact-section-p {
+  color: rgba(63, 77, 113, 0.74);
+  font-size: 14px;
+  margin-left: 50px;
+}
+p.contact-section-p1 {
+  color: rgba(63, 77, 113, 0.74);
+  font-size: 14px;
+  margin-bottom: 30px;
+  margin-left: 50px;
+}
+p.contact-section-p2 {
+  color: rgba(63, 77, 113, 0.74);
+  font-size: 14px;
+  margin-left: 50px;
+}
+span.white-circle {
+  position: absolute;
+  margin-left: -33px;
+  color: #017db9;
+  border: 1px solid #00abfb;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 21px;
+  font-size: 13px;
+}
+.container.contact-section {
+  margin-top: 50px;
+  margin-bottom: 60px;
+}
+
+button.contact-req {
+  text-align: center;
+  margin: auto;
+  display: block;
+  background: #00aafb;
+  color: #fff;
+  height: 40px;
+  padding-left: 25px;
+  border-radius: 5px !important;
+  padding-right: 25px;
+}
+
+.middlefiled {
+  margin-bottom: 20px;
+}
+section.w-50.input-fileds-email {
+  float: left;
+  padding-right: 5px;
+}
+section.w-50.input-fileds-phone {
+  float: left;
+  padding-left: 5px;
+}
+
+.cont_form{
+  
+}

@@ -1,0 +1,560 @@
+<ng-container *ngIf="!serverDown">
+    <!-- Basic Info -->
+    <section *ngIf="user" class="header-profile">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-2">
+            <div class="profile-con">
+              <section class="profile-image">
+                <img [src]="user.mob_user_avatar" [title]="user.mob_first_name" onerror="this.src='https://dev-api.myverkoper.com/assets/seller/images/mvk-no-image.png'" [alt]="user.mob_first_name" />
+              </section>
+              <label class="upload">
+                <span class="files">
+                  <img title="Select Image" src="assets/svg/upload-image-01.svg" alt="" />
+                </span>
+                <input  type="file" accept="image/*" (change)="onFileSelected($event)" />
+              </label>
+            </div>
+          </div>
+    
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-5">
+                <h2>{{ user.mob_first_name ?? "None"}}</h2>
+                <span class="country">{{user.mob_user_school_name ?? "-"}}</span>
+                <!-- <span class="country"> IND </span>
+                <span class="years"> 4YRS </span> -->
+              </div>
+            </div>
+    
+            <!-- Not Using -->
+            <div *ngIf="false" class="row">
+              <div class="col-lg-5">
+                <section class="profile-s">
+                  <!-- <h2>{{ first_name ? first_name : "None"}}</h2>
+                  <span class="country"> IND </span>
+                  <span class="years"> 4YRS </span> -->
+                  <p class="text-data-one" *ngIf="user.company_name">
+                    <span>at</span> {{ user.company_name}}
+                  </p>
+                  <p class="text-data-onet">
+                    Assistant Email: {{ user.assistant_email ?? "None"}}
+                  </p>
+                </section>
+              </div>
+    
+              <div class="col-lg-5">
+                <section class="email-contrt">
+                  <p>Joined Myverkoper.com in <ng-container *ngIf="user.created_at"> {{ user.created_at}}</ng-container></p>
+                  <p *ngIf="company">Main Products are: {{
+                    company.main_products
+                    ? company.main_products
+                    : "None"
+                    }} </p>
+                </section>
+              </div>
+            </div>
+
+          </div>
+
+            <!-- Not Using -->
+          <div *ngIf="false" class="col-lg-2">
+            <div class="col-lg-2">
+              <section class="email-contrt">
+                <button class="editBtn" (click)="editBasicDetails()" mat-button><mat-icon>edit</mat-icon>Edit</button>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- User Personal Details -->
+    <section *ngIf="user " class="contact-information-section">
+      <div class="title">
+        <h2>Personal</h2>
+        <div>
+          <button class="editBtn" (click)="editBasicDetails()" mat-button><mat-icon>edit</mat-icon>Edit</button>
+        </div>
+      </div>
+      <!-- <h2>Profile Information</h2> -->
+      <div class="row">
+        <div class="col-lg-6">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+                <section class="contact-infrm">
+                  <div class="first-row">Title:</div>
+                  <div class="second-row">{{ user.pre_sal ? user.pre_sal : "-" }}</div>
+                </section>
+            </li>
+
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Email:</div>
+                <div class="second-row">
+                  {{ user.mob_email ?? "N/A" }}
+                </div>
+              </section>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-6">
+          <ul class="list-group contact-list-ul">
+
+            <li class="list-group-item">
+                <section class="contact-infrm">
+                  <div class="first-row">Full Name:</div>
+                  <div class="second-row">{{ user.mob_first_name ?? "-" }}</div>
+                </section>
+            </li>
+            
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Mobile Number:</div>
+                <div class="second-row">{{ user.mob_user_phone ?? "-" }}</div>
+              </section>
+            </li>
+          </ul>
+        </div>
+        <!-- <div class="col-lg-2">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="second-row">
+                  <button class="editBtn" (click)="editBasicDetails()" mat-button><mat-icon>edit</mat-icon>Edit</button>
+                </div>
+              </section>
+            </li>
+          </ul>
+        </div> -->
+      </div>
+    </section>
+    
+    <!--User Professional Details -->
+    <section *ngIf="user" class="contact-information-section">
+      <div class="title">
+        <h2>Professional</h2>
+        <div>
+          <button class="editBtn" (click)="editContact()" mat-button><mat-icon>edit</mat-icon>Edit</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Institute/School Name:</div>
+                <div class="second-row">{{ user.mob_user_school_name ? user.mob_user_school_name : "None" }}</div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Seniority Level:</div>
+                <div class="second-row">
+                  {{ user.seniority_level ? user.seniority_level : "None" }}
+                </div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Pincode:</div>
+                <div class="second-row">
+                  {{ user.user_pincode ? user.user_pincode : "None" }}
+                </div>
+              </section>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-6">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Management Type:</div>
+                <div class="second-row">{{ user.management_type_display_text || "None" }}</div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Designation:</div>
+                <div  class="second-row">
+                  {{ getMobDesignation() ?? "None" }}
+                </div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Address:</div>
+                <div *ngIf="userAddress" class="second-row">{{ userAddress.user_address_line1 ? userAddress.user_address_line1   : "-" }}</div>
+              </section>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    
+    <!-- Address Info -->
+    <section *ngIf="false" class="contact-information-section">
+      <h2>Address Information</h2>
+      <div class="row">
+        <div class="col-lg-5">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Country Name:</div>
+                <div class="second-row">{{ address.country_name ? address.country_name : "None" }}</div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">City Name:</div>
+                <div class="second-row">
+                  {{ address.city_name ? address.city_name : "None" }}
+                </div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Locality Area:</div>
+                <div class="second-row">
+                  {{ address.locality_area ? address.locality_area : "None" }}
+                </div>
+              </section>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-5">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">State Name:</div>
+                <div class="second-row">{{ address.state_name ? address.state_name : "None" }}</div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">User Pincode:</div>
+                <div class="second-row">
+                  {{ address.user_pincode ? address.user_pincode : "None" }}
+                </div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Land Mark:</div>
+                <div class="second-row">{{ address.land_mark_address ? address.land_mark_address : "None" }}</div>
+              </section>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="second-row">
+                  <button class="editBtn" (click)="editAddress()" mat-button><mat-icon>edit</mat-icon>Edit</button>
+                </div>
+              </section>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Intelletual Info -->
+    <section *ngIf="false" class="contact-information-section">
+      <h2>Intellectual Information</h2>
+      <div class="row">
+        <div class="col-lg-5">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">TradeMark No:</div>
+                <div class="second-row">{{ intellectual.trademark_no ? intellectual.trademark_no : "None" }}</div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Copyright No:</div>
+                <div class="second-row">
+                  {{ intellectual.copyright_no ? intellectual.copyright_no : "None" }}
+                </div>
+              </section>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-5">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Patent No:</div>
+                <div class="second-row">{{ intellectual.patent_no ? intellectual.patent_no : "None" }}</div>
+              </section>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="second-row">
+                  <button class="editBtn" (click)="editIntellictual()" mat-button><mat-icon>edit</mat-icon>Edit</button>
+                </div>
+              </section>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section> 
+    
+    <!-- Statuory Info -->
+    <section *ngIf="false" class="contact-information-section">
+      <h2>Statutory Information</h2>
+      <div class="row">
+        <div class="col-lg-5">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">GST No:</div>
+                <div class="second-row">{{ statutory.gst_no ? statutory.gst_no : "N/A" }}</div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">PAN No:</div>
+                <div class="second-row">
+                  {{ statutory.pan_no ? statutory.pan_no : "N/A" }}
+                </div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">TAN No:</div>
+                <div class="second-row">
+                  {{ statutory.tan_no ? statutory.tan_no : "N/A" }}
+                </div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">ISNO No:</div>
+                <div class="second-row">
+                  {{ statutory.isno_no ? statutory.isno_no : "N/A" }}
+                </div>
+              </section>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-5">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">CIN No:</div>
+                <div class="second-row">{{ statutory.cin_no ? statutory.cin_no : "N/A" }}</div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">DGFT Code:</div>
+                <div class="second-row">
+                  {{ statutory.dgft_code ? statutory.dgft_code : "N/A" }}
+                </div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">License No:</div>
+                <div class="second-row">{{ statutory.act_licence_no ? statutory.act_licence_no : "N/A" }}</div>
+              </section>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="second-row">
+                  <button class="editBtn" (click)="editStatutory()" mat-button><mat-icon>edit</mat-icon>Edit</button>
+                </div>
+              </section>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Company Info -->
+    <section *ngIf="false" class="contact-information-section">
+      <h2>Company Information</h2>
+      <div class="row">
+        <div class="col-lg-5">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Company Name:</div>
+                <div class="second-row">
+                  {{ company.company_name ? company.company_name : "None"}}
+                </div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Year Established:</div>
+                <div class="second-row">
+                  {{ company.created_at ? company.created_at : "None" }}
+                </div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Official Website:</div>
+                <div class="second-row">
+                  {{ company.company_website ? company.company_website : "None" }}
+                </div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Business Type:</div>
+                <div class="second-row">
+                  {{ company.business_type ? company.business_type : "None" }}
+                </div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Total Number Of Employees:</div>
+                <div class="second-row">
+                  {{ company.employee_size ? company.employee_size : "-" }}
+                </div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Fax Information:</div>
+                <div class="second-row">
+                  {{ company.fax_no ? company.fax_no : "None" }}
+                </div>
+              </section>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-5">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Platforms for selling:</div>
+                <div class="second-row">
+                  {{ company.selling_platforms ? company.selling_platforms : "None" }}
+                </div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Main Products:</div>
+                <div class="second-row breakword">
+                  {{ company.main_products ? company.main_products : "None" }}
+                </div>
+              </section>
+            </li>
+            <!-- <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Registered address:</div>
+                <div class="second-row">
+                  {{ company.city_name ? company.tax : "None" }}
+                </div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Operational Address:</div>
+                <div class="second-row">
+                  {{ company.city_name ? company.city_name : "None" }}
+                </div>
+              </section>
+            </li> -->
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">About Us:</div>
+                <div class="second-row">
+                  {{ company.about_us ? company.about_us : "None" }}
+                </div>
+              </section>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="second-row">
+    
+                  <button class="editBtn" (click)="editCompany()" mat-button><mat-icon>edit_outline</mat-icon>Edit</button>
+    
+                </div>
+              </section>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Sourcing Info -->
+    <section *ngIf="false" class="contact-information-section">
+      <h2>Sourcing Information</h2>
+      <div class="row">
+        <div class="col-lg-5">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Annual Purchasing Volume:</div>
+                <div class="second-row">{{ sourcing.annual_purchasing_volume ? sourcing.annual_purchasing_volume : "-"}}</div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Primary Sourcing Purpose:</div>
+                <div class="second-row">{{ sourcing.primary_sourcing_purpose ? sourcing.primary_sourcing_purpose : "-"}}</div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Average Sourcing Frequency:</div>
+                <div class="second-row">{{ sourcing.average_sourcing_frequency ? sourcing.average_sourcing_frequency : "-"}}</div>
+              </section>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-5">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Preferred Supplier Qualifications:</div>
+                <div class="second-row">{{ sourcing.preferred_supplier_qualifications ? sourcing.preferred_supplier_qualifications : "-"}}</div>
+              </section>
+            </li>
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="first-row">Preferred Industries:</div>
+                <div class="second-row">{{ sourcing.preferred_industries ? sourcing.preferred_industries : "-"}}</div>
+              </section>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <ul class="list-group contact-list-ul">
+            <li class="list-group-item">
+              <section class="contact-infrm">
+                <div class="second-row">
+                  <button class="editBtn" (click)="editSourcingInfo()" mat-button><mat-icon>edit</mat-icon>Edit</button>
+                </div>
+              </section>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+</ng-container>
+<section *ngIf="serverDown">
+  <app-server-down></app-server-down>
+</section>

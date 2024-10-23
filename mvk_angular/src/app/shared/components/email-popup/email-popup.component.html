@@ -1,0 +1,40 @@
+<div class="rfqformwrapper dialogrfqformwrapper">
+    <section class="fieldsec filedsec-100p">
+        <h2 class="poptitle">
+            *Email Updation Required To Chat <a (click)="closeRFQpopup()"><mat-icon>close</mat-icon></a>
+        </h2>
+        <form [formGroup]="myForm">
+            <!-- Sending Otp Field -->
+            <section class="flex-row-sign">
+                <section class="mobilefiled emailfield">
+                    <mat-form-field appearance="outline" class="smallfiled noborders mobilenumberfield">
+                        <input matInput type="email" placeholder="Email" formControlName="email" />
+                    </mat-form-field>
+                </section>
+                <section class="otpbtnsec">
+                    <button mat-stroked-button class="otpbtn " [disabled]="!email.valid" (click)="sendOtptoEmail()" type="button">
+                       Send OTP
+                    </button>
+                </section>
+            </section>
+
+            
+            <!-- Otp Validating Field -->
+            <section *ngIf="otpStatus">
+                <br> <br>
+                <section class="flex-row-sign">
+                    <section class="mobilefiled otpfiled">
+                        <mat-form-field appearance="outline" class="smallfiled noborders mobilenumberfield">
+                            <input matInput type="number" placeholder="Enter OTP" formControlName="otp" />
+                        </mat-form-field>
+                    </section>
+                    <section class="otpbtnsec">
+                        <button mat-stroked-button [disabled]="!myForm.valid" class="my-button otpbtn" (click)="signUP()" type="button">
+                            Verify
+                        </button>
+                    </section>
+                </section>
+            </section>
+        </form>
+    </section>
+</div>

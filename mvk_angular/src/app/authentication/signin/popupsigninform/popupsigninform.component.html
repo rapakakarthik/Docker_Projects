@@ -1,0 +1,6 @@
+<section class="signup_popup">
+    <a class="popclose" (click)="close()"><mat-icon>close</mat-icon></a>
+    <app-signinform *ngIf="showSignIn" [popDisplay]="fromPopup"  (actionclose)="closepopup($event)"></app-signinform>
+    <app-popupsignup *ngIf="!showSignIn" [signInData]="object" (actionclose)="closepopup($event)"></app-popupsignup>
+    <!-- <app-popupsignupform *ngIf="!showSignIn" [signInData]="object" (actionclose)="closepopup($event)"></app-popupsignupform> -->
+</section>

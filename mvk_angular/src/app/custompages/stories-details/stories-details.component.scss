@@ -1,0 +1,79 @@
+.stories{
+  .stories_card{
+
+    img{
+      width: 100%;
+      height: 250px;
+      object-fit: contain;
+      background: #f5f5f5;
+      border-radius: 10px;
+    }
+
+    .heading_row{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0 0;
+
+      .title{
+        font-size: 18px;
+      }
+
+      .actions{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        li{
+          list-style: none;
+
+          &.active svg path{
+            
+          }
+        }
+
+        .like, .bookmark{
+          display: flex;
+          align-items: center;
+          gap: 7px;
+        }
+
+        .bookmarked{
+          color: #017EB9;
+          display: flex;
+          align-items: center;
+          gap: 7px;
+
+          svg path{
+            fill: #017EB9;
+          }
+        }
+
+        .liked {
+          color: #017EB9;
+          svg path{
+            fill: #017EB9;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .stories .stories_card{
+
+    img{
+      height: 125px;
+    }
+
+    .heading_row{
+      display: block;
+  
+      .actions{
+        justify-content: end;
+      }
+    }
+  }
+   
+}

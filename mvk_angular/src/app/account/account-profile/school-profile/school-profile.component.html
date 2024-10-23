@@ -1,0 +1,666 @@
+<form [formGroup]="schoolProfileForm">
+    <section class="v3_profile">
+        <!-- School Profile -->
+        <div class="title">
+            <h2 class="smallTitle">School Profile</h2>
+        </div>
+        <div class="form_box">
+            <div formGroupName="school_details" class="row_form">
+                <div class="row_field">
+                    <label><span class="text_red">*</span>School Name</label>
+                    <div class="form_field">
+                        <div class="field_control" [class.error_control]="schoolNameError">
+                            <input formControlName="school_name" maxlength="30" type="text" appAlphaNumeric class="form-control" />
+                        </div>
+                    </div>
+                </div>  
+                <div class="row_field">
+                    <label><span class="text_red">*</span>UDISE Code</label>
+                    <div class="form_field">
+                        <div class="field_control" [class.error_control]="udiseError">
+                            <input appAllowNumbersOnly formControlName="udise_code" type="text" maxlength="11" class="form-control" />
+                            <!-- <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 18 18" fill="none">
+                                <path d="M8.25 6.75H9.75V5.25H8.25M9 15C5.6925 15 3 12.3075 3 9C3 5.6925 5.6925 3 9 3C12.3075 3 15 5.6925 15 9C15 12.3075 12.3075 15 9 15ZM9 1.5C8.01508 1.5 7.03981 1.69399 6.12987 2.0709C5.21993 2.44781 4.39314 3.00026 3.6967 3.6967C2.29018 5.10322 1.5 7.01088 1.5 9C1.5 10.9891 2.29018 12.8968 3.6967 14.3033C4.39314 14.9997 5.21993 15.5522 6.12987 15.9291C7.03981 16.306 8.01508 16.5 9 16.5C10.9891 16.5 12.8968 15.7098 14.3033 14.3033C15.7098 12.8968 16.5 10.9891 16.5 9C16.5 8.01508 16.306 7.03981 15.9291 6.12987C15.5522 5.21993 14.9997 4.39314 14.3033 3.6967C13.6069 3.00026 12.7801 2.44781 11.8701 2.0709C10.9602 1.69399 9.98491 1.5 9 1.5ZM8.25 12.75H9.75V8.25H8.25V12.75Z" fill="#B0B0B0"/>
+                                </svg>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label><span class="text_red">*</span>Street</label>
+                    <div class="form_field">
+                        <div class="field_control" [class.error_control]="streetError">
+                            <input formControlName="street" maxlength="30" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label><span class="text_red">*</span>Postal Code</label>
+                    <div class="form_field">
+                        <div class="field_control" [class.error_control]="!isPincodeValid">
+                            <input appAllowNumbersOnly (input)="pincodeVerify()" formControlName="postal_code" placeholder="Pincode" maxlength="6" pattern="[0-9]{6}" type="text" class="form-control" />
+                            <p [style.color]="isPincodeValid ? 'green' : 'red'">{{pinResponse}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label><span class="text_red">*</span>City</label>
+                    <div class="form_field">
+                        <div class="field_control" [class.error_control]="cityError">
+                            <input formControlName="city" maxlength="30" appRejectSpecialCharacters type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label>State</label>
+                    <div class="form_field">
+                        <div class="field_control">
+                            <input readonly [value]="state" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label>Country</label>
+                    <div class="form_field">
+                        <div class="field_control">
+                            <input readonly [value]="country" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label>Medium</label>
+                    <div class="form_field">
+                        <div class="field_control">
+                            <div class="select_control">
+                                <select formControlName="medium" class="form-control">
+                                    <option [value]="0" disabled> Select </option>
+                                    @for (medium of schoolDropdowns.school_medium; track medium.id) {
+                                        <option [value]="medium.id">{{medium.name}}</option>
+                                    }
+                                </select>
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
+                                    fill="none">
+                                    <path
+                                        d="M12.4496 14.475L8.82456 10.85C8.77456 10.8 8.73706 10.7458 8.71206 10.6875C8.68706 10.6292 8.67456 10.5667 8.67456 10.5C8.67456 10.3667 8.72039 10.25 8.81206 10.15C8.90373 10.05 9.02456 10 9.17456 10H16.7746C16.9246 10 17.0454 10.05 17.1371 10.15C17.2287 10.25 17.2746 10.3667 17.2746 10.5C17.2746 10.5333 17.2246 10.65 17.1246 10.85L13.4996 14.475C13.4162 14.5583 13.3329 14.6167 13.2496 14.65C13.1662 14.6833 13.0746 14.7 12.9746 14.7C12.8746 14.7 12.7829 14.6833 12.6996 14.65C12.6162 14.6167 12.5329 14.5583 12.4496 14.475Z"
+                                        fill="black" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label><span class="text_red">*</span>School Management</label>
+                    <div class="form_field">
+                        <div class="field_control">
+                            <div class="select_control">
+                                <select formControlName="school_management" class="form-control">
+                                    <option [value]="0" disabled> Select </option>
+                                    @for (management of schoolDropdowns.school_management; track management.id) {
+                                        <option [value]="management.id">{{management.name}}</option>
+                                    }
+                                </select>
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
+                                    fill="none">
+                                    <path
+                                        d="M12.4496 14.475L8.82456 10.85C8.77456 10.8 8.73706 10.7458 8.71206 10.6875C8.68706 10.6292 8.67456 10.5667 8.67456 10.5C8.67456 10.3667 8.72039 10.25 8.81206 10.15C8.90373 10.05 9.02456 10 9.17456 10H16.7746C16.9246 10 17.0454 10.05 17.1371 10.15C17.2287 10.25 17.2746 10.3667 17.2746 10.5C17.2746 10.5333 17.2246 10.65 17.1246 10.85L13.4996 14.475C13.4162 14.5583 13.3329 14.6167 13.2496 14.65C13.1662 14.6833 13.0746 14.7 12.9746 14.7C12.8746 14.7 12.7829 14.6833 12.6996 14.65C12.6162 14.6167 12.5329 14.5583 12.4496 14.475Z"
+                                        fill="black" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label><span class="text_red">*</span>School Type</label>
+                    <div class="form_field">
+                        <div class="field_control">
+                            <div class="select_control">
+                                <select formControlName="school_type" class="form-control">
+                                    <option [value]="0" disabled> Select </option>
+                                    @for (type of schoolDropdowns.school_type; track type.id) {
+                                        <option [value]="type.id">{{type.name}}</option>
+                                    }
+                                </select>
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
+                                    fill="none">
+                                    <path
+                                        d="M12.4496 14.475L8.82456 10.85C8.77456 10.8 8.73706 10.7458 8.71206 10.6875C8.68706 10.6292 8.67456 10.5667 8.67456 10.5C8.67456 10.3667 8.72039 10.25 8.81206 10.15C8.90373 10.05 9.02456 10 9.17456 10H16.7746C16.9246 10 17.0454 10.05 17.1371 10.15C17.2287 10.25 17.2746 10.3667 17.2746 10.5C17.2746 10.5333 17.2246 10.65 17.1246 10.85L13.4996 14.475C13.4162 14.5583 13.3329 14.6167 13.2496 14.65C13.1662 14.6833 13.0746 14.7 12.9746 14.7C12.8746 14.7 12.7829 14.6833 12.6996 14.65C12.6162 14.6167 12.5329 14.5583 12.4496 14.475Z"
+                                        fill="black" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (boards.length > 0) {
+                <div class="row_field">
+                    <label><span class="text_red">*</span>School Board</label>
+                    <div class="form_field">
+                        <div class="field_control">
+                            <div class="select_control">
+                                <select formControlName="school_board" class="form-control">
+                                    <option [value]="0" disabled> Select </option>
+                                    @for (board of boards; track board.id) {
+                                        <option [value]="board.id">{{board.name}}</option>
+                                    }
+                                </select>
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
+                                    fill="none">
+                                    <path
+                                        d="M12.4496 14.475L8.82456 10.85C8.77456 10.8 8.73706 10.7458 8.71206 10.6875C8.68706 10.6292 8.67456 10.5667 8.67456 10.5C8.67456 10.3667 8.72039 10.25 8.81206 10.15C8.90373 10.05 9.02456 10 9.17456 10H16.7746C16.9246 10 17.0454 10.05 17.1371 10.15C17.2287 10.25 17.2746 10.3667 17.2746 10.5C17.2746 10.5333 17.2246 10.65 17.1246 10.85L13.4996 14.475C13.4162 14.5583 13.3329 14.6167 13.2496 14.65C13.1662 14.6833 13.0746 14.7 12.9746 14.7C12.8746 14.7 12.7829 14.6833 12.6996 14.65C12.6162 14.6167 12.5329 14.5583 12.4496 14.475Z"
+                                        fill="black" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+                <div class="row_field">
+                    <label><span class="text_red">*</span>Streams Available</label>
+                    <div class="form_field">
+                        <div class="field_control">
+                            <div class="select_control">
+                                <select formControlName="streams" class="form-control">
+                                    <option [value]="'default'" disabled> Select </option>
+                                    @for (stream of schoolDropdowns.streams; track stream.id) {
+                                        <option [value]="stream.id">{{stream.name}}</option>
+                                    }
+                                    <option value="0">Others</option>
+                                </select>
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
+                                    fill="none">
+                                    <path
+                                        d="M12.4496 14.475L8.82456 10.85C8.77456 10.8 8.73706 10.7458 8.71206 10.6875C8.68706 10.6292 8.67456 10.5667 8.67456 10.5C8.67456 10.3667 8.72039 10.25 8.81206 10.15C8.90373 10.05 9.02456 10 9.17456 10H16.7746C16.9246 10 17.0454 10.05 17.1371 10.15C17.2287 10.25 17.2746 10.3667 17.2746 10.5C17.2746 10.5333 17.2246 10.65 17.1246 10.85L13.4996 14.475C13.4162 14.5583 13.3329 14.6167 13.2496 14.65C13.1662 14.6833 13.0746 14.7 12.9746 14.7C12.8746 14.7 12.7829 14.6833 12.6996 14.65C12.6162 14.6167 12.5329 14.5583 12.4496 14.475Z"
+                                        fill="black" />
+                                </svg>
+                            </div>
+                        </div>
+                        @if (showDescriptionBoxStreams) {
+                            <div class="field_control reason_field mt-3">
+                                <input formControlName="other_streams" type="text" appRejectSpecialCharacters maxlength="30" class="form-control" />
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label><span class="text_red">*</span>Type of School</label>
+                    <div class="form_field">
+                        <div class="field_control">
+                            <div class="select_control">
+                                <select formControlName="type_of_school" class="form-control">
+                                    <option [value]="0" disabled> Select </option>
+                                    @for (type of schoolDropdowns.type_of_school; track type.id) {
+                                        <option [value]="type.id">{{type.name}}</option>
+                                    }
+                                </select>
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
+                                    fill="none">
+                                    <path
+                                        d="M12.4496 14.475L8.82456 10.85C8.77456 10.8 8.73706 10.7458 8.71206 10.6875C8.68706 10.6292 8.67456 10.5667 8.67456 10.5C8.67456 10.3667 8.72039 10.25 8.81206 10.15C8.90373 10.05 9.02456 10 9.17456 10H16.7746C16.9246 10 17.0454 10.05 17.1371 10.15C17.2287 10.25 17.2746 10.3667 17.2746 10.5C17.2746 10.5333 17.2246 10.65 17.1246 10.85L13.4996 14.475C13.4162 14.5583 13.3329 14.6167 13.2496 14.65C13.1662 14.6833 13.0746 14.7 12.9746 14.7C12.8746 14.7 12.7829 14.6833 12.6996 14.65C12.6162 14.6167 12.5329 14.5583 12.4496 14.475Z"
+                                        fill="black" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label><span class="text_red">*</span>Year of Established</label>
+                    <div class="form_field">
+                        <div class="field_control" [class.error_control]="yearError">
+                            <input formControlName="year" type="text" maxlength="4" appAllowNumbersOnly class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Contact Details -->
+            <div class="title">
+                <h2>Contact Details</h2>
+            </div>
+        
+            <div formGroupName="contact_details" class="row_form">
+                <div class="row_field">
+                    <label><span class="text_red">*</span>Website</label>
+                    <div class="form_field">
+                        <div class="field_control" [class.error_control]="websiteError">
+                            <input formControlName="website" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label><span class="text_red">*</span>Email Id</label>
+                    <div class="form_field">
+                        <div class="field_control" [class.error_control]="contactEmailError">
+                            <input formControlName="email" maxlength="64" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label><span class="text_red">*</span>STD Code</label>
+                    <div class="form_field">
+                        <div class="field_control" [class.error_control]="stdCodeError">
+                            <input formControlName="std_code" type="text" maxlength="8" appAllowNumbersOnly class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label><span class="text_red">*</span>Mobile Number</label>
+                    <div class="form_field">
+                        <div class="field_control" [class.error_control]="contactMobileError">
+                            <input formControlName="mobile" type="text" appAllowNumbersOnly maxlength="10" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label><span class="text_red">*</span>Landline Number</label>
+                    <div class="form_field">
+                        <div class="field_control" [class.error_control]="contactLandlineError">
+                            <input formControlName="landline_number" type="text" maxlength="10" appAllowNumbersOnly class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Head of the school -->
+            @if (showHeadSection) {
+            <div class="title">
+                <h2>Head of the School</h2>
+            </div>
+        
+            <div formGroupName="head_of_school" class="row_form">
+                <div class="row_field">
+                    <label><span class="text_red">*</span>HOS Type</label>
+                    <div class="form_field">
+                        <div class="field_control">
+                            <div class="select_control">
+                                <select formControlName="hos_type" class="form-control">
+                                    <option [value]="0" disabled> Select </option>
+                                    @for (section of schoolDropdowns.hos; track section.id) {
+                                        <option [value]="section.id">{{section.name}}</option>
+                                    }
+                                </select>
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
+                                    fill="none">
+                                    <path
+                                        d="M12.4496 14.475L8.82456 10.85C8.77456 10.8 8.73706 10.7458 8.71206 10.6875C8.68706 10.6292 8.67456 10.5667 8.67456 10.5C8.67456 10.3667 8.72039 10.25 8.81206 10.15C8.90373 10.05 9.02456 10 9.17456 10H16.7746C16.9246 10 17.0454 10.05 17.1371 10.15C17.2287 10.25 17.2746 10.3667 17.2746 10.5C17.2746 10.5333 17.2246 10.65 17.1246 10.85L13.4996 14.475C13.4162 14.5583 13.3329 14.6167 13.2496 14.65C13.1662 14.6833 13.0746 14.7 12.9746 14.7C12.8746 14.7 12.7829 14.6833 12.6996 14.65C12.6162 14.6167 12.5329 14.5583 12.4496 14.475Z"
+                                        fill="black" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label><span class="text_red">*</span>HOS Name</label>
+                    <div class="form_field">
+                        <div class="field_control" [class.error_control]="hosNameError">
+                            <input formControlName="hos_name" maxlength="30" type="text" appAlphaNumeric class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label><span class="text_red">*</span>Contact Number</label>
+                    <div class="form_field">
+                        <div class="field_control" [class.error_control]="hosNumberError">
+                            <input formControlName="hos_contact" type="text" maxlength="10" appAllowNumbersOnly class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row_field">
+                    <label><span class="text_red">*</span>Email Id</label>
+                    <div class="form_field">
+                        <div class="field_control" [class.error_control]="hosEmailError">
+                            <input formControlName="hos_email" type="text" maxlength="64" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        
+            @if(schoolDetails.value.school_board > 0) {
+            <div formGroupName="secondary_school" class="section_affiliation">
+                <div class="affiliation_row">
+                    <p>Affiliation Board of the school for SECONDARY Sections</p>
+                    <div class="field_control">
+                        <div class="select_control">
+                            <select formControlName="secondary" class="form-control">
+                                <option [value]="0" disabled> Select </option>
+                                @for (section of schoolDropdowns.school_secondary_sections; track section.id) {
+                                    <option [value]="section.id">{{section.name}}</option>
+                                }
+                            </select>
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
+                                fill="none">
+                                <path
+                                    d="M12.4496 14.475L8.82456 10.85C8.77456 10.8 8.73706 10.7458 8.71206 10.6875C8.68706 10.6292 8.67456 10.5667 8.67456 10.5C8.67456 10.3667 8.72039 10.25 8.81206 10.15C8.90373 10.05 9.02456 10 9.17456 10H16.7746C16.9246 10 17.0454 10.05 17.1371 10.15C17.2287 10.25 17.2746 10.3667 17.2746 10.5C17.2746 10.5333 17.2246 10.65 17.1246 10.85L13.4996 14.475C13.4162 14.5583 13.3329 14.6167 13.2496 14.65C13.1662 14.6833 13.0746 14.7 12.9746 14.7C12.8746 14.7 12.7829 14.6833 12.6996 14.65C12.6162 14.6167 12.5329 14.5583 12.4496 14.475Z"
+                                    fill="black" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="affiliation_row">
+                    <p>Affiliation Board of the school for HIGHER SECONDARY Sections</p>
+                    <div class="field_control">
+                        <div class="select_control">
+                            <select formControlName="higher_secondary" class="form-control">
+                                <option [value]="0" disabled> Select </option>
+                                @for (section of schoolDropdowns.school_secondary_sections; track section.id) {
+                                    <option [value]="section.id">{{section.name}}</option>
+                                }
+                            </select>
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
+                                fill="none">
+                                <path
+                                    d="M12.4496 14.475L8.82456 10.85C8.77456 10.8 8.73706 10.7458 8.71206 10.6875C8.68706 10.6292 8.67456 10.5667 8.67456 10.5C8.67456 10.3667 8.72039 10.25 8.81206 10.15C8.90373 10.05 9.02456 10 9.17456 10H16.7746C16.9246 10 17.0454 10.05 17.1371 10.15C17.2287 10.25 17.2746 10.3667 17.2746 10.5C17.2746 10.5333 17.2246 10.65 17.1246 10.85L13.4996 14.475C13.4162 14.5583 13.3329 14.6167 13.2496 14.65C13.1662 14.6833 13.0746 14.7 12.9746 14.7C12.8746 14.7 12.7829 14.6833 12.6996 14.65C12.6162 14.6167 12.5329 14.5583 12.4496 14.475Z"
+                                    fill="black" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        
+            <form [formGroup]="sourcingForm">
+            <div class="row_form">
+                <div class="section_radio">
+                    <div class="title">
+                        <h2>Pre primary school?</h2>
+                    </div>
+                    <div class="row_radio">
+                        <div class="radio_control">
+                            <input formControlName="primary" type="radio" name="primary" value="1" id="primary-yes">
+                            <label for="primary-yes">Yes</label>
+                        </div>
+                        <div class="radio_control">
+                            <input formControlName="primary" type="radio" name="primary" value="0" id="primary-no">
+                            <label for="primary-no">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="section_radio">
+                    <div class="title">
+                        <h2>Is this a Residential school?</h2>
+                    </div>
+                    <div class="row_radio">
+                        <div class="radio_control">
+                            <input formControlName="residential" type="radio" name="residential" value="1" id="residential-yes">
+                            <label for="residential-yes">Yes</label>
+                        </div>
+                        <div class="radio_control">
+                            <input formControlName="residential" type="radio" name="residential" value="0" id="residential-no">
+                            <label for="residential-no">No</label>
+                        </div>
+                    </div>
+                    @if (showResidentailDrop) {
+                    <div class="field_control mt-3">
+                        <div class="select_control">
+                            <select formControlName="resVal" class="form-control">
+                                <option [value]="0" disabled> Select </option>
+                                @for (residential of schoolDropdowns.residential_school; track residential.id) {
+                                    <option [value]="residential.id">{{residential.name}}</option>
+                                }
+                            </select>
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
+                                fill="none">
+                                <path
+                                    d="M12.4496 14.475L8.82456 10.85C8.77456 10.8 8.73706 10.7458 8.71206 10.6875C8.68706 10.6292 8.67456 10.5667 8.67456 10.5C8.67456 10.3667 8.72039 10.25 8.81206 10.15C8.90373 10.05 9.02456 10 9.17456 10H16.7746C16.9246 10 17.0454 10.05 17.1371 10.15C17.2287 10.25 17.2746 10.3667 17.2746 10.5C17.2746 10.5333 17.2246 10.65 17.1246 10.85L13.4996 14.475C13.4162 14.5583 13.3329 14.6167 13.2496 14.65C13.1662 14.6833 13.0746 14.7 12.9746 14.7C12.8746 14.7 12.7829 14.6833 12.6996 14.65C12.6162 14.6167 12.5329 14.5583 12.4496 14.475Z"
+                                    fill="black" />
+                            </svg>
+                        </div>
+                    </div>
+                    }
+                </div>
+                <div class="section_radio">
+                    <div class="title">
+                        <h2>Does the school run any skill training center after school hours?</h2>
+                    </div>
+                    <div class="row_radio">
+                        <div class="radio_control">
+                            <input formControlName="training" type="radio" name="training" value="1" id="training-yes">
+                            <label for="training-yes">Yes</label>
+                        </div>
+                        <div class="radio_control">
+                            <input formControlName="training" type="radio" name="training" value="0" id="training-no">
+                            <label for="training-no">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="section_radio">
+                    <div class="title">
+                        <h2>Is this a Special School for CWSN?</h2>
+                    </div>
+                    <div class="row_radio">
+                        <div class="radio_control">
+                            <input formControlName="cwsn" type="radio" name="cwsn" value="1" id="cwsn-yes">
+                            <label for="cwsn-yes">Yes</label>
+                        </div>
+                        <div class="radio_control">
+                            <input formControlName="cwsn" type="radio" name="cwsn" value="0" id="cwsn-no">
+                            <label for="cwsn-no">No</label>
+                        </div>
+                    </div>
+                    @if (showCwsnDrop) {
+                    <div class="field_control mt-3">
+                        <div class="select_control">
+                            <select formControlName="cwsnVal" class="form-control">
+                                <option [value]="'default'" disabled> Select </option>
+                                @for (csw of schoolDropdowns.cwsn; track csw.id) {
+                                    <option [value]="csw.id">{{csw.name}}</option>
+                                }
+                            </select>
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
+                                fill="none">
+                                <path
+                                    d="M12.4496 14.475L8.82456 10.85C8.77456 10.8 8.73706 10.7458 8.71206 10.6875C8.68706 10.6292 8.67456 10.5667 8.67456 10.5C8.67456 10.3667 8.72039 10.25 8.81206 10.15C8.90373 10.05 9.02456 10 9.17456 10H16.7746C16.9246 10 17.0454 10.05 17.1371 10.15C17.2287 10.25 17.2746 10.3667 17.2746 10.5C17.2746 10.5333 17.2246 10.65 17.1246 10.85L13.4996 14.475C13.4162 14.5583 13.3329 14.6167 13.2496 14.65C13.1662 14.6833 13.0746 14.7 12.9746 14.7C12.8746 14.7 12.7829 14.6833 12.6996 14.65C12.6162 14.6167 12.5329 14.5583 12.4496 14.475Z"
+                                    fill="black" />
+                            </svg>
+                        </div>
+                    </div>
+                    @if (showDescriptionBox) {
+                    <div class="field_control reason_field mt-3">
+                        <!-- <label>
+                            <span>What's the reason</span>
+                            <span class="reason_desc_count">0/300</span>
+                        </label>
+                        <textarea formControlName="cwsnDesc" maxlength="300" class="form-control" rows="4" placeholder="Enter Description"></textarea> -->
+                        <input formControlName="cwsnDesc" type="text" appRejectSpecialCharacters maxlength="30" class="form-control" />
+                    </div>
+                    }
+                    }
+                </div>
+                <div class="section_radio">
+                    <div class="title">
+                        <h2>Is Continuous and Comprehensive Evaluation (CCE) being implemented in School?</h2>
+                    </div>
+                    <div class="row_radio">
+                        <div class="radio_control">
+                            <input formControlName="cce" type="radio" name="cce" value="1" id="cce-yes">
+                            <label for="cce-yes">Yes</label>
+                        </div>
+                        <div class="radio_control">
+                            <input formControlName="cce" type="radio" name="cce" value="0" id="cce-no">
+                            <label for="cce-no">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="section_radio">
+                    <div class="title">
+                        <h2>Is the School certified as Fit India School?</h2>
+                    </div>
+                    <div class="row_radio">
+                        <div class="radio_control">
+                            <input formControlName="fit_india_school" type="radio" name="fit_india_school" value="1" id="fit_india_school-yes">
+                            <label for="fit_india_school-yes">Yes</label>
+                        </div>
+                        <div class="radio_control">
+                            <input formControlName="fit_india_school" type="radio" name="fit_india_school" value="0" id="fit_india_school-no">
+                            <label for="fit_india_school-no">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="section_radio">
+                    <div class="title">
+                        <h2>Playground facility available in the School?</h2>
+                    </div>
+                    <div class="row_radio">
+                        <div class="radio_control">
+                            <input formControlName="playground_facility" type="radio" name="playground_facility" value="1" id="playground_facility-yes">
+                            <label for="playground_facility-yes">Yes</label>
+                        </div>
+                        <div class="radio_control">
+                            <input formControlName="playground_facility" type="radio" name="playground_facility" value="0" id="playground_facility-no">
+                            <label for="playground_facility-no">No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        
+            <div *ngIf="showRooms" class="section_rooms">
+        
+                <div class="total_qty">
+                    <p>Total Number of Rooms(Including classrooms, Other rooms & toilets)</p>
+                    <input readonly [value]="totalRooms" type="number" class="form-control">
+                </div>
+        
+                @for (rooms of schoolDropdowns.number_of_rooms; track rooms.pk_id) {
+                <div class="row_quantity">
+                    <p>{{rooms.room_name}}</p>
+                    <div class="quantity">
+                        <button (click)="addRoom1(rooms.pk_id, 'decrease')" class="decrement" [disabled]="roomsCount1[rooms.pk_id] == 0">-</button>
+                        <input type="number" readonly [value]="roomsCount1[rooms.pk_id]" min="0" max="20">
+                        <button (click)="addRoom1(rooms.pk_id, 'increase')" class="increment" [disabled]="roomsCount1[rooms.pk_id] == 20">+</button>
+                    </div>
+                </div>
+        
+                @if (rooms.is_dropdown == 1 && roomsCount1[rooms.pk_id] > 0) {
+                    <div [formGroup]="roomsForm" class="field_control mt-3">
+                        <div class="select_control">
+                            <mat-form-field appearance="outline" class="multi_select form-control">
+                                <mat-select placeholder="Select" multiple [formControlName]="'form' + rooms.pk_id">
+                                    @for (room of rooms.rooms_dropdowns; track room.id) {
+                                        <mat-option [value]="room.id">{{room.name}}</mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                }
+                }
+        
+            </div>
+        
+        
+            <!-- static rooms -->
+            <!-- @if(false) {
+            <div class="section_rooms">
+        
+                <div class="total_qty">
+                    <p>Total Number of Rooms(Including classrooms, Other rooms & toilets)</p>
+                    <input readonly [value]="totalRooms" type="number" class="form-control">
+                </div>
+        
+                <div class="row_quantity">
+                    <p>Separate room for Head of the School/Head Teacher/ Principal</p>
+                    <div class="quantity">
+                        <button (click)="addRoom('head', 'decrease')" class="decrement" [disabled]="roomsCount.head == 0">-</button>
+                        <input type="number" readonly [value]="roomsCount.head" min="0" max="20">
+                        <button (click)="addRoom('head', 'increase')" class="increment" [disabled]="roomsCount.head == 20">+</button>
+                    </div>
+                </div>
+        
+                <div class="row_quantity">
+                    <p>Separate room for Assistant Head Teacher/Vice Principal</p>
+                    <div class="quantity">
+                        <button (click)="addRoom('assistant', 'decrease')" class="decrement" [disabled]="roomsCount.assistant == 0">-</button>
+                        <input type="number" readonly [value]="roomsCount.assistant" min="0" max="20">
+                        <button (click)="addRoom('assistant', 'increase')" class="increment" [disabled]="roomsCount.assistant == 20">+</button>
+                    </div>
+                </div>
+        
+                @if (roomsCount.assistant > 0) {
+                    <div class="field_control mt-3">
+                        <div class="select_control">
+                            <mat-form-field appearance="outline" class="multi_select form-control">
+                                <mat-select>
+                                  <mat-select-trigger>
+                                    {{subjects.value?.[0] || ''}}
+                                    @if ((subjects.value?.length || 0) > 1) {
+                                      <span class="example-additional-selection">
+                                        (+{{(subjects.value?.length || 0) - 1}} {{subjects.value?.length === 2 ? 'other' : 'others'}})
+                                      </span>
+                                    }
+                                  </mat-select-trigger>
+                                    @for (subject of subjectList; track subject) {
+                                        <mat-option [value]="subject">{{subject}}</mat-option>
+                                    }
+                                </mat-select>
+                              </mat-form-field>
+                        </div>
+                    </div>
+                    }
+        
+                <div class="row_quantity">
+                    <p>Separate Common room for girls</p>
+                    <div class="quantity">
+                        <button (click)="addRoom('girls', 'decrease')" class="decrement" [disabled]="roomsCount.girls == 0">-</button>
+                        <input type="number" readonly [value]="roomsCount.girls" min="0" max="20">
+                        <button (click)="addRoom('girls', 'increase')" class="increment" [disabled]="roomsCount.girls == 20">+</button>
+                    </div>
+                </div>
+        
+                @if (roomsCount.girls > 0) {
+                <div class="field_control mt-3">
+                    <div class="select_control">
+                        <mat-form-field appearance="outline" class="multi_select form-control">
+                            <mat-select>
+                              <mat-select-trigger>
+                                {{subjects.value?.[0] || ''}}
+                                @if ((subjects.value?.length || 0) > 1) {
+                                  <span class="example-additional-selection">
+                                    (+{{(subjects.value?.length || 0) - 1}} {{subjects.value?.length === 2 ? 'other' : 'others'}})
+                                  </span>
+                                }
+                              </mat-select-trigger>
+                                @for (subject of subjectList; track subject) {
+                                    <mat-option [value]="subject">{{subject}}</mat-option>
+                                }
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                </div>
+                }
+            </div>
+            } -->
+            <!-- static rooms -->
+        
+            <form *ngIf="showStaffForm" [formGroup]="staffForm">
+            @for (staff of schoolDropdowns.staff_strength; track staff.id) {
+            <label class="radio_title">{{staff.name}}</label>
+            <div class="row_radiobox">
+                <div *ngIf="staff.staff_strength_one" class="radiobox">
+                    <input [formControlName]="'form' + staff.id" [value]="staff.staff_strength_one" type="radio" [id]="staff.staff_strength_one + staff.id" [name]="'form' + staff.id">
+                    <label [for]="staff.staff_strength_one + staff.id">{{staff.staff_strength_one}}</label>
+                </div>
+                <div *ngIf="staff.staff_strength_two" class="radiobox">
+                    <input [formControlName]="'form' + staff.id"  [value]="staff.staff_strength_two" type="radio" [id]="staff.staff_strength_two + staff.id" [name]="'form' + staff.id">
+                    <label [for]="staff.staff_strength_two + staff.id">{{staff.staff_strength_two}}</label>
+                </div>
+                <div *ngIf="staff.staff_strength_three" class="radiobox">
+                    <input [formControlName]="'form' + staff.id"  [value]="staff.staff_strength_three" type="radio" [id]="staff.staff_strength_three + staff.id" [name]="'form' + staff.id">
+                    <label [for]="staff.staff_strength_three + staff.id">{{staff.staff_strength_three}}</label>
+                </div>
+                <div *ngIf="staff.staff_strength_four" class="radiobox">
+                    <input [formControlName]="'form' + staff.id"  [value]="staff.staff_strength_four" type="radio" [id]="staff.staff_strength_four + staff.id" [name]="'form' + staff.id">
+                    <label [for]="staff.staff_strength_four + staff.id">{{staff.staff_strength_four}}</label>
+                </div>
+            </div>
+            }
+            </form>
+        </div>
+        <div class="col-lg-12 mt-4">
+            <div class="form_buttons">
+                <button (click)="cancelSchoolProfile()" class="grey_stroked_btn">Cancel</button>
+                <button (click)="editSchoolProfile()" class="primary_btn">Save</button>
+            </div>
+        </div>
+    </section>
+    </form>

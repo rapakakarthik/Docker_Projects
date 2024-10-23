@@ -1,0 +1,21 @@
+<ng-container *ngIf="buyerSellerStatus">
+<ng-container *ngIf="!type; else type">
+<button
+  [disabled]="disabled" [ngClass]="class"
+  class="chat-now text_btn"
+  (click)="showChat()"
+  >
+  <!-- [ngClass]="{ primaryBtn: btnstyle }" -->
+  <img *ngIf="!btnstyle" src="../../../../assets/svg/new-chat.svg" alt="">
+  Chat Now!
+</button>
+</ng-container>
+<ng-template #type>
+  <button (click)="showChat()" class="stroked_btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+      <path d="M5.70085 15.2885L4.20515 16.784C3.98352 17.0058 3.72722 17.0568 3.43624 16.937C3.14541 16.817 3 16.599 3 16.2828V4.41801C3 4.01395 3.13532 3.6766 3.40596 3.40596C3.6766 3.13532 4.01395 3 4.41801 3H17.3815C17.7856 3 18.123 3.13532 18.3936 3.40596C18.6642 3.6766 18.7996 4.01395 18.7996 4.41801V13.8705C18.7996 14.2746 18.6642 14.6119 18.3936 14.8826C18.123 15.1532 17.7856 15.2885 17.3815 15.2885H5.70085ZM5.32605 14.4108H17.3815C17.5167 14.4108 17.6406 14.3545 17.7531 14.242C17.8656 14.1295 17.9218 14.0057 17.9218 13.8705V4.41801C17.9218 4.28284 17.8656 4.159 17.7531 4.0465C17.6406 3.934 17.5167 3.87775 17.3815 3.87775H4.41801C4.28284 3.87775 4.159 3.934 4.0465 4.0465C3.934 4.159 3.87775 4.28284 3.87775 4.41801V15.854L5.32605 14.4108Z" fill="#0172A8"/>
+    </svg>
+    <span>Chat Now</span>
+  </button>
+</ng-template>
+</ng-container>

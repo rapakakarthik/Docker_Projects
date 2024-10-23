@@ -1,0 +1,144 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 header-form">
+      <h3> Contact Information </h3>
+      <!-- <span> Accurate and verified contacts will help to build trust with suppliers. </span> -->
+      <button
+        type="button"
+        (click)="closeDialog()"
+        mat-stroked-button
+        color="primary"
+        class="close-btn btn-clss"
+      >
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submit(form)">
+    <div mat-dialog-content>
+      <div class="row main-form">
+
+        <!-- Institute/School Name -->
+        <div class="col-lg-12">
+          <label> *Institute/School Name:</label>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100 middlefiled">
+            <input formControlName="school_name" class="w-100 middlefiled" placeholder="Institute/School Name" matInput>
+          </mat-form-field>
+        </div>
+
+        <!-- Management Type Field -->
+        <div class="col-lg-12">
+          <label> *Management Type:</label>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100 middlefiled">
+            <mat-label>Select Option</mat-label>
+            <mat-select
+              formControlName="management_type"
+              class="w-100 mat-select-rfq"
+            >
+              <mat-option
+                *ngFor="let management of managements"
+                [value]="management.pk_buyer_lost_reason_id"
+                >{{ management.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+        
+        <!-- Seniority Level -->
+        <div class="col-lg-12">
+          <label> *Seniority Level:</label>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100 middlefiled">
+            <mat-label>Select Option</mat-label>
+            <mat-select
+              formControlName="seniority_level"
+              class="w-100 mat-select-rfq"
+            >
+              <mat-option
+                *ngFor="let seniority of seniorities"
+                [value]="seniority.id"
+                >{{ seniority.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Designation Field -->
+        <div  class="col-lg-12">
+          <label> *Designation:</label>
+        </div>
+        <div  class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100 middlefiled">
+            <mat-label>Select Option</mat-label>
+            <mat-select
+              formControlName="designation"
+              class="w-100 mat-select-rfq"
+            >
+              <mat-option
+                *ngFor="let title of designations"
+                [value]="title.id"
+                >{{ title.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+
+        <!-- Pincode -->
+        <div class="col-lg-12">
+          <label> *Pincode:</label>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100 middlefiled">
+            <input
+              type="number"
+              (input)="pincodeVerify()"
+              pattern="[0-9]{6}"
+              formControlName="pincode"
+              placeholder="Pincode"
+              class="w-100 middlefiled"
+              matInput
+            />
+          </mat-form-field>
+          <p>{{pinResponse}}</p>
+        </div>
+
+        <!-- Address -->
+        <div class="col-lg-12">
+          <label> *Address:</label>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100 middlefiled">
+            <input
+              formControlName="address"
+              placeholder="Address"
+              class="w-100 middlefiled"
+              matInput
+            />
+          </mat-form-field>
+        </div>
+        
+        
+      </div>
+    </div>
+
+    <div mat-dialog-actions align="end" class="buttons-footer-rfq">
+      <!-- Update Button -->
+      <section class="rfqbtnwrap">
+        <button color="primary" [disabled]="!form.valid || !isPincodeValid" mat-raised-button type="submit" class="primaryBtn rfq-button">
+          Update Details
+        </button>
+      </section>
+      <section class="rfqbtnwrap">
+        <button type="button" (click)="closeDialog()" mat-stroked-button color="primary" class="close-btn">
+          Close
+        </button>
+      </section>
+    </div>
+  </form>
+</div>

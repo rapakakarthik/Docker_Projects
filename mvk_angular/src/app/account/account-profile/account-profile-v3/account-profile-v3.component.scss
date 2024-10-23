@@ -1,0 +1,156 @@
+section.profile-image img {
+    width: 81px;
+    height: 81px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+  }
+  
+  section.contact-infrm {
+    display: flex;
+    & div {
+      width: 50%;
+    }
+  }
+  
+  .profile-con {
+    display: flex;
+  }
+  section.header-profile {
+    border: solid 1px #8bdffa;
+    background-color: #f5fcff;
+    padding-top: 20px;
+    padding-bottom: 12px;
+    & h2 {
+      color: #000000;
+      font-size: 20px;
+      font-weight: 500;
+      font-family: inter !important;
+      margin-bottom: 3px;
+    }
+  }
+  .profile-s {
+    & .country {
+      color: #545454;
+      font-size: 12px;
+      font-family: inter;
+    }
+    & .years {
+      font-size: 11px;
+      color: #2e3231;
+      font-weight: 500;
+      font-family: "Inter";
+      border: solid 1px #e6e6e6;
+      padding: 2px;
+      margin-left: 10px;
+      border-radius: 3px;
+    }
+    & p.text-data-one {
+      margin-bottom: 0px;
+      margin-top: 12px;
+      color: #0172a8;
+      font-family: inter;
+      font-weight: 500;
+      span {
+        color: #000;
+      }
+    }
+    & p.text-data-onet {
+      color: #000000;
+      font-size: 14px;
+      font-family: inter;
+    }
+  }
+  section.email-contrt {
+    & p {
+      color: #000;
+      margin-bottom: 0px;
+      font-size: 14px;
+      font-family: inter;
+      width: 20ch;
+    }
+  }
+  section.contact-information-section {
+    margin-top: 15px;
+    padding: 0 12px;
+    & h2 {
+      // border-bottom: 1px solid #d9d9d9;
+      // padding-bottom: 5px;
+      margin-bottom: 0px;
+    }
+  }
+  ul.list-group.contact-list-ul {
+    & li {
+      border: none;
+    }
+  }
+  .first-row {
+    color: #545454;
+    font-size: 14px;
+    font-family: "Inter";
+  }
+  .second-row {
+    color: #000000;
+    font-size: 14px;
+    font-family: inter;
+  }
+  
+  .list2 {
+    padding-top: 100px;
+  }
+  .second-row.breakword {
+    word-break: break-word;
+  }
+  .editBtn {
+    color: #0172a8 !important;
+    font-size: 14px;
+    font-family: inter;
+    font-weight: 500;
+    & .mat-icon {
+      font-size: 14px;
+      width: 14px;
+      height: 14px;
+      color: #0172a8;
+    }
+  }
+  
+  .upload input {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+  }
+  
+  span.files {
+    background-color: white;
+    border-radius: 15px;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    position: relative;
+    top: 52px;
+    left: -33px;
+    cursor: pointer;
+    & img {
+      padding: 3px;
+      height: 26px;
+      width: 26px;
+      margin: 3px;
+    }
+  }
+  
+  .contact-information-section .title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #d9d9d9;
+    margin-bottom: 10px;
+  }
+  
+  @media screen and (max-width: 575px) {
+    .upload input{
+        width: 50%;
+    }
+    section.contact-infrm div{
+      word-break: break-all;
+    }
+  }

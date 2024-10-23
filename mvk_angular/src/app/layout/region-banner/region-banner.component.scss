@@ -1,0 +1,82 @@
+ 
+  .baner-text-content {
+    padding: 50px;
+    padding-bottom: 0px;
+  }
+  
+  
+  section.gradient-imgs {
+    
+    & .grd-bg-img {
+      height: 100%;
+      width: 100%;
+      background-size: auto;
+      background-repeat: no-repeat;
+      background-position: right center !important;
+      }
+    & .baner-text-content-t {
+      width: 100%;
+      height: 100%;
+      padding: 0px 0 20px 20px;
+      max-width: 60%;
+      display: flex;
+      
+      flex-direction: column;
+      justify-content: center;
+      & h2 {
+        font-family: 'Open Sans', sans-serif !important;
+        font-size: 26px !important;
+        line-height: 1.3;
+     margin: 0 0 10px 0;
+    font-weight: 700;
+        
+      }
+
+      & p {
+        font-family: 'Open Sans', sans-serif !important;
+        font-size: 16px !important;
+        line-height: 1.3;
+     margin: 0;
+    font-weight: 700;
+        
+      }
+      & button {
+        background: none;
+        box-shadow: none;
+        border: 1px solid black;
+        color: black;
+        padding: 22px;
+        font-weight: 500;
+        border-radius: 10px;
+        font-size: 16px;
+      }
+    }
+  }
+  
+  
+
+  .singlebanner{ height: 300px;}
+
+
+  @media only screen and (max-width: 600px) {
+
+
+    section.gradient-imgs
+    
+    { .baner-text-content-t { h2 {
+     
+        font-size: 12px !important;
+    }
+    p {
+     
+        font-size: 10px !important;
+    }
+
+}
+
+
+
+    }
+
+
+  }

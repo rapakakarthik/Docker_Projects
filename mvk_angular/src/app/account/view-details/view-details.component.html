@@ -1,0 +1,16 @@
+<mat-tab-group [(selectedIndex)]="selectedTabIndex" class="vew-details-bodysection">
+  <!-- My Enquiry -->
+  <mat-tab label="Inquiries">
+    <app-inquiries-list></app-inquiries-list>
+  </mat-tab>
+  
+  <!-- My RFQ -->
+  <mat-tab label="RFQs">
+    <app-rfq-list [getOnlyQuotes]="getOnlyQuotes"></app-rfq-list>
+  </mat-tab>
+  
+  <!-- My RFQ Draft-->
+  <!-- <mat-tab label="My RFQ Drafts">
+    <app-rfq-draft></app-rfq-draft>
+  </mat-tab> -->
+</mat-tab-group>

@@ -1,0 +1,41 @@
+<section class="company_video">
+    <div class="row">
+        <div class="col-6 col-md-4 col-lg-3" *ngFor="let i of [0,0,0,0,0,0]">
+            <div class="video_card">
+                <div class="video_img" (click)="openVideo()">
+                    <video>
+                        <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                    </video>
+                    <i class="fa fa-play video_icon"></i>
+                </div>
+                <div class="details">
+                    <img class="product_img" src="https://mvk-qa-laravel-media.s3.ap-south-1.amazonaws.com/seller_account/127/product_images/1619691366AMVnDl.jpg"/>
+                    <div>
+                        <h2 class="video_title">Wholesale summer designer fashion white brand item lorem ipsum</h2>
+                        <p class="price">₹641.03-₹726.03 /piece</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<ng-template #videoModal>
+    <section class="videoModal">
+        <button class="video_close" (click)="dialogRef.close()"><i class="fa fa-close"></i></button>
+        <video controls>
+            <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+        </video>
+        <div class="videoProducts">
+            <p class="date">08 March 2024</p>
+            <h2 class="video_title">Wholesale summer designer fashion white brand item.....</h2>
+            <div class="product_row">
+                <div class="product_item" *ngFor="let i of [0,0,0,0,0,0,0,0,0]">
+                    <img src="https://mvk-qa-laravel-media.s3.ap-south-1.amazonaws.com/seller_account/127/product_images/1619691366AMVnDl.jpg"/>
+                    <p class="video_title">New-arrival Large</p>
+                    <p class="video_price">5,500 - 6000</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</ng-template>

@@ -1,0 +1,81 @@
+<section class="company-profile-main">
+  <div class="row">
+    <div class="col-sm-4 col-md-3">
+      <section *ngIf="basicDetails" class="company-overview">
+        <h5 class="mainTitle"> Company Profile Information </h5>
+        <section class="card-profile">
+          <span class="img-profile">
+            <img [src]="basicDetails.seller_profile_image" />
+          </span>
+          <h3> {{basicDetails.seller_user_name}} </h3>
+        </section>
+      </section>
+    </div>
+
+    <div class="col-sm-8 col-md-9">
+      <section class="right-profile">
+        <section class="right-profile-bottom">
+    
+          <section class="details_tab">
+            <section *ngIf="profileDetails.length > 0" class="performce-tables">
+              <section class="tab-profile-section">
+                @for (detail of profileDetails; track detail.title) {
+                @if (detail.title != 'Certificates' && detail.details.length > 0) {
+                  <section class="profile-parent">
+                    <section class="profile-header"> {{detail.title}}</section>
+                    <ul class="list-group al">
+                      <li *ngFor="let det of detail.details" class="list-group-item li">
+                        <div> {{det.key}} :</div>
+                        <p> {{det.val || 'N/A'}} </p>
+                      </li>
+                    </ul>
+                  </section>
+                } @else if(detail.title == 'Certificates' && detail.details.length > 0) {
+                  <section class="profile-parent">
+                    <section class="profile-header"> {{detail.title}}</section>
+                    <section class="profile-image-container">
+                      @for (certificate of detail.details; track $index) {
+                        @if (getFileType(certificate.val) == "image") {
+                        <section class="profile-image">
+                          <img [src]="certificate.val" alt="">
+                        </section>
+                        }
+                        @else if (getFileType(certificate.val) == "pdf") {
+                        <section class="profile-image">
+                          <a [href]="certificate.val" target="_blank" rel="noopener noreferrer">Pdf</a>
+                        </section>
+                        }
+                      }
+                    </section>
+                  </section>
+                }
+                }
+
+                <!-- <section *ngIf="companyDetails.certificates.length > 0" class="profile-parent">
+                  <section class="profile-header"> Certifications</section>
+                  <section class="profile-image-container">
+                    @for (certificate of companyDetails.certificates; track $index) {
+                      @if (getFileType(certificate.file) == "image") {
+                      <section class="profile-image">
+                        <img [src]="certificate.file" alt="">
+                      </section>
+                      }
+                      @else if (getFileType(certificate.file) == "pdf") {
+                      <section class="profile-image">
+                        <a [href]="certificate.file" target="_blank" rel="noopener noreferrer">Pdf</a>
+                      </section>
+                      }
+                    }
+                  </section>
+                </section> -->
+               
+                <app-review *ngIf="false"></app-review>
+              </section>
+            </section>
+          </section>
+          
+        </section>
+      </section>
+    </div>
+  </div>
+</section>

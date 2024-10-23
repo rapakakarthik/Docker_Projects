@@ -1,0 +1,41 @@
+
+::ng-deep {
+.rec_job_listing_div_jobs{ width: 75%; margin:0 auto}
+
+.rec-group{ display: flex; flex-wrap: wrap; margin: 0; padding: 0;}
+
+    ul.rec-job-info{ list-style: none; margin: 0 0 20px; padding: 0;
+width: 100%;  background: #fbfbfb;width: 47%; margin: 10px;
+        
+    & li{ margin: 0 0 20px; padding: 0; list-style: none; display: flex; font-size: 14px; & span{ &:first-child{
+        display: inline-block; min-width: 200px;
+    color: #848484;
+    }}}
+    }
+ul.rec-job-info {
+    overflow: hidden;
+    border: 1px solid #e5e9f3;
+    border-radius: 8px;
+    padding: 16px;
+    box-sizing: border-box;
+    
+}
+.rec-job-info a {
+    color: #338cf0;
+    text-decoration: none;
+    font-weight: bold;
+}
+.rec-job-title{ }
+
+}
+#rec_job_listing_div{
+    display: flex;
+}
+.career_heading h1{
+    font-size: 22px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+.career_heading h1 a{
+    color: #0074bd!important;
+}

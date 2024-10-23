@@ -1,0 +1,134 @@
+<section class="innerfilter">
+  <!-- For product listing page -->
+  @if (!showDefaultCategories) {
+  <div class="filter_category">
+    <h4 class="sidenavbar-list-heading">You are in</h4>
+    <ul class="sidenav_cat">
+      <li *ngIf="productCatList" class="sidenav_cat_list"> 
+        @if (showAnyDept) {
+        <div (click)="showDefault()" class="sidenav_cat_name">
+          <img src="assets/svg/left-arrow.svg" alt="" srcset="">
+          <span>Any Department</span>
+        </div>
+        }
+        @if (productCatList.hierarchy.length) {
+          @for (cat of productCatList.hierarchy; track cat.cat_id ){
+            <div class="sidenav_cat_name" (click)="getHeirarchy(cat.cat_id)">
+              <img src="assets/svg/left-arrow.svg" alt="" srcset="">
+              <span>{{ cat.cat_name }}</span>
+            </div>
+          }
+        }
+        <section class="sub-category">
+          <ul class="sidenav_subcat">
+            <li class="sidenav_subcat_list">
+              <b>{{productCatList.name}}</b>
+            </li>
+            @for (subCat of (showAll ? productCatList.sub_categories : productCatList.sub_categories.slice(0,5)); track subCat.pk_id){
+              <li class="sidenav_subcat_list ps-2" (click)="getHeirarchy(subCat.pk_id)">
+                {{subCat.cat_name}}
+              </li>
+            }
+            @if (productCatList.sub_categories.length > 5) {
+              <button class="grey_stroked_btn" (click)="toggleMore()">{{ showAll ? "View Less" : "View More" }}</button>
+            }
+          </ul>
+        </section>
+      </li>
+    </ul>
+  </div>
+  }
+  @else {
+  <!-- For search results listing page -->
+  <div class="filter_category">
+    <!-- <h4 class="sidenavbar-list-heading">You are in</h4> -->
+    <ul class="sidenav_cat">
+      <li class="sidenav_cat_list"> 
+        <section class="sub-category">
+          <ul class="sidenav_subcat">
+            @for (cat of relatedCategories; track cat.id ){
+            <li (click)="getHeirarchy(cat.id)" class="sidenav_subcat_list">
+              {{cat.display_text}}
+            </li>
+            }
+          </ul>
+        </section>
+      </li>
+    </ul>
+  </div>
+  }
+
+  <!-- <div class="filter_color">
+    <h4 class="sidenavbar-list-heading">Colour</h4>
+    <ul class="color_list">
+      @for(color of colors; track $index){
+        <li [ngStyle]="{'background' : color.name}"></li>
+      }
+    </ul>
+  </div> -->
+
+  <form *ngIf="showFilters && filterData" [formGroup]="checkboxForm">
+    <ng-container *ngFor="let head of filterData">
+      <!-- For all Filters Except Colours -->
+      <!-- *ngIf="head.display_text != 'Colour'; else colours" -->
+      <mat-expansion-panel
+        class="sidenavbar-collapse"
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">
+        <mat-expansion-panel-header class="sidenavbar-collaspe-header">
+          <mat-panel-description>
+            <h3 class="sidenavbar-list-heading"> {{ head.display_text }} </h3>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        @if (head.select == 'multi') {
+        <ng-container *ngFor="let item of head.children">
+          <mat-list class="sidenavbar-main-list">
+            <mat-list-item class="sidenavbar-category-list checked">
+                <mat-checkbox color="primary" (change)="logData()"
+                  [formControlName]="item.id"
+                  class="example-margin sidenavbar-list-ls checked-text">
+                  <span class="checked-text-span"> {{ item.display_text }} </span>
+                </mat-checkbox>
+            </mat-list-item>
+          </mat-list>
+        </ng-container>
+        } 
+        <!-- @else {
+          <mat-list class="sidenavbar-main-list">
+            <mat-list-item class="sidenavbar-category-list checked">
+                <mat-checkbox color="primary" (change)="logData()"
+                  [formControlName]="head.children.display_text"
+                  class="example-margin sidenavbar-list-ls checked-text">
+                  <span class="checked-text-span"> {{ head.children.display_text }} </span>
+                </mat-checkbox>
+            </mat-list-item>
+          </mat-list>
+        } -->
+
+      </mat-expansion-panel>
+
+      <!-- For colours only -->
+      <ng-template #colours>
+        <mat-expansion-panel
+          class="sidenavbar-collapse"
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false">
+          <mat-expansion-panel-header class="sidenavbar-collaspe-header">
+            <mat-panel-description>
+              <h3 class="sidenavbar-list-heading"> {{ head.display_text }} </h3>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <section class="color-section">
+            <mat-list role="list">
+              <mat-list-item
+                *ngFor="let item of head.children"
+                [ngStyle]="{'background-color': item.display_text,'border': item.display_text == 'White' ? '1px solid black' : '1px solid white'}" role="listitem">
+                <mat-checkbox style="opacity: 0" color="primary" (change)="logData()" [formControlName]="item.display_text" class="example-margin sidenavbar-list-ls checked-text"></mat-checkbox>
+              </mat-list-item>
+            </mat-list>
+          </section>
+        </mat-expansion-panel>
+      </ng-template>
+    </ng-container>
+  </form>
+</section>

@@ -1,0 +1,100 @@
+<div class="images-slider-two">
+  <!-- Top Banner Details -->
+  <section
+    *ngIf="getTypes && getTypes.banner"
+    class="img-container"
+    [ngStyle]="{
+      'background-image': 'url(' + setImageEncode(getTypes?.banner) + ')'
+    }"
+  >
+    <!-- [ngStyle]="{ 'background-image': 'url(' + recomendationsData.banner.banner + ')' }" -->
+    <div>
+      <h1 class="h-sliders">{{ getTypes.title }}</h1>
+      <p class="p-slider">{{ getTypes.desc }}</p>
+    </div>
+  </section>
+</div>
+
+<!-- Main Section -->
+<section class="main-container">
+  <div *ngIf="getTypes" class="hometabs newhometab">
+    <ng-container
+      *ngFor="let type of getTypes.recommendation_types; let i = index"
+    >
+      <mat-chip-option
+        [class.selected]="selectedChipIndex === i"
+        (click)="changeType(type, i)"
+      >
+        {{ type.type }}
+      </mat-chip-option>
+    </ng-container>
+
+    <!-- <p class="tabdesc">{{typeDesc}}</p>   -->
+  </div>
+
+  <div *ngIf="productCategories.length > 0" class="tab-banner-chips-normal">
+    <!-- <mat-tab-group [(selectedIndex)]="selectedTabIndex">
+      <mat-tab *ngFor="let cat of productCategories" [id]="cat.pk_id">
+        <ng-template mat-tab-label>
+          <div (click)="changeCatOrder(cat.pk_id)" class="chipcls">{{ cat.cat_name }}</div>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group> -->
+    <mat-tab-group [(selectedIndex)]="selectedTabIndex" (selectedTabChange)="onTabClick($event)">
+      <ng-container *ngFor="let cat of productCategories">
+          <mat-tab label="{{ cat.cat_name }}"></mat-tab>
+      </ng-container>
+    </mat-tab-group>
+  </div>
+
+  <!-- Product Loader -->
+  <section *ngIf="loader" class="main-loader-container">
+    <section *ngFor="let i of [0, 0, 0, 0, 0, 0]" class="loader-wrap">
+      <section><span class="smart titletext"></span></section>
+      <section class="manu-loader">
+        <section class="loader-img img-ld">
+          <section class="text-img"></section>
+          <section class="text-img"></section>
+          <section class="text-img"></section>
+        </section>
+      </section>
+    </section>
+  </section>
+
+  <!-- Product Data -->
+  <section
+    class="flex-wrap marT30"
+    *ngIf="newProductData && newProductData.length > 0"
+  >
+    <ng-container *ngFor="let product of newProductData | paginate: { itemsPerPage: 9, currentPage: p, totalItems: totalCount }">
+      <section class="flex-list" *ngIf="product.products.length > 0">
+        <h2 class="smallTitle">
+          {{ product.cat_name }}
+          <mat-icon (click)="gotonavigation(product)">arrow_forward</mat-icon>
+        </h2>
+
+        <section class="cardsWarp">
+          <ng-container *ngFor="let item of product.products.slice(0, 3)">
+            <app-item-card
+              [recomendationItems]="item"
+              [linkTo]="'/recommendations'"
+              class="itemBlocks"
+            ></app-item-card>
+          </ng-container>
+        </section>
+      </section>
+    </ng-container>
+  </section>
+  @if (totalCount > 9) {
+    <section>
+      <pagination-controls [maxSize]="5" (pageChange)="onPageChange($event)"></pagination-controls>    
+    </section>
+  }
+  <ng-container *ngIf="noProdFound">
+    <app-nodata></app-nodata>
+  </ng-container>
+</section>
+
+
+<!-- category/topranking/most_popular/633 
+  format example -->

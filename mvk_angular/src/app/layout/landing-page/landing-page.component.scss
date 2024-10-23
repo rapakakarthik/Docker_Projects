@@ -1,0 +1,89 @@
+body {
+    background: #f2f3f7 !important;
+}
+
+img.myverkoper-buyer-logo {
+    width: 260px;
+    display: block;
+    margin-top: 10px;
+    margin-left: 50px;
+}
+
+mat-list.mat-mdc-list.mat-mdc-list-base.mdc-list.tab-list-myverkoper {
+    display: -webkit-inline-box;
+    margin-top: 10px;
+}
+
+mat-chip.mat-mdc-chip.primary-filled-button.mat-primary.mdc-evolution-chip.mat-mdc-standard-chip {
+    background: none;
+    border: 1px solid #c6c6c6;
+    background: none;
+    width: auto;
+    border-radius: 60px;
+    color: #92afa3 !important;
+    height: 40px !important;
+    border: 1px solid #c4c4c4;
+    padding-right: 40px;
+    padding-left: 40px;
+    margin-top: 20px;
+    margin-right: 15px;
+    font-weight: inherit;
+    cursor: pointer;
+}
+
+.product-manufaction-tab {
+    display: -webkit-inline-box;
+}
+
+mat-list-item.mat-mdc-list-item.mdc-list-item.product-listing.mat-mdc-list-item-single-line.mdc-list-item--with-one-line {
+    width: auto;
+}
+
+.product-manufaction-tab {
+    margin-top: 12px;
+}
+
+.header-icons {
+    display: inline-flex;
+    float: right;
+    margin-top: 7px;
+}
+
+svg.svg-icons {
+    fill: #918f8f;
+}
+
+button.mat-mdc-menu-trigger.mavbar-menu-product.mdc-button.mat-mdc-button.mat-unthemed.mat-mdc-button-base {
+    margin-left: 36px;
+    margin-top: 12px;
+}
+
+mat-list.mat-mdc-list.mat-mdc-list-base.mdc-list.header-icons.list {
+    margin-top: 0px;
+}
+
+mat-list-item.mat-mdc-list-item.mdc-list-item.header-icons.list.mat-mdc-list-item-single-line.mdc-list-item--with-one-line {
+    margin-top: 0px;
+    height: 20px;
+}
+
+mat-list-item.mat-mdc-list-item.mdc-list-item.navbar-menu-list.mat-mdc-list-item-single-line.mdc-list-item--with-one-line {
+    width: auto;
+}
+
+mat-list.mat-mdc-list.mat-mdc-list-base.mdc-list.navbar-menu-list {
+    display: -webkit-inline-box;
+    float: right;
+}
+
+button.mat-mdc-menu-trigger.mavbar-menu-product.mdc-button.mat-mdc-button.mat-unthemed.mat-mdc-button-base {
+    margin-left: 0px !important;
+}
+
+button.mat-mdc-menu-trigger.mavbar-menu-product.list.mdc-button.mat-mdc-button.mat-unthemed.mat-mdc-button-base {
+    margin-left: 44px !important;
+}
+
+mat-list.mat-mdc-list.mat-mdc-list-base.mdc-list.navbar-menu-listt {
+    float: right;
+}

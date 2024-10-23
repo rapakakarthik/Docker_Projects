@@ -1,0 +1,175 @@
+<ng-container *ngIf="form">
+  <h2 class="poptitle">
+    Post your Request <a (click)="closeRFQpopup()"><mat-icon>close</mat-icon></a>
+  </h2>
+
+  <div class="rfqformwrapper dialogrfqformwrapper">
+    <form [formGroup]="form">
+      <section class="innerform">
+          @if (this.dataObject.type == "create") {
+          <section class="fieldsec filedsec-100p">
+            <label>*Product Name</label>
+            <mat-form-field appearance="outline" class="middlefiled">
+              <input matInput type="search" placeholder="Product Name" formControlName="product_name"/>
+              <mat-error>Product Name required</mat-error>
+            </mat-form-field>
+          </section>
+          }
+          @else {
+          <section class="fieldsec filedsec-100p">
+            <label>*Product Name</label>
+            <mat-form-field appearance="outline" class="middlefiled">
+              <input matInput type="search" maxlength="30" placeholder="Product Name" formControlName="product_name"/>
+            </mat-form-field>
+          </section>
+          }
+
+          <section class="fieldsec filedBlock">
+            <section class="fieldsec filedsec-50p">
+              <label>*Enter Quantity</label>
+              <mat-form-field appearance="outline" class="middlefiled">
+                <input matInput type="text" maxlength="5" appAllowNumbersOnly formControlName="quantity" />
+                <mat-error *ngIf="form.get('quantity')?.hasError('required')">
+                  Quantity is required
+                </mat-error>
+              </mat-form-field>
+            </section>
+
+            <section class="fieldsec filedsec-50p">
+              <label>*Select Units</label>
+              <mat-form-field appearance="outline" class="middlefiled">
+                <mat-select formControlName="units">
+                  <mat-option *ngFor="let u of units" [value]="u.id">
+                    {{ u.val }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </section>
+          </section>
+
+          <section class="fieldsec filedsec-100p">
+            <label>Enter Detail Description</label>
+            <div class="ai_desc">
+              @if(!aiLoader) {
+                <button class="get-ai underline_btn" (click)="getChatGPTDescription()">{{generateTxt}} from AI</button> 
+                } @else {
+                  <span class="loading-ai"><img src="/assets/images/loading.gif" alt="" srcset=""></span>
+                }
+                <mat-form-field appearance="outline" class="middlefiled textarea-wrapper">
+                  <textarea matInput formControlName="description"></textarea>
+                </mat-form-field>
+            </div>
+            <!-- <ul class="destails_desc" *ngIf="questions && questions.length > 0">
+              <li
+                *ngFor="let q of questions"
+                (click)="addSentenceToDescription(q)"
+              >
+                {{ q }}
+              </li>
+            </ul> -->
+          </section>
+      </section>
+
+      <!-- Uploaded images preview -->
+      <div *ngIf="previews.length > 0" class="upload_images">
+        <div class="image" *ngFor="let p of previews; let i = index">
+          <img [src]="p">
+          <i (click)="removeImage(i)" class="fa fa-close"></i>
+        </div>
+      </div>
+
+      <!-- Uploaded images button -->
+      @if (previews.length <= 2) {
+      @if (!(this.dataObject.type == "update" && this.dataObject.obj.files.length >= 3)) {
+      <div class="image_upload">
+        <label class="text-center" for="image">
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+              <path d="M9.87451 15.5906H11.1245V11.8952L12.6662 13.4369L13.5443 12.5458L10.4995 9.50105L7.45472 12.5458L8.34576 13.424L9.87451 11.8952V15.5906ZM5.75597 18.1869C5.335 18.1869 4.97868 18.041 4.68701 17.7494C4.39535 17.4577 4.24951 17.1014 4.24951 16.6804V3.86C4.24951 3.43903 4.39535 3.08271 4.68701 2.79105C4.97868 2.49938 5.335 2.35355 5.75597 2.35355H12.3745L16.7495 6.72855V16.6804C16.7495 17.1014 16.6037 17.4577 16.312 17.7494C16.0203 18.041 15.664 18.1869 15.2431 18.1869H5.75597ZM11.7495 7.35355V3.60355H5.75597C5.6918 3.60355 5.63305 3.63028 5.57972 3.68375C5.52625 3.73709 5.49951 3.79584 5.49951 3.86V16.6804C5.49951 16.7446 5.52625 16.8033 5.57972 16.8567C5.63305 16.9101 5.6918 16.9369 5.75597 16.9369H15.2431C15.3072 16.9369 15.366 16.9101 15.4193 16.8567C15.4728 16.8033 15.4995 16.7446 15.4995 16.6804V7.35355H11.7495Z" fill="#017DB9"/>
+            </svg>
+          </span>
+          <p>Max file size: 10MB.<br>Types supported<br>: jpg, jpeg, png.</p>
+        </label>
+        <input (change)="onFileSelected($event)" #fileInput multiple="3" type="file" id="image" accept="image/*" style="display: none;"/>
+      </div>
+      }}
+
+      <!-- If not signed in -->
+      @if (!isSignedIn) {
+      <section class="fieldsec filedsec-50p error_field">
+        <label>*Confirm your mobile number to post RFQ</label>
+        @if (!verified || mobileNumber == 0) {
+        <app-confirm-mobile (next)="saveMobile($event)"></app-confirm-mobile>
+        }
+        @else {
+          <section class="number-verified">
+            <p> {{mobileNumber}} </p>
+            <p class="verified-text"> verified </p>
+          </section>
+        }
+      </section>
+      }
+
+      <!-- Business card -->
+      @if (isSignedIn) {
+      <section class="fieldsec filedsec-100p mb-0">
+        <mat-checkbox formControlName="supplier_business" class="termscheck" color="primary" >
+        I agree to share my Business card with quoted suppliers.
+        </mat-checkbox>
+      </section>
+      }
+
+      <!-- Rfq terms -->
+      <section class="fieldsec filedsec-100p">
+        <mat-checkbox formControlName="tandc" class="termscheck" color="primary" >
+          I have read, understood and agreed to abide by the
+          <span (click)="openTermsDialog($event)" class="underline_btn">Buying Request Posting Rules</span>
+        </mat-checkbox>
+      </section>
+
+      <section class="rfqbtnwrap">
+      @if (isSignedIn) {
+        <button (click)="submit(form)" [disabled]="form.invalid" type="button" class="primary_btn rfq-button">
+          Invite suppliers to quote
+        </button>
+      }
+      @else {
+        <button (click)="submitV2()" [disabled]="form.invalid || !verified" type="button" class="primary_btn rfq-button">
+          Invite suppliers to quote
+        </button>
+      }
+      </section>
+    </form>
+  </div>
+</ng-container>
+
+<!-- Terms & Conditions -->
+<ng-template #rfqTerms>
+  <section class="categorywrapper">
+    <h2 class="poptitle">
+      Terms and Conditions
+      <a (click)="closeTerms()"><mat-icon>close</mat-icon></a>
+    </h2>
+    <div class="iframe-container">
+      <iframe src="https://api.myverkoper.com/html/v2/rfq-terms-condition" frameborder="0"></iframe>
+    </div>
+  </section>
+</ng-template>
+
+<!-- Thank You Page -->
+<ng-template #thankyoutemplate>
+  <h2 class="poptitle">
+    Request for quotation
+    <a (click)="closeThankYou()"><mat-icon>close</mat-icon></a>
+  </h2>
+  <section class="confrmationpopup">
+    <!-- <mat-icon>check_circle</mat-icon> -->
+    <img src="assets/images/confirmed.png"/>
+    <!-- <h3>Thank You</h3> -->
+    <div class="py-4">
+        <p class="m-0">Your submission has been received.</p>
+        <p class="pt-2">We will be in touch and contact you soon!</p>
+    </div>
+    <button (click)="closeThankYou()" class="back_btn"><i class="fa fa-arrow-left pe-2"></i> Back to Site</button>
+  </section>
+</ng-template>

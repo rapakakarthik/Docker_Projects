@@ -1,0 +1,65 @@
+<form [formGroup]="myForm">
+    <!-- Sending Otp Field -->
+    <section  class="flex-row-sign">
+      <section class="mobilefiled">
+  
+        <mat-form-field appearance="outline" class="smallfiled noborders mobilenumberfield">
+          <input (input)="onPhoneNumberChange()" [readonly]="showOtpField" matInput type="text" maxlength="10" appAllowNumbersOnly placeholder="Mobile Number" formControlName="number" required/>
+        </mat-form-field>
+      </section>
+      <section  class="otpbtnsec">
+        <button *ngIf="!hideSendotp" mat-stroked-button class="my-button otpbtn" [disabled]="numbermob.invalid" (click)="checkBuyerAccount()" type="submit">
+          <ng-container *ngIf="!otpLoading; else spin">
+            Send OTP
+          </ng-container>
+          <ng-template #spin>
+            <mat-spinner></mat-spinner>
+          </ng-template>
+        </button>
+      </section>
+    </section>
+    
+    <!-- Otp Validating Field -->
+    <section *ngIf="showOtpField">
+      <p class="smalltxt marT20">
+        We have sent an otp to <strong>{{ myForm.controls["number"].value }} </strong>
+        <a (click)="notYou()">Not You?</a>
+      </p>
+  
+      <section class="flex-row-sign">
+        <section class="mobilefiled otpfiled" >
+          <mat-form-field appearance="outline" class="smallfiled noborders mobilenumberfield">
+            <input
+              matInput
+              type="text"
+              maxlength="4"
+              appAllowNumbersOnly
+              placeholder="Enter OTP"
+              formControlName="otp"
+            />
+              <mat-error *ngIf="otp.hasError('required') && otp.touched">
+                OTP is required
+              </mat-error>
+          </mat-form-field>
+        </section>
+      <section  class="otpbtnsec">
+      <button
+        [disabled]="otp.invalid"
+        mat-stroked-button
+        class="my-button otpbtn"
+        (click)="updateMobile()"
+        type="submit"
+      >
+        Update
+      </button>
+      </section>
+      </section>
+      <p class="smalltxt marT20">
+        Didn't Recieve OTP?
+        <button mat-button class="pointer bluelink" [disabled]="!isResending" (click)="resendOtp()">
+          Resend Now. <span class="timer" *ngIf="!isResending"> 00:  {{ countDown$ | async }} </span>
+        </button>
+      </p>
+    </section>
+</form>
+  

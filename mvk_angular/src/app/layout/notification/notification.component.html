@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Notifications</h2>
+<mat-dialog-content>
+  <!-- Content for notification dialog -->
+  <div *ngIf="noDataFound">
+    No Notications Found
+  </div>
+  <ul *ngIf="!noDataFound">
+    <li class="pointer" (click)="openNotify(notification)" *ngFor="let notification of notificationData">
+      <span *ngIf="notification.read_status == 0"> <i style="color: red" class="fa fa-circle"></i> </span>  {{notification.message}} 
+    </li>
+  </ul>
+</mat-dialog-content>
+<!-- <mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Close</button>
+</mat-dialog-actions> -->

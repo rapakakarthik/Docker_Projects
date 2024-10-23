@@ -1,0 +1,205 @@
+.signup-header{
+  
+  img.myverkoper-buyer-logo {
+    max-height: 45px;
+    z-index: 4;
+  }
+  #logosec{
+    position: relative;
+    width: fit-content;
+  }
+  span.beta-text {
+      font-size: 8px !important;
+      border-radius: 10px;
+      color: #01b9f5;
+      position: absolute;
+      top: 0px;
+      right: -31px;
+      height: 16px;
+      line-height: 15px;
+      margin-left: 10px;
+      font-weight: 600;
+      border: 1px solid #01b9f5;
+      padding: 0px 7px;
+      z-index: 4;
+  }
+}
+
+.loginlogo {
+  max-width: 300px;
+}
+
+.formTitles {
+  font-family: Inter;
+  font-size: 22px;
+  font-weight: 600;
+
+  line-height: 1.5;
+
+  text-align: left;
+  color: #333;
+  letter-spacing: -1px;
+  margin: 0 0 5px 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.formslogan {
+  font-family: Inter;
+
+  font-weight: 400;
+  line-height: 1.57;
+  letter-spacing: 0.1px;
+  color: #545454;
+  font-size: 12px;
+  margin: 0 0 40px 0;
+}
+
+.terms_font {
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333333;
+
+  & a {
+    color: #2b78c6 !important;
+    text-decoration: none;
+  }
+}
+
+.marT20 {
+  margin-top: 20px;
+}
+
+.signwrap {
+  min-height: calc(100vh - 66px);
+}
+
+.loginlogo {
+  max-height: 45px;
+}
+
+.signup-header {
+  padding: 10px;
+  height: 66px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: white;
+}
+
+.signUpbtn {
+  position: absolute;
+  right: 135px;
+  top: 75px;
+}
+.signUpbtn.skipall {
+  position: absolute;
+  right: 30px;
+  top: 75px;
+}
+button.btn.signUpbtn {
+  background: #eaf3ff !important;
+  box-shadow: none !important;
+  border-radius: 24px;
+  text-transform: capitalize;
+  padding-bottom: 0px !important;
+  padding-left: 25px !important;
+  padding-right: 25px !important;
+  color: #00b9f5;
+}
+
+.pfixed {
+  position: fixed;
+  width: 50%;
+  padding: 0 100px;
+}
+
+.leftsign .pfixed{
+  position: inherit;
+  width: auto;
+}
+
+// Single select css
+.radio.selected {
+  border: 2px solid #017db9;
+  background: #e5f6fb;
+}
+
+.radio{ display: flex; }
+
+.radio{ padding: 20px 19px 22px 22px;
+  border-radius: 8px;
+  border: solid 1px #e6e6e6;
+  background-color: #fff; & p{
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.5;
+  letter-spacing: 0.4px;
+  text-align: left;
+  color: #333; margin: 0;
+}}
+mat-radio-button{ margin-bottom: 20px; display: flex;  }
+.mainimgwrap{ flex: 0 0 90px;}
+.imgwrap{ width:70px; height: 70px; border-radius:50%; & img{ width:100%; height: 100%; border-radius: 50%; object-fit:cover}}
+
+// Text Box Css
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+::ng-deep .mat-mdc-unelevated-button:not(:disabled) {
+  border: 1px solid #b0d7e9;
+  height: 56px
+}
+
+.mT30 {
+  margin-top: 30px;
+}
+
+.rightsidesign{
+  overflow: scroll;
+  height: calc(100vh - 67px);
+}
+
+.innersec.step2{
+  max-width: 420px;
+}
+
+@media screen and (max-width: 770px) {
+  .leftsign .pfixed{
+    padding: 40px 20px 20px;
+  }
+  .formTitles{
+    font-size: 18px;
+  }
+}  
+@media screen and (max-width: 575px) {
+  .mp-0{
+    padding: 0;
+  }
+  .rightheader{
+    background: #fff;
+    margin-top: 11px;
+    padding: 7px 10px;
+  }
+}
+
+.error_msg{
+  color: #E82828;
+  font-weight: 500;
+}

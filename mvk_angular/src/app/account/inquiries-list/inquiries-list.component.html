@@ -1,0 +1,391 @@
+<!-- Middle Section -->
+<section class="inquires-table-section">
+  <!-- Delete section -->
+  <section *ngIf="false" class="inquiry-headersection">
+    <section>
+      <mat-form-field appearance="outline" class="middlefiled selectmiddle marR20">
+        <mat-label>Move to</mat-label>
+        <mat-select>
+
+          <mat-option [value]="'one'">
+            Option 1
+          </mat-option>
+
+          <mat-option [value]="'one'">
+            Option 1
+          </mat-option>
+
+          <mat-option [value]="'one'">
+            Option 1
+          </mat-option>
+        </mat-select>
+
+      </mat-form-field>
+
+
+      <button type="button" class="btn btn-primary">Delete</button>
+    </section>
+    <section>
+
+      <!-- <mat-checkbox class="marR20" color="primary">New Reply</mat-checkbox> -->
+
+      <mat-form-field appearance="outline" class="middlefiled selectmiddle">
+        <mat-label>All Inquiries</mat-label>
+        <mat-select>
+
+          <mat-option [value]="'one'">
+            Option 1
+          </mat-option>
+
+          <mat-option [value]="'one'">
+            Option 1
+          </mat-option>
+
+          <mat-option [value]="'one'">
+            Option 1
+          </mat-option>
+        </mat-select>
+
+      </mat-form-field>
+    </section>
+  </section>
+
+  <!-- <form [formGroup]="form">
+  <section class="inquiry-headersection">
+    <section>
+      <mat-form-field appearance="outline" class="middlefiled selectmiddle marR20">
+        <input formControlName="search" (keyup.enter)="getInquiryList(skip)" matInput placeholder="Search.." >
+      </mat-form-field>
+    </section>
+    <section>
+      <mat-form-field appearance="outline" class="middlefiled selectmiddle marR20">
+        <mat-label>Sort By</mat-label>
+        <mat-select formControlName="sortBy" (selectionChange)="getInquiryList(skip)">
+          <mat-option [value]="'Asc'">
+            Oldest
+          </mat-option>
+          <mat-option [value]="'Desc'">
+            Latest
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </section>
+    <section>
+      <mat-form-field appearance="outline" class="middlefiled selectmiddle">
+        <mat-label>Filter By</mat-label>
+        <mat-select formControlName="filter" (selectionChange)="getInquiryList(skip)">
+          <mat-option [value]="">
+            All
+          </mat-option>
+          <mat-option [value]="'unread'">
+            Unread
+          </mat-option>
+          <mat-option [value]="'favourite'">
+            Favourite
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </section>
+  </section>
+  </form> -->
+
+  <div [formGroup]="form" class="table_row">
+    <div class="left_side">
+      @if(selected) {
+      <select formControlName="filter" (change)="moveTo()" class="form-select">
+        <option value="" disabled selected>Move to</option>
+        @if (selectedFolderId) {
+        <option class="pointer" [value]="'un_group'">UnGroup</option>
+        }
+        @for (folder of folders; track folder.id) {
+          <option class="pointer" [value]="folder.id">{{folder.name}}</option>
+        }
+      </select>
+      @if (showDelete) {
+        <button (click)="deleteInquiries()" class="delete_btn">Delete</button>
+      } 
+      @else {
+        <button (click)="restoreInquiries()" class="delete_btn">Restore</button>
+      }
+      <span class="text_primary fw_500">{{selectedCount}} Selected</span>
+    }
+    </div>
+    <div class="right_side">
+      <!-- <div class="new_reply">
+        <input (change)="getInquiryList(0)" formControlName="new_reply" type="checkbox" id="new_reply" name="new_reply">
+        <label for="new_reply">New Reply</label>
+      </div> -->
+      <div class="custom_select">
+        <button class="select_button" (click)="clickSelect($event)">
+          <span> {{selectedFolder}} </span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 13 9" fill="none">
+            <path d="M1.71875 0.948242L6.5 5.71907L11.2812 0.948242L12.75 2.41699L6.5 8.66699L0.25 2.41699L1.71875 0.948242Z" fill="#B0B0B0"/>
+          </svg>
+        </button>
+        <div class="dropdown_options" *ngIf="showOptions" (click)="$event.stopPropagation()">
+            <ul class="options_list">
+              <li (click)="getAll()" class="list pointer">All</li>
+              <li (click)="getTrash()" class="list pointer">Trash</li>
+              <li class="list" (click)="clickMyFolder()">
+                <span>My Folders</span>
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
+                  <path d="M5.5 1.28125V9.71875M9.71875 5.5H1.28125" stroke="#8A8A8A" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </li>
+              <ul class="folder_list">
+                <li class="list" *ngIf="showInputFolder">
+                    <input [(ngModel)]="text" [ngModelOptions]="{standalone: true}" type="text" maxlength="10" class="form-control">
+                    <!-- Tick icon -->
+                    <span (click)="clickSaveFolder()">
+                      <svg class="icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#434343">
+                        <path d="M382-267.69 183.23-466.46 211.77-495 382-324.77 748.23-691l28.54 28.54L382-267.69Z"/>
+                      </svg>
+                    </span>
+                </li>
+                @for (folder of folders; track folder.id) {
+                <li class="list">
+                  <div>
+                    @if(folder.showInput){
+                      <input [(ngModel)]="text" [ngModelOptions]="{standalone: true}" type="text" maxlength="10" class="form-control">
+                    } @else {
+                      <span class="pointer" (click)="getGroup(folder.id, folder.name)">{{ folder.name }}</span>
+                    }
+                  </div>
+                  <div>
+                    @if (!folder.showInput) {
+                      <!-- Edit icon -->
+                      <span (click)="editFolder(folder.id, folder.name)">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 17 17" fill="none">
+                          <path d="M1.20829 15.7915H2.35204L13.4961 4.64775L12.352 3.50374L1.20829 14.6478V15.7915ZM1.00803 16.8332C0.769664 16.8332 0.569838 16.7525 0.408553 16.5912C0.247268 16.43 0.166626 16.2301 0.166626 15.9918V14.9082C0.166626 14.6778 0.212025 14.4583 0.302824 14.2496C0.393622 14.0409 0.514456 13.8611 0.665324 13.7103L13.8966 0.464942C14.0033 0.369803 14.1211 0.296278 14.25 0.244368C14.379 0.192459 14.5134 0.166504 14.6533 0.166504C14.7933 0.166504 14.9289 0.188552 15.0601 0.232649C15.1912 0.276746 15.3122 0.356174 15.4231 0.470931L16.5349 1.5889C16.6496 1.69966 16.7281 1.82119 16.7703 1.95348C16.8123 2.08595 16.8333 2.21833 16.8333 2.35062C16.8333 2.49176 16.8095 2.62683 16.7619 2.75583C16.7144 2.88465 16.6387 3.00244 16.5349 3.10921L3.28954 16.3345C3.13867 16.4853 2.9589 16.6062 2.75022 16.697C2.54154 16.7878 2.32201 16.8332 2.09163 16.8332H1.00803ZM12.914 4.08577L12.352 3.50374L13.4961 4.64775L12.914 4.08577Z" fill="#9F9F9F"/>
+                        </svg>
+                      </span>
+
+                      <!-- Delete icon -->
+                      <span (click)="deleteFolder(folder.id)">
+                      <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 25 25" fill="none">
+                        <path d="M7.93285 20.8335C7.47001 20.8335 7.07383 20.6688 6.74431 20.3393C6.4148 20.0097 6.25004 19.6136 6.25004 19.1507V6.2502H5.72921C5.58164 6.2502 5.45794 6.2002 5.35811 6.1002C5.25829 6.0002 5.20837 5.87632 5.20837 5.72858C5.20837 5.58084 5.25829 5.45723 5.35811 5.35775C5.45794 5.25827 5.58164 5.20853 5.72921 5.20853H9.37504C9.37504 4.9936 9.45481 4.80627 9.61436 4.64655C9.77391 4.487 9.96124 4.40723 10.1763 4.40723H14.8237C15.0388 4.40723 15.2262 4.487 15.3857 4.64655C15.5453 4.80627 15.625 4.9936 15.625 5.20853H19.2709C19.4184 5.20853 19.5421 5.25853 19.642 5.35853C19.7418 5.45853 19.7917 5.5824 19.7917 5.73014C19.7917 5.87789 19.7418 6.0015 19.642 6.10098C19.5421 6.20046 19.4184 6.2502 19.2709 6.2502H18.75V19.1507C18.75 19.6136 18.5853 20.0097 18.2558 20.3393C17.9263 20.6688 17.5301 20.8335 17.0672 20.8335H7.93285ZM17.7084 6.2502H7.29171V19.1507C7.29171 19.3377 7.35178 19.4913 7.47192 19.6117C7.59223 19.7318 7.74587 19.7919 7.93285 19.7919H17.0672C17.2542 19.7919 17.4079 19.7318 17.5282 19.6117C17.6483 19.4913 17.7084 19.3377 17.7084 19.1507V6.2502ZM10.7378 17.7085C10.8857 17.7085 11.0094 17.6586 11.1089 17.5588C11.2084 17.459 11.2581 17.3353 11.2581 17.1877V8.85436C11.2581 8.70679 11.2081 8.5831 11.1081 8.48327C11.0081 8.38344 10.8842 8.33353 10.7365 8.33353C10.5888 8.33353 10.4651 8.38344 10.3657 8.48327C10.2662 8.5831 10.2164 8.70679 10.2164 8.85436V17.1877C10.2164 17.3353 10.2664 17.459 10.3664 17.5588C10.4663 17.6586 10.5901 17.7085 10.7378 17.7085ZM14.2636 17.7085C14.4113 17.7085 14.5349 17.6586 14.6344 17.5588C14.7339 17.459 14.7836 17.3353 14.7836 17.1877V8.85436C14.7836 8.70679 14.7336 8.5831 14.6336 8.48327C14.5338 8.38344 14.41 8.33353 14.2623 8.33353C14.1144 8.33353 13.9907 8.38344 13.8912 8.48327C13.7917 8.5831 13.742 8.70679 13.742 8.85436V17.1877C13.742 17.3353 13.792 17.459 13.892 17.5588C13.992 17.6586 14.1158 17.7085 14.2636 17.7085Z" fill="#9F9F9F"/>
+                      </svg>  
+                      </span> 
+                    }
+                    @else {
+                     <!-- Tick icon -->
+                      <span (click)="saveFolder(folder.id)" >
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#434343">
+                          <path d="M382-267.69 183.23-466.46 211.77-495 382-324.77 748.23-691l28.54 28.54L382-267.69Z"/>
+                        </svg>
+                      </span>
+                    }
+                  </div>
+                </li>
+                }
+              </ul>
+            </ul>
+        </div>
+      </div>
+      <div class="v3_search">
+        <input formControlName="search" (keyup.enter)="getInquiryList(skip)" type="search" placeholder="Search">
+        <i (click)="getInquiryList(skip)" class="fa fa-search"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Section -->
+  <div class="mvk_table">
+  <table>
+    <thead>
+      <tr>
+        <!-- <th scope="col" colspan="3"></th> -->
+        <th scope="col" colspan="3" width="40%">Inquiry</th>
+        <th scope="col" colspan="3" width="40%">Send to</th>
+        @if (showDelete) {
+        <th scope="col" colspan="3" width="20%" class="text-center">Action</th>
+        }
+      </tr>
+    </thead>
+    <tbody [formGroup]="checkboxForm">
+      <tr *ngIf="noInquiryFound">
+        <td colspan="12" class="text-center py-5">
+          <img src="/assets/images/cloud.png"/>
+          <h3 class="nofound_title">No Inquiries Found</h3>
+        </td>
+      </tr>
+      @if (inquiryList.length > 0) {
+      <tr *ngFor="let det of inquiryList | paginate: { itemsPerPage: 5, currentPage: p, totalItems: totalcount, id: 'inquiry' }">
+        <!-- <td colspan="3">
+          <div (click)="addToFav(det.enquery_id, det.favourite)" class="fav_img">
+            <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 213.15 194.93">
+              <path d="M256,120.48c-.75,25.48-10.43,47-29.07,64.29-23.3,21.57-46.87,42.85-70.37,64.2-5.08,4.61-8.79,4.93-13.29.66-18.86-17.88-39.44-33.82-58.4-51.56-11.17-10.45-22.37-20.95-29.79-34.6-10.39-19.1-16-39.14-9.34-60.72,6.89-22.33,20.95-38,44.31-43.76,15.56-3.81,29.26,1.24,41.75,10.35,3.71,2.71,7,5.94,10.76,8.62,5.34,3.83,8.94,3.67,14.19-.22a40.82,40.82,0,0,0,4.1-3.42c28.43-27.63,67-17,84.65,11.28A66.36,66.36,0,0,1,256,120.48Zm-3.94-.24c-.78-15.38-5.5-27.19-13.62-37.67-12.8-16.49-33.36-23.93-52.1-18.86-9.42,2.55-17,8.19-24.08,14.65-9.34,8.48-15.89,8.41-25.42.26a114.12,114.12,0,0,0-9.39-7.49C116.94,64,105.52,60,92.6,62.47c-16.67,3.24-28.7,13-37.08,27.4-12.56,21.61-10.29,43.42-.36,65.22,7.05,15.49,18.59,27.46,31,38.61,17.86,16.09,36.15,31.69,54.05,47.73,10.1,9.06,8.36,9.6,18.91-.13,22.8-21,46.57-41,68.51-62.93A81.52,81.52,0,0,0,252.06,120.24Z" transform="translate(-42.85 -57.71)"/>
+              <path [class]="det.favourite == 1 ? 'cls-1' : 'cls-2'" d="M252.06,120.24a81.52,81.52,0,0,1-24.46,58.13c-21.94,21.93-45.71,41.91-68.51,62.93-10.55,9.73-8.81,9.19-18.91.13-17.9-16-36.19-31.64-54.05-47.73-12.38-11.15-23.92-23.12-31-38.61-9.93-21.8-12.2-43.61.36-65.22,8.38-14.4,20.41-24.16,37.08-27.4,12.92-2.5,24.34,1.48,34.85,8.66a114.12,114.12,0,0,1,9.39,7.49c9.53,8.15,16.08,8.22,25.42-.26,7.11-6.46,14.66-12.1,24.08-14.65,18.74-5.07,39.3,2.37,52.1,18.86C246.56,93.05,251.28,104.86,252.06,120.24Z" transform="translate(-42.85 -57.71)"/>
+            </svg>
+          </div>
+        </td> --> 
+        <td colspan="3">
+          <section class="table-data-first">
+            <input (change)="checkSelection()" [formControlName]="det.enquery_id" class="input-checkbox" type="checkbox" aria-label="Checkbox for following text input" />
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span class="time-date">
+                  {{ det.created_at }}
+                  <span> ID: {{ det.enquery_code }} </span>
+                </span>
+              </li>
+              <li class="list-group-item">
+                <div class="product_detl">
+                  @if(det.product_img) {
+                    <img [src]="det.product_img"/>
+                  }
+                  <p>{{ det.product_name | sanitize }}</p>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </td>
+        <td colspan="3">
+          <section class="chat-list-card">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <div class="img-media">
+                  <div class="imgparentwrap width40">
+                    <img [src]="det.company_logo" />
+                  </div>
+                </div>
+                <div class="list-card-chat">
+                  <h4>{{ det.brand_name }}</h4>
+                  <p>{{ det.seller_company_name }}</p>
+                  <a  *ngIf="det.new_reply" routerLink="../messenger" href="javascript:;">
+                    <span> New Reply </span>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </td>
+        @if (showDelete) {
+        <td colspan="3">
+          <section class="approcal-buttons">
+            <ul class="list-group">
+              <li *ngIf="det.buyer_seller_status == 1" class="list-group-item txt-center">
+                <app-chat-now [det]="det" [btnstyle]="true"></app-chat-now>
+              </li>
+              <!-- <li class="list-group-item txt-center">
+                <span [ngStyle]="getSpanStyle(det.enquery_status).style" class="status">
+                  {{ det.enquery_status }}
+                </span>
+              </li> -->
+              <li class="list-group-item txt-center">
+                <button (click)="getInquiryDetails(det.enquery_id)" type="button" class="btn btn-outline-primary">
+                  View Inquiry Detail
+                </button>
+              </li>
+            </ul>
+          </section>
+        </td>
+        }
+      </tr>
+      }
+      @if (inqiryLoading) {
+        <td colspan="12" class="text-center py-5">
+          <img src="/assets/images/cloud.png"/>
+          <h3 class="nofound_title">Loading...</h3>
+        </td>
+      }
+    </tbody>
+  </table>
+</div>
+</section>
+
+<section *ngIf="totalcount > 5" class="paginaton">
+  <pagination-controls [maxSize]="5" (pageChange)="onPageChange($event)" id='inquiry'></pagination-controls>    
+</section>
+
+
+<!-- Profile Inquiry Details -->
+<section class="inquiry-popup" *ngIf="inquiryOpened">
+  <section class="inquiry-heading-popup">
+    <h4>
+      <mat-icon (click)="toggleInquiryProfile()">close</mat-icon> Inquiry
+      Details
+    </h4>
+  </section>
+  <section class="inquiry-main-section">
+    <!-- <p>
+      {{ inquiryDetails.product_name }}
+    </p> -->
+    <ul class="list-group list-group-horizontal">
+      <li class="list-group-item">
+        <div class="inquiry-img-media">
+          <span> To </span>
+          <div class="profileimg">
+            <img [src]="inquiryDetails.company_logo" />
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <h4>{{ inquiryDetails.seller_company_name }} <span> <i class="fa fa-star"></i>({{inquiryDetails.company_rating}}/5) </span></h4> 
+        @if (inquiryDetails.buyer_seller_status == 1) {
+          <app-view-number [btnstyle]="true" [cid]="inquiryDetails.seller_id"></app-view-number>
+        }
+         <!-- @if (inquiryDetails.buyer_seller_status == 1) {
+          <a routerLink="../messenger" href="javascript:;">
+            <p class="primary_btn">  Contact Now </p>
+          </a>
+          } -->
+        <!-- <button type="button" class="btn btn-primary">Contact Now</button> -->
+      </li>
+    </ul>
+  </section>
+  <section class="time-and-date">
+    <span> {{ inquiryDetails.created_at }} </span>
+    <span> ID: {{ inquiryDetails.enquery_code }} </span>
+  </section>
+  <section class="inquiry-list-box">
+    <ul class="list-group list-group-horizontal">
+      <li class="list-group-item">
+        <div class="imgparentwrap width80">
+          <img class="" [src]="inquiryDetails.product_img" />
+        </div>
+      </li>
+      <li class="list-group-item">
+        <p>
+          <!-- {{inquiryDetails | json}} -->
+
+          {{ inquiryDetails.product_name  }}
+        </p>
+        <!-- <span>
+          <b> {{ inquiryDetails.order_value }} </b>
+          <ng-container>/ {{ inquiryDetails.units }}</ng-container>
+        </span> -->
+      </li>
+    </ul>
+    <div class="mvk_listtable my-3">
+      <table>
+        <tbody>
+          <tr>
+            <th>Read Status:</th>
+            <td>{{inquiryDetails.read_status == 0 ? 'Unread' : 'Read'}} </td>
+          </tr>
+          <tr>
+            <th>Status:</th>
+            <td>{{inquiryDetails.enquery_status}}</td>
+          </tr>
+          <tr>
+            <th>Quantity:</th>
+            <td>{{inquiryDetails.quantity}}</td>
+          </tr>
+          <tr>
+            <th>Units:</th>
+            <td>{{inquiryDetails.units}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <!-- <section class="close-inquiry">
+    <button (click)="closeInquiry(inquiryDetails.enquery_id)" mat-raised-button type="submit" class="primaryBtn rfq-button">
+      Close Enquiry
+    </button>
+  </section> -->
+</section>
+<section *ngIf="serverDown">
+  <app-server-down></app-server-down>
+</section>

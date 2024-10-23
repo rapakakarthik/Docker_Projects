@@ -1,0 +1,27 @@
+<div class="media-banner" *ngIf="companyData">
+  <section class="leftblock">
+    <div class="imgwrap">
+      <img class="" [src]="companyData.seller_company_logo" />
+    </div>
+    <section>
+      <h2>{{ companyData.display_short_name }}</h2>
+      <p class="">Supports 2k 4k IPS</p>
+      <button (click)="goTo('company', companyData.fk_seller_account_id)" mat-stroked-button class="stroke_whitebtn">Visit Store</button>
+    </section>
+  </section>
+
+  <div class="rightblockwrap">
+    <div *ngFor="let data of getObj()" class="rightblock">
+      <section class="pointer">
+        <div (click)="goTo('product', data.product_id)" class="imgwrap">
+          <img class="" [src]="data.product_image" />
+        </div>
+      </section>
+      <section>
+        <h3>{{ data.product_name }}</h3>
+        <p class="">{{ data.product_pricing | inidanCurrency }}</p>
+        <h3>{{ data.product_quantity }} {{ data.product_unit_type }}</h3>
+      </section>
+    </div>
+  </div>
+</div>

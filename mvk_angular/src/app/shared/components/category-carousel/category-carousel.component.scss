@@ -1,0 +1,47 @@
+.box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.circle-box {
+    height: 125px;
+    width: 125px;
+    border-radius: 50%;
+    border: 1px solid #eaeaea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    P{
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-align: center;
+        width: 95%;
+        padding: 0 10px;
+        margin: 0;
+        font-size: 14px;
+    }
+    img {
+        height: 40px;
+        width: 40px;
+    }
+}
+
+.circle-box:hover {
+    background-color: #EFFBFF;
+    cursor: pointer;
+    p {
+        color: #0172A8;
+    }
+    img {
+        filter: brightness(0) saturate(100%) invert(49%) sepia(83%) saturate(7200%) hue-rotate(182deg) brightness(87%) contrast(99%);
+    }
+}
+
+.circle-box.loader:hover {
+    cursor: auto;
+}

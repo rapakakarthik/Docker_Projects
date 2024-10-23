@@ -1,0 +1,48 @@
+<section>
+  <div *ngIf="mainCategoryInfo" class="tab-heading-banner">
+    <h2 class="mainTitle">{{ mainCategoryInfo.title }}</h2>
+    <h4>{{ mainCategoryInfo.sub_title }}</h4>
+  </div>
+
+  <div class="mobiletabwrapper btntabstyle marB20"><ul><li *ngFor="let category of mainCategoryData; let i=index">  <button (click)="setActiveTab(i)" [class.selectedtab]="i === activeTab" class="chipcls">{{ category.room_name }}</button></li></ul></div>
+  <div class="tab-banner-chips onlydesktop">
+    <mat-tab-group
+      (selectedIndexChange)="getSubCategory1($event)"
+      class="mat-tab-labels"  #tabGroup
+    >
+      <mat-tab *ngFor="let category of mainCategoryData">
+        <ng-template mat-tab-label>
+          <div class="chipcls">{{ category.room_name }}</div>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+    <!-- <h4 *ngIf="subCategoryInfo">{{ subCategoryInfo.description }}</h4> -->
+  </div>
+
+  
+  <!-- Sub Category Loader -->
+  <section *ngIf="loader" class="loader-wrap">
+    <section *ngFor="let i of [1, 2, 3, 4, 5, 6]" class="manu-loader">
+      <section class="loader-img">
+        <section class="text-img"></section>
+      </section>
+      <section class="loader-desc">
+        <section *ngFor="let i of [1, 2]" class="smart text"></section>
+      </section>
+    </section>
+  </section>
+
+  <div class="frames">
+    <div class="row">
+      <div *ngFor="let category of subCategoryData" class="col-lg-3 col-sm-4 col-6">
+        <div (click)="goTo(category.pk_sub_id)" class="frame_box">
+          <img [src]="category.image" [appSafeImage]="'https://dev-api.myverkoper.com/assets/seller/images/mvk-no-image.png'"/>
+          <div class="box_content">
+            <h1>{{ category.sub_room }}</h1>
+            <p>{{ category.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

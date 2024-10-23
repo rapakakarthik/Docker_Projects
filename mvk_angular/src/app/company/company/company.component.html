@@ -1,0 +1,464 @@
+<ng-container *ngIf="dataFound">
+  <section class="main-container">
+    <section class="flex-product">
+      <!-- Uppper Section Profile -->
+      <section *ngIf="companyProfile" class="v3_company_profile">
+        <div class="v3_company_img">
+          <img [alt]="companyProfile.seller_company_name" [src]="companyProfile.seller_company_logo" />
+        </div>
+        <div class="v3_company_details">
+          <div class="v3_company_flex">
+            <h2 class="v3_company_name">{{companyProfile.seller_company_name}}</h2>
+            <!-- share icon -->
+            <span class="pointer" title="share" (click)="share()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                <path
+                  d="M18.75 22.9163C17.8819 22.9163 17.1441 22.6125 16.5365 22.0049C15.9288 21.3972 15.625 20.6594 15.625 19.7913C15.625 19.6698 15.6337 19.5438 15.651 19.4132C15.6684 19.2827 15.6944 19.1656 15.7292 19.0622L8.38542 14.7913C8.09028 15.0518 7.76042 15.2559 7.39583 15.4038C7.03125 15.5518 6.64931 15.6254 6.25 15.6247C5.38194 15.6247 4.6441 15.3209 4.03646 14.7132C3.42882 14.1056 3.125 13.3677 3.125 12.4997C3.125 11.6316 3.42882 10.8938 4.03646 10.2861C4.6441 9.67849 5.38194 9.37467 6.25 9.37467C6.64931 9.37467 7.03125 9.44863 7.39583 9.59655C7.76042 9.74447 8.09028 9.94829 8.38542 10.208L15.7292 5.93717C15.6944 5.83301 15.6684 5.71599 15.651 5.58613C15.6337 5.45627 15.625 5.33023 15.625 5.20801C15.625 4.33995 15.9288 3.6021 16.5365 2.99447C17.1441 2.38683 17.8819 2.08301 18.75 2.08301C19.6181 2.08301 20.3559 2.38683 20.9635 2.99447C21.5712 3.6021 21.875 4.33995 21.875 5.20801C21.875 6.07606 21.5712 6.81391 20.9635 7.42155C20.3559 8.02919 19.6181 8.33301 18.75 8.33301C18.3507 8.33301 17.9687 8.2594 17.6042 8.11217C17.2396 7.96495 16.9097 7.76079 16.6146 7.49967L9.27083 11.7705C9.30555 11.8747 9.3316 11.992 9.34896 12.1226C9.36632 12.2531 9.375 12.3788 9.375 12.4997C9.375 12.6212 9.36632 12.7472 9.34896 12.8778C9.3316 13.0084 9.30555 13.1254 9.27083 13.2288L16.6146 17.4997C16.9097 17.2393 17.2396 17.0354 17.6042 16.8882C17.9687 16.741 18.3507 16.667 18.75 16.6663C19.6181 16.6663 20.3559 16.9702 20.9635 17.5778C21.5712 18.1854 21.875 18.9233 21.875 19.7913C21.875 20.6594 21.5712 21.3972 20.9635 22.0049C20.3559 22.6125 19.6181 22.9163 18.75 22.9163ZM18.75 6.24967C19.0451 6.24967 19.2927 6.14967 19.4927 5.94967C19.6927 5.74967 19.7924 5.50245 19.7917 5.20801C19.7917 4.91287 19.6917 4.6653 19.4917 4.4653C19.2917 4.2653 19.0444 4.16565 18.75 4.16634C18.4549 4.16634 18.2073 4.26634 18.0073 4.46634C17.8073 4.66634 17.7076 4.91356 17.7083 5.20801C17.7083 5.50315 17.8083 5.75072 18.0083 5.95072C18.2083 6.15072 18.4556 6.25037 18.75 6.24967ZM6.25 13.5413C6.54514 13.5413 6.79271 13.4413 6.99271 13.2413C7.19271 13.0413 7.29236 12.7941 7.29167 12.4997C7.29167 12.2045 7.19167 11.957 6.99167 11.757C6.79167 11.557 6.54444 11.4573 6.25 11.458C5.95486 11.458 5.70729 11.558 5.50729 11.758C5.30729 11.958 5.20764 12.2052 5.20833 12.4997C5.20833 12.7948 5.30833 13.0424 5.50833 13.2424C5.70833 13.4424 5.95556 13.542 6.25 13.5413ZM18.75 20.833C19.0451 20.833 19.2927 20.733 19.4927 20.533C19.6927 20.333 19.7924 20.0858 19.7917 19.7913C19.7917 19.4962 19.6917 19.2486 19.4917 19.0486C19.2917 18.8486 19.0444 18.749 18.75 18.7497C18.4549 18.7497 18.2073 18.8497 18.0073 19.0497C17.8073 19.2497 17.7076 19.4969 17.7083 19.7913C17.7083 20.0865 17.8083 20.334 18.0083 20.534C18.2083 20.734 18.4556 20.8337 18.75 20.833Z"
+                  fill="#017DB9" />
+              </svg>
+            </span>
+            <!-- favorite icon -->
+            @if(!isFav) {
+            <span class="pointer" title="add to wishlist" (click)="addCompanyToFav()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                <path
+                  d="M12.0518 19.3105L12.0517 19.3104C11.9214 19.2622 11.808 19.1897 11.7077 19.0893L11.6987 19.0804L11.6893 19.0718L10.4945 17.9929C10.4944 17.9927 10.4942 17.9926 10.4941 17.9924C8.65145 16.3184 7.02871 14.6934 5.62464 13.1176C4.26817 11.595 3.625 10.0551 3.625 8.48926C3.625 7.29102 4.02658 6.30765 4.82878 5.50561L4.82885 5.50554C5.6309 4.70333 6.61426 4.30176 7.8125 4.30176C8.48646 4.30176 9.20562 4.47181 9.97468 4.83086L9.9748 4.83091C10.6883 5.16381 11.3967 5.81128 12.0858 6.83028L12.5 7.44277L12.9142 6.83028C13.6033 5.81128 14.3117 5.1638 15.0252 4.83091L15.0253 4.83086C15.7944 4.47181 16.5135 4.30176 17.1875 4.30176C18.3857 4.30176 19.3691 4.70333 20.1712 5.50554L20.1712 5.5056C20.9734 6.30765 21.375 7.29102 21.375 8.48926C21.375 10.092 20.7053 11.6649 19.2918 13.2166C17.8278 14.8238 16.224 16.4177 14.4802 17.9982C14.4801 17.9983 14.48 17.9984 14.4799 17.9985L13.2908 19.0717L13.2813 19.0803L13.2722 19.0893C13.1747 19.1869 13.0603 19.2596 12.9233 19.3086C12.7684 19.3641 12.6214 19.3895 12.4799 19.3895C12.3387 19.3895 12.1968 19.3642 12.0518 19.3105Z"
+                  fill="none" stroke="#017DB9" />
+              </svg>
+            </span>
+            }
+            @else {
+            <span class="pointer" title="remove from wishlist" (click)="removeCompanyFromFav()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                <path
+                  d="M12.0518 19.3105L12.0517 19.3104C11.9214 19.2622 11.808 19.1897 11.7077 19.0893L11.6987 19.0804L11.6893 19.0718L10.4945 17.9929C10.4944 17.9927 10.4942 17.9926 10.4941 17.9924C8.65145 16.3184 7.02871 14.6934 5.62464 13.1176C4.26817 11.595 3.625 10.0551 3.625 8.48926C3.625 7.29102 4.02658 6.30765 4.82878 5.50561L4.82885 5.50554C5.6309 4.70333 6.61426 4.30176 7.8125 4.30176C8.48646 4.30176 9.20562 4.47181 9.97468 4.83086L9.9748 4.83091C10.6883 5.16381 11.3967 5.81128 12.0858 6.83028L12.5 7.44277L12.9142 6.83028C13.6033 5.81128 14.3117 5.1638 15.0252 4.83091L15.0253 4.83086C15.7944 4.47181 16.5135 4.30176 17.1875 4.30176C18.3857 4.30176 19.3691 4.70333 20.1712 5.50554L20.1712 5.5056C20.9734 6.30765 21.375 7.29102 21.375 8.48926C21.375 10.092 20.7053 11.6649 19.2918 13.2166C17.8278 14.8238 16.224 16.4177 14.4802 17.9982C14.4801 17.9983 14.48 17.9984 14.4799 17.9985L13.2908 19.0717L13.2813 19.0803L13.2722 19.0893C13.1747 19.1869 13.0603 19.2596 12.9233 19.3086C12.7684 19.3641 12.6214 19.3895 12.4799 19.3895C12.3387 19.3895 12.1968 19.3642 12.0518 19.3105Z"
+                  fill="#D63333" stroke="#D63333" />
+              </svg>
+            </span>
+            }
+          </div>
+          <p class="business_type">
+            {{companyProfile.seller_business_type}}
+          </p>
+          @if (basicDetails.experience_years) {
+          <div class="v3_company_year">{{basicDetails.experience_years}}</div>
+          }
+
+          @if(connectionEstablished){
+            <app-contactsupplier [companyBtn]="false" [btnstyle]="true" [class]="'primary_btn'"
+            [sellerDetails]="sellerDetails"></app-contactsupplier>
+          }
+        </div>
+        <section class="v3_company_actions" [ngClass]="{'v3_contact_info' : connectionEstablished}">
+          @if(connectionEstablished){
+            <div>
+              <!-- <button class="primary_btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                  <path d="M15.4307 16.5C13.7449 16.5 12.0167 16.0779 10.2462 15.2337C8.47575 14.3894 6.82767 13.2044 5.302 11.6788C3.78917 10.1532 2.61058 8.50842 1.76625 6.74425C0.922083 4.98008 0.5 3.25508 0.5 1.56925C0.5 1.26925 0.6 1.016 0.8 0.8095C1 0.603167 1.25 0.5 1.55 0.5H4.023C4.29483 0.5 4.532 0.585584 4.7345 0.75675C4.93717 0.927917 5.07442 1.1475 5.14625 1.4155L5.64225 3.8C5.68842 4.0795 5.68008 4.32375 5.61725 4.53275C5.55442 4.74175 5.4435 4.91292 5.2845 5.04625L3.0905 7.09225C3.50067 7.83708 3.95417 8.52908 4.451 9.16825C4.94783 9.80742 5.47767 10.4128 6.0405 10.9845C6.62117 11.5653 7.24617 12.1054 7.9155 12.6048C8.58467 13.1041 9.31925 13.5756 10.1193 14.0193L12.2578 11.8422C12.4206 11.6666 12.6036 11.5509 12.8068 11.4952C13.0099 11.4394 13.2346 11.4282 13.4808 11.4615L15.5845 11.8923C15.8563 11.9589 16.0769 12.0958 16.2462 12.303C16.4154 12.51 16.5 12.7475 16.5 13.0155V15.45C16.5 15.75 16.3968 16 16.1905 16.2C15.984 16.4 15.7308 16.5 15.4307 16.5Z" fill="white"/>
+                </svg>
+                <span>Call Now</span>
+              </button> -->
+              <app-view-number type="company-btn" [cid]="sellerDetails.sellerId"></app-view-number>
+            </div>
+            <div>
+              <!-- <button class="stroked_btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                  <path d="M5.70085 15.2885L4.20515 16.784C3.98352 17.0058 3.72722 17.0568 3.43624 16.937C3.14541 16.817 3 16.599 3 16.2828V4.41801C3 4.01395 3.13532 3.6766 3.40596 3.40596C3.6766 3.13532 4.01395 3 4.41801 3H17.3815C17.7856 3 18.123 3.13532 18.3936 3.40596C18.6642 3.6766 18.7996 4.01395 18.7996 4.41801V13.8705C18.7996 14.2746 18.6642 14.6119 18.3936 14.8826C18.123 15.1532 17.7856 15.2885 17.3815 15.2885H5.70085ZM5.32605 14.4108H17.3815C17.5167 14.4108 17.6406 14.3545 17.7531 14.242C17.8656 14.1295 17.9218 14.0057 17.9218 13.8705V4.41801C17.9218 4.28284 17.8656 4.159 17.7531 4.0465C17.6406 3.934 17.5167 3.87775 17.3815 3.87775H4.41801C4.28284 3.87775 4.159 3.934 4.0465 4.0465C3.934 4.159 3.87775 4.28284 3.87775 4.41801V15.854L5.32605 14.4108Z" fill="#0172A8"/>
+                </svg>
+                <span>Chat Now</span>
+              </button> -->
+              <app-chat-now type="company-btn" [class]="'product_details_btn'"  [sellerDetails]="sellerDetails"></app-chat-now>
+            </div>
+          } @else {
+            <button (click)="contactSupplierPopup()" class="primary_btn me-3 mb-3">Contact Supplier</button>
+            <app-contactsupplier [companyBtn]="true" [btnstyle]="true" [class]="'primary_btn'"
+              [sellerDetails]="sellerDetails"></app-contactsupplier>
+            }
+        </section>
+      </section>
+      <!-- <section class="company-profile">
+        <section *ngIf="companyDetails" class="company_image">
+          <p *ngIf="companyDetails"> {{companyDetails.seller_details.seller_profile}}</p>
+          <img [alt]="companyDetails.seller_account_name" [src]="companyDetails.seller_account_logo" />
+        </section>
+        <section class="company-details">
+          <app-mfg-desc [type]="'company'" [data]="companyDetails"></app-mfg-desc>
+        </section>
+        <section class="company-actions">
+          <section *ngIf="showChat">
+            <app-chat-now [sellerDetails]="sellerDetails" [btnstyle]="true"></app-chat-now>
+          </section>
+          <section *ngIf="sellerDetails.buyerSellerStatus == 1">
+            <app-view-number [btnstyle]="true" [cid]="companyId"></app-view-number>
+          </section>
+          <section>
+            [companyBtn]="true"
+            <app-contactsupplier [btnstyle]="true" [class]="'stroked_button'"
+              [sellerDetails]="sellerDetails"></app-contactsupplier>
+          </section>
+        </section>
+      </section> -->
+
+      <!-- <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+            <mat-tab>
+                <ng-template mat-tab-label> Home</ng-template>
+                Content 1</mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label> Products
+                        <a [matMenuTriggerFor]="product"> Products</a>
+                        <mat-menu #product="matMenu">
+                            <button mat-menu-item>Item 1</button>
+                        <button mat-menu-item>Item 2</button>
+                    </mat-menu>
+
+
+                </ng-template>
+                    Content 1</mat-tab>
+        
+        </mat-tab-group>-->
+
+      <!-- <ul class="companymenu">
+            <li><a>Home</a></li>
+            <li><a [matMenuTriggerFor]="product"> Products</a>
+                <mat-menu #product="matMenu">
+                    <button mat-menu-item>Item 1</button>
+                    <button mat-menu-item>Item 2</button>
+                </mat-menu>
+            </li>
+            <li><a>Profile</a></li>
+            <li><a>Contact</a></li>
+        </ul> -->
+
+      <section class="product_details tab-section sm_space">
+        <div class="tab_row">
+          <mat-tab-group class="tab-section-group" [(selectedIndex)]="selectedTabIndex">
+
+            <!-- Product Details tab-->
+            <mat-tab label="Product">
+              <section *ngIf="categories.length > 0" class="companysec">
+                <section class="companyleft">
+                  <!-- <h2 class="company_subtitle"><span class="material-icons">verified</span>TOP PICS</h2> -->
+                  <!-- <p class="top_picks">
+                    <img src="../../../assets/images/verified_icon1.png" />
+                    <span>Top Picks</span>
+                  </p> -->
+                  <h3 class="company-simitite">Products Categories</h3>
+                  <!-- Categories List -->
+                  <ul class="sidemenu">
+                    <!-- <li>
+                      <a class="pointer" [ngClass]="{'selected': categoryId === 0}" (click)="changeProducts(0, '')">All</a>
+                    </li> -->
+                    <li *ngFor="let category of categories">
+                      <!-- <a (click)="changeProducts(group.group_id)">{{ -->
+                      <a class="pointer" [ngClass]="{'selected': categoryId === category.pk_id}"
+                        (click)="changeProducts(category.pk_id, category.cat_name)">
+                        {{ category.cat_name }}
+                      </a>
+                    </li>
+                  </ul>
+                </section>
+                <section class="company-right">
+                  <!-- filters -->
+                  <div class="hometabs">
+                    <mat-chip-listbox>
+                      <mat-chip-option *ngFor="let chip of chips" [ngClass]="{'selected': chip.key == selectedChip}"
+                        (click)="changeChip(chip)">
+                        {{chip.val}}
+                      </mat-chip-option>
+                    </mat-chip-listbox>
+                  </div>
+                  
+                  <!-- list & grid view buttons start -->
+                  <div class="v3_filter_view">
+
+                    <!-- list icon -->
+                    <span (click)="listView()" [ngClass]="{ 'list_active' : viewClass === 'v3_list_view' }">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 30 30" fill="none">
+                            <path d="M16.25 6.25H26.25M16.25 11.25H22.5M16.25 18.75H26.25M16.25 23.75H22.5M3.75 6.25C3.75 5.91848 3.8817 5.60054 4.11612 5.36612C4.35054 5.1317 4.66848 5 5 5H10C10.3315 5 10.6495 5.1317 10.8839 5.36612C11.1183 5.60054 11.25 5.91848 11.25 6.25V11.25C11.25 11.5815 11.1183 11.8995 10.8839 12.1339C10.6495 12.3683 10.3315 12.5 10 12.5H5C4.66848 12.5 4.35054 12.3683 4.11612 12.1339C3.8817 11.8995 3.75 11.5815 3.75 11.25V6.25ZM3.75 18.75C3.75 18.4185 3.8817 18.1005 4.11612 17.8661C4.35054 17.6317 4.66848 17.5 5 17.5H10C10.3315 17.5 10.6495 17.6317 10.8839 17.8661C11.1183 18.1005 11.25 18.4185 11.25 18.75V23.75C11.25 24.0815 11.1183 24.3995 10.8839 24.6339C10.6495 24.8683 10.3315 25 10 25H5C4.66848 25 4.35054 24.8683 4.11612 24.6339C3.8817 24.3995 3.75 24.0815 3.75 23.75V18.75Z" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+
+                    <!-- grid icon -->
+                    <span (click)="gridView()" [ngClass]="{ 'grid_active' : viewClass === 'v3_grid_view' }">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 30 30" fill="none">
+                            <path d="M11.25 16.5C11.8467 16.5 12.419 16.7371 12.841 17.159C13.2629 17.581 13.5 18.1533 13.5 18.75V24.75C13.5 25.3467 13.2629 25.919 12.841 26.341C12.419 26.7629 11.8467 27 11.25 27H5.25C4.65326 27 4.08097 26.7629 3.65901 26.341C3.23705 25.919 3 25.3467 3 24.75V18.75C3 18.1533 3.23705 17.581 3.65901 17.159C4.08097 16.7371 4.65326 16.5 5.25 16.5H11.25ZM24.75 16.5C25.3467 16.5 25.919 16.7371 26.341 17.159C26.7629 17.581 27 18.1533 27 18.75V24.75C27 25.3467 26.7629 25.919 26.341 26.341C25.919 26.7629 25.3467 27 24.75 27H18.75C18.1533 27 17.581 26.7629 17.159 26.341C16.7371 25.919 16.5 25.3467 16.5 24.75V18.75C16.5 18.1533 16.7371 17.581 17.159 17.159C17.581 16.7371 18.1533 16.5 18.75 16.5H24.75ZM11.25 18H5.25C5.05109 18 4.86032 18.079 4.71967 18.2197C4.57902 18.3603 4.5 18.5511 4.5 18.75V24.75C4.5 24.9489 4.57902 25.1397 4.71967 25.2803C4.86032 25.421 5.05109 25.5 5.25 25.5H11.25C11.4489 25.5 11.6397 25.421 11.7803 25.2803C11.921 25.1397 12 24.9489 12 24.75V18.75C12 18.5511 11.921 18.3603 11.7803 18.2197C11.6397 18.079 11.4489 18 11.25 18ZM24.75 18H18.75C18.5511 18 18.3603 18.079 18.2197 18.2197C18.079 18.3603 18 18.5511 18 18.75V24.75C18 24.9489 18.079 25.1397 18.2197 25.2803C18.3603 25.421 18.5511 25.5 18.75 25.5H24.75C24.9489 25.5 25.1397 25.421 25.2803 25.2803C25.421 25.1397 25.5 24.9489 25.5 24.75V18.75C25.5 18.5511 25.421 18.3603 25.2803 18.2197C25.1397 18.079 24.9489 18 24.75 18ZM11.25 3C11.8467 3 12.419 3.23705 12.841 3.65901C13.2629 4.08097 13.5 4.65326 13.5 5.25V11.25C13.5 11.8467 13.2629 12.419 12.841 12.841C12.419 13.2629 11.8467 13.5 11.25 13.5H5.25C4.65326 13.5 4.08097 13.2629 3.65901 12.841C3.23705 12.419 3 11.8467 3 11.25V5.25C3 4.65326 3.23705 4.08097 3.65901 3.65901C4.08097 3.23705 4.65326 3 5.25 3H11.25ZM24.75 3C25.3467 3 25.919 3.23705 26.341 3.65901C26.7629 4.08097 27 4.65326 27 5.25V11.25C27 11.8467 26.7629 12.419 26.341 12.841C25.919 13.2629 25.3467 13.5 24.75 13.5H18.75C18.1533 13.5 17.581 13.2629 17.159 12.841C16.7371 12.419 16.5 11.8467 16.5 11.25V5.25C16.5 4.65326 16.7371 4.08097 17.159 3.65901C17.581 3.23705 18.1533 3 18.75 3H24.75ZM11.25 4.5H5.25C5.05109 4.5 4.86032 4.57902 4.71967 4.71967C4.57902 4.86032 4.5 5.05109 4.5 5.25V11.25C4.5 11.4489 4.57902 11.6397 4.71967 11.7803C4.86032 11.921 5.05109 12 5.25 12H11.25C11.4489 12 11.6397 11.921 11.7803 11.7803C11.921 11.6397 12 11.4489 12 11.25V5.25C12 5.05109 11.921 4.86032 11.7803 4.71967C11.6397 4.57902 11.4489 4.5 11.25 4.5ZM24.75 4.5H18.75C18.5511 4.5 18.3603 4.57902 18.2197 4.71967C18.079 4.86032 18 5.05109 18 5.25V11.25C18 11.4489 18.079 11.6397 18.2197 11.7803C18.3603 11.921 18.5511 12 18.75 12H24.75C24.9489 12 25.1397 11.921 25.2803 11.7803C25.421 11.6397 25.5 11.4489 25.5 11.25V5.25C25.5 5.05109 25.421 4.86032 25.2803 4.71967C25.1397 4.57902 24.9489 4.5 24.75 4.5Z" fill="#CCCCCC"/>
+                        </svg>
+                    </span>
+                  </div>
+                  <!-- list & grid view buttons stop -->
+
+                  @if (!loader) {
+                  <ng-container *ngIf="products.length > 0; else noProducts">
+                    <!-- Mutiple inquiry -->
+                    <div class="row align-items-end">
+                      <div class="col-lg-9 col-md-12">
+                        @if(categoryId !== 0) {
+                        <h1 class="title_breadcrumb">
+                          <span class="pointer" (click)="changeProducts(0, '')"> All </span> / <span>{{categoryName}}</span>
+                        </h1>
+                        }
+                        @if (selectedProducts.length) {
+                        <h2 class="selected_title">Selected Products {{selectedProducts.length}} / 20 </h2>
+                        }
+                        <div class="selected_img_row">
+                          <div class="selected_img_item" *ngFor="let product of selectedProducts">
+                            <img class="selected_img" [src]="product.image" />
+                            <img (click)="unSelect(product.id)" class="close_icon"
+                              src="../../../assets/svg/close_icon.svg">
+                          </div>
+                        </div>
+                      </div>
+                      @if (selectedProducts.length > 0) {
+                      <div class="col-lg-3 col-md-12 mt-3 mt-lg-0">
+                        <div class="text-end">
+                          <button (click)="sendInquiry()" class="primary_btn">Send Enquiry</button>
+                        </div>
+                      </div>
+                      }
+                    </div>
+                    <div [ngClass]="viewClass">
+                      <div class="row mt-5">
+                        <ng-container
+                          *ngFor="let product of products | paginate: { itemsPerPage: 8, currentPage: p, totalItems: totalCount }">
+                          <div [ngClass]="{
+                            'col-md-12 col-sm-6': viewClass === 'v3_list_view',
+                            'col-lg-4 col-sm-6': viewClass === 'v3_grid_view'
+                          }">
+                            <div (click)="goToProduct(product.product_name, product.product_id)" class="v3_list_details pointer">
+                              @if (isSignedIn) {
+                              <div (click)="$event.stopPropagation()" class="selection">
+
+                                @if(!product.selected) {
+                                <!-- plus icon -->
+                                <svg (click)="addImage(product)" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 30 30" fill="none">
+                                  <circle cx="15" cy="15" r="14.5" stroke="#333333"/>
+                                  <path d="M15.6003 6.99902L15.6003 21.999" stroke="#333333" stroke-linecap="round"/>
+                                  <path d="M8 14.3994L23 14.3994" stroke="#333333" stroke-linecap="round"/>
+                                </svg>
+                                }
+                                @else {
+                                <!-- tick icon -->
+                                <svg (click)="unSelect(product.product_id)" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 30 30" fill="none">
+                                  <circle cx="15" cy="15" r="15" fill="#3FA950"/>
+                                  <line x1="11.8565" y1="19.0478" x2="22.8565" y2="8.04781" stroke="white"/>
+                                  <line x1="11.8372" y1="19.713" x2="6.81686" y2="13.73" stroke="white"/>
+                                </svg>
+                                }
+                              </div>
+                              }
+                              <div class="v3_product_details">
+                                <div class="v3_image">
+                                  <img class="singleImage"
+                                    [src]="product.product_image" />
+                                </div>
+                                <div class="v3_details">
+                                  <div class="w-100">
+                                    <h2 class="v3_product_name"> {{product.product_name}} </h2>
+                                    <p><b>{{product.price}}</b> /{{product.unit_type}}</p>
+                                    <p class="text_red fw_500">{{product.quantity}} {{product.unit_type}} (Min,order)</p>
+                                  </div>
+
+                                  <div (click)="$event.stopPropagation()" class="v3_actions">
+                                    <div class="fav_icon">
+                                      <!-- favorite icon -->
+                                      @if(!product.is_wishlist) {
+                                        <span class="pointer" title="Add to wishlist" (click)="addProductToFav(product.product_id)">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                            <path
+                                              d="M12.0518 19.3105L12.0517 19.3104C11.9214 19.2622 11.808 19.1897 11.7077 19.0893L11.6987 19.0804L11.6893 19.0718L10.4945 17.9929C10.4944 17.9927 10.4942 17.9926 10.4941 17.9924C8.65145 16.3184 7.02871 14.6934 5.62464 13.1176C4.26817 11.595 3.625 10.0551 3.625 8.48926C3.625 7.29102 4.02658 6.30765 4.82878 5.50561L4.82885 5.50554C5.6309 4.70333 6.61426 4.30176 7.8125 4.30176C8.48646 4.30176 9.20562 4.47181 9.97468 4.83086L9.9748 4.83091C10.6883 5.16381 11.3967 5.81128 12.0858 6.83028L12.5 7.44277L12.9142 6.83028C13.6033 5.81128 14.3117 5.1638 15.0252 4.83091L15.0253 4.83086C15.7944 4.47181 16.5135 4.30176 17.1875 4.30176C18.3857 4.30176 19.3691 4.70333 20.1712 5.50554L20.1712 5.5056C20.9734 6.30765 21.375 7.29102 21.375 8.48926C21.375 10.092 20.7053 11.6649 19.2918 13.2166C17.8278 14.8238 16.224 16.4177 14.4802 17.9982C14.4801 17.9983 14.48 17.9984 14.4799 17.9985L13.2908 19.0717L13.2813 19.0803L13.2722 19.0893C13.1747 19.1869 13.0603 19.2596 12.9233 19.3086C12.7684 19.3641 12.6214 19.3895 12.4799 19.3895C12.3387 19.3895 12.1968 19.3642 12.0518 19.3105Z"
+                                              fill="none" stroke="#017DB9" />
+                                          </svg>
+                                        </span>
+                                      }
+                                      @else {
+                                        <span class="pointer" title="Remove from wishlist" (click)="removeProductFromFav(product.product_id)">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                            <path
+                                              d="M12.0518 19.3105L12.0517 19.3104C11.9214 19.2622 11.808 19.1897 11.7077 19.0893L11.6987 19.0804L11.6893 19.0718L10.4945 17.9929C10.4944 17.9927 10.4942 17.9926 10.4941 17.9924C8.65145 16.3184 7.02871 14.6934 5.62464 13.1176C4.26817 11.595 3.625 10.0551 3.625 8.48926C3.625 7.29102 4.02658 6.30765 4.82878 5.50561L4.82885 5.50554C5.6309 4.70333 6.61426 4.30176 7.8125 4.30176C8.48646 4.30176 9.20562 4.47181 9.97468 4.83086L9.9748 4.83091C10.6883 5.16381 11.3967 5.81128 12.0858 6.83028L12.5 7.44277L12.9142 6.83028C13.6033 5.81128 14.3117 5.1638 15.0252 4.83091L15.0253 4.83086C15.7944 4.47181 16.5135 4.30176 17.1875 4.30176C18.3857 4.30176 19.3691 4.70333 20.1712 5.50554L20.1712 5.5056C20.9734 6.30765 21.375 7.29102 21.375 8.48926C21.375 10.092 20.7053 11.6649 19.2918 13.2166C17.8278 14.8238 16.224 16.4177 14.4802 17.9982C14.4801 17.9983 14.48 17.9984 14.4799 17.9985L13.2908 19.0717L13.2813 19.0803L13.2722 19.0893C13.1747 19.1869 13.0603 19.2596 12.9233 19.3086C12.7684 19.3641 12.6214 19.3895 12.4799 19.3895C12.3387 19.3895 12.1968 19.3642 12.0518 19.3105Z"
+                                              fill="#D63333" stroke="#D63333" />
+                                          </svg>
+                                        </span>
+                                      }
+                                    </div>
+                                    
+                                    
+                                    
+                                    <app-contactsupplier [btnstyle]="true" [class]="'stroked_btn'"
+                                    [sellerDetails]="getSellerDetails(product)"></app-contactsupplier>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                  <!-- <div class="col-lg-3 col-md-12 mt-3 mt-lg-0">
+                    <div class="text-end">
+                      <button (click)="sendInquiry()" class="primary_btn">Send Enquiry</button>
+                    </div>
+                  </div>
+                    <section class="custom-flexs-list4">
+                      <ng-container
+                        *ngFor="let product of products | paginate: { itemsPerPage: 8, currentPage: p, totalItems: totalCount }">
+                        <section class="card1">
+                          <a [routerLink]="['/product' , product.product_id]">
+                          <a (click)="goTo(product)">
+                            <app-product-card [styleClass]="'smallcard'" [item]="product" [description]="true"
+                              [price]="true" [qty]="true"></app-product-card>
+                            [showAdd]="true"
+                          </a>
+                        </section>
+                      </ng-container>
+                    </section> -->
+                    <section *ngIf="products.length > 8" class="paginator">
+                      <pagination-controls [maxSize]="5" (pageChange)="onPageChange($event)"></pagination-controls>
+                    </section>
+                  </ng-container>
+                  <ng-template #noProducts>
+                    <section class="invalid-url">
+                      <div class="no_found">
+                        <img src="assets/images/no_products.jpg" alt="">
+                        <h1>No products found</h1>
+                      </div>
+                  </section>
+                  </ng-template>
+                  }
+                  @else {
+                    <section class="manu-loader">
+                      <section class="loader-img img-ld">
+                        <section *ngFor="let i of [1, 2, 3, 4, 5, 6]" class="text-img"></section>
+                      </section>
+                    </section>
+                  }
+                </section>
+              </section>
+            </mat-tab>
+
+            <!-- Profile tab-->
+            <mat-tab *ngIf="companyProfileDetails" label="Profile">
+              <section class="padT30">
+                <app-company-page-profile [companyProfileDetails]="companyProfileDetails"></app-company-page-profile>
+              </section>
+            </mat-tab>
+
+            <!-- Contact tab -->
+            <mat-tab label="Contact">
+              <app-company-contact [sellerDetails]="sellerDetails"
+                [companyProfileDetails]="companyProfileDetails"></app-company-contact>
+            </mat-tab>
+
+            <!-- Company videos tab -->
+            <!-- <mat-tab label="Video">
+          <app-company-video></app-company-video>
+        </mat-tab> -->
+          </mat-tab-group>
+
+          <!-- Search tab -->
+          @if (selectedTabIndex == 0) {
+          <div class="search_control">
+            <div class="search_input">
+              <input [(ngModel)]="searchText" (keyup.enter)="getProducts()" type="text"
+                placeholder="Search in this store" />
+              <i class="search_icon fa fa-search"></i>
+            </div>
+          </div>
+          }
+        </div>
+      </section>
+    </section>
+  </section>
+
+  <!-- Bottom Section Company Profile-->
+  <section *ngIf="false" class="bottom_com_section">
+    <section class="main-container">
+      <section *ngIf="companyProfile" class="company-name">
+        <section>
+          <h2 class="manufacture-heading">
+            {{ companyProfile.seller_company_name }}
+          </h2>
+          <section class="ratingWrap">
+            <span>
+              <ng-container *ngFor="let r of [0, 1, 2, 3, 4]">
+                <svg [ngClass]="
+                  companyProfile.company_rating - 1 > r
+                    ? 'filled-star'
+                    : 'filled-star-gray'
+                " xmlns="http://www.w3.org/2000/svg" height="15" viewBox="0 96 960 960" width="15">
+                  <path d="m185 1039 80-331L3 484l343-29 134-313 134 314 343 28-262 224 80 331-295-176-295 176Z" />
+                </svg>
+              </ng-container>
+            </span>
+            <span class="ratecount">
+              {{ companyProfile.company_rating }} ({{
+              companyProfile.company_reviews
+              }})</span>
+            <!-- "very Satisfied" -->
+          </section>
+        </section>
+        <section>
+          <section class="company-actions-row">
+            <!-- [sellerDetails]="sellerDetails" -->
+            <section>
+              <app-chat-now [sellerDetails]="sellerDetails" [btnstyle]="true"></app-chat-now>
+            </section>
+            <section>
+              <app-view-number [btnstyle]="true" [cid]="companyId"></app-view-number>
+            </section>
+            <section>
+              <app-contactsupplier [btnstyle]="true" [class]="'stroked_button'"
+                [sellerDetails]="sellerDetails"></app-contactsupplier>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>
+  </section>
+</ng-container>
+
+<ng-container *ngIf="!dataFound">
+  <app-server-down [text]="text"></app-server-down>
+</ng-container>
+
+<ng-template #contactSupplierTemplate>
+  <div class="dialog_header">
+    <h1 class="smallTitle">Send Message to Supplier</h1>
+    <button (click)="closeDialog()" class="close_icon">
+      <img src="/assets/images/close.png"/>
+    </button>
+  </div>
+  <div class="dialog_body">
+    <form [formGroup]="contactSupplierForm" (ngSubmit)="submit(contactSupplierForm)">
+      <section class="msg_supplier">
+        <div class="msg_row">
+          <label class="msg_label">To :</label>
+          <div class="name">{{companyProfile.seller_company_name}}</div>
+        </div>
+        <div class="msg_row d-sm-inherit">
+          <label class="msg_label"><span class="text_error">*</span>Product Name:</label>
+          <div>
+            <div class="msg_textarea">
+              <input class="form-control" formControlName="product_name" type="text" maxlength="30" name="product_name" id="product_name">
+            </div>
+          </div>
+        </div>
+        <div class="msg_row d-sm-inherit">
+          <label class="msg_label"><span class="text_error">*</span>Message :</label>
+          <div>
+            <div class="msg_textarea">
+              <textarea formControlName="description" rows="4" class="form-control" placeholder="Enter your inquiry details such as product name, color, size, MOQ, FOB, etc."></textarea>
+              @if(textError) {
+                <div class="text_error">Content Required</div>
+              }
+            </div>
+            <!-- <div class="msg_checkbox">
+              <input formControlName="business_card" type="checkbox" name="b_card" id="b_card"/>
+              <label for="b_card">I agree to share my <b>Business Card</b> to the supplier </label>
+            </div> -->
+            <button [disabled]="contactSupplierForm.invalid" type="submit" class="primary_btn">Send Now</button>
+          </div>
+        </div>
+      </section>
+    </form>
+  </div>
+</ng-template>

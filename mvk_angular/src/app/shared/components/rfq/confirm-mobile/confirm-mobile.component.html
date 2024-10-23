@@ -1,0 +1,64 @@
+<form [formGroup]="myForm">
+    <!-- Sending Otp Field -->
+    <section class="flex-row-sign">
+        <section class="mobilefiled me-2">
+            <mat-form-field appearance="outline" class="smallfiled noborders mobilenumberfield w-100">
+                <input [readonly]="otpStatus" matInput type="text" appAllowNumbersOnly maxlength="10" placeholder="Mobile Number"
+                    formControlName="number" required />
+            </mat-form-field>
+        </section>
+        <section class="otpbtnsec">
+            <button *ngIf="!hideSendotp" class="stroked_btn" [disabled]="numbermob.invalid" (click)="sendOTP()"
+                type="submit">
+                <ng-container *ngIf="!otpLoading; else spin">
+                    Send OTP
+                </ng-container>
+                <ng-template #spin>
+                    <mat-spinner></mat-spinner>
+                </ng-template>
+            </button>
+        </section>
+    </section>
+
+    @if(mobileError) {
+        <div class="text_error">{{errorTxt}}</div>
+    }
+
+    <!-- Otp Validating Field -->
+    <section *ngIf="otpStatus">
+        <p class="smalltxt mt-4">
+            We have sent an otp to <strong>{{ myForm.controls["number"].value }} </strong>
+        </p>
+        <p class="mb-4"><a class="text_btn" (click)="notYou()">Not You?</a></p>
+
+        <section class="flex-row-sign">
+            <section class="w-100 me-3">
+                <section class="mobilefiled otpfiled"
+                    [ngClass]="{'correct_otp': verified, 'incorrect_otp': invalidOtp}">
+                    <mat-form-field appearance="outline" class="smallfiled noborders mobilenumberfield">
+                        <input matInput type="text" appAllowNumbersOnly maxlength="4" placeholder="Enter OTP" formControlName="otp" />
+                    </mat-form-field>
+                    <span class="incorrect_icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none"> <path d="M8.75 16.9872L12.5 13.2372L16.25 16.9872L16.9872 16.25L13.2372 12.5L16.9872 8.75L16.25 8.01276L12.5 11.7628L8.75 8.01276L8.01276 8.75L11.7628 12.5L8.01276 16.25L8.75 16.9872ZM12.5034 21.875C11.207 21.875 9.98819 21.629 8.84687 21.137C7.70573 20.645 6.71302 19.9773 5.86875 19.1339C5.02448 18.2905 4.35616 17.2986 3.8638 16.1583C3.37127 15.0182 3.125 13.7999 3.125 12.5034C3.125 11.207 3.37101 9.98819 3.86302 8.84687C4.35503 7.70573 5.02274 6.71302 5.86615 5.86875C6.70955 5.02448 7.70139 4.35616 8.84167 3.8638C9.98177 3.37127 11.2001 3.125 12.4966 3.125C13.793 3.125 15.0118 3.37101 16.1531 3.86302C17.2943 4.35504 18.287 5.02274 19.1313 5.86615C19.9755 6.70955 20.6438 7.70139 21.1362 8.84167C21.6287 9.98177 21.875 11.2001 21.875 12.4966C21.875 13.793 21.629 15.0118 21.137 16.1531C20.645 17.2943 19.9773 18.287 19.1339 19.1313C18.2905 19.9755 17.2986 20.6438 16.1583 21.1362C15.0182 21.6287 13.7999 21.875 12.5034 21.875ZM12.5 20.8333C14.8264 20.8333 16.7969 20.026 18.4115 18.4115C20.026 16.7969 20.8333 14.8264 20.8333 12.5C20.8333 10.1736 20.026 8.20312 18.4115 6.58854C16.7969 4.97396 14.8264 4.16667 12.5 4.16667C10.1736 4.16667 8.20312 4.97396 6.58854 6.58854C4.97396 8.20312 4.16667 10.1736 4.16667 12.5C4.16667 14.8264 4.97396 16.7969 6.58854 18.4115C8.20312 20.026 10.1736 20.8333 12.5 20.8333Z" fill="#E82828" /></svg>
+                    </span>
+                    <span class="correct_icon"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none"><g clip-path="url(#clip0_20_84)"> <path d="M17.2812 7.89583L10.4166 14.7604L6.677 11.0312L5.20825 12.5L10.4166 17.7083L18.7499 9.375L17.2812 7.89583ZM12.4999 2.08333C6.74992 2.08333 2.08325 6.75 2.08325 12.5C2.08325 18.25 6.74992 22.9167 12.4999 22.9167C18.2499 22.9167 22.9166 18.25 22.9166 12.5C22.9166 6.75 18.2499 2.08333 12.4999 2.08333ZM12.4999 20.8333C7.89575 20.8333 4.16659 17.1042 4.16659 12.5C4.16659 7.89583 7.89575 4.16667 12.4999 4.16667C17.1041 4.16667 20.8333 7.89583 20.8333 12.5C20.8333 17.1042 17.1041 20.8333 12.4999 20.8333Z" fill="#3FA950" /></g><defs><clipPath id="clip0_20_84"><rect width="25" height="25" fill="white" /></clipPath></defs></svg></span>
+                </section>
+                <div *ngIf="invalidOtp" class="error_msg mt-2">Entered Invalid OTP</div>
+            </section>
+            <section class="otpbtnsec">
+                <button [disabled]="otp.invalid" class="stroked_btn" (click)="verifyOtp()" type="submit">
+                    <ng-container *ngIf="!otpLoading; else spin2">Verify</ng-container>
+                    <ng-template #spin2><mat-spinner></mat-spinner></ng-template>
+                </button>
+            </section>
+        </section>
+        <p class="smalltxt marT20">
+            Didn't Recieve OTP?
+            <button mat-button class="pointer bluelink" [disabled]="!isResending" (click)="resendOtp()">
+                Resend Now. <span class="timer" *ngIf="!isResending"> 00: {{ countDown$ | async }} </span>
+            </button>
+        </p>
+    </section>
+</form>
+
+<!-- <button (click)="continue()" [disabled]="!verified" class="primary_btn mt-5 py-2">Continue to Signup</button> -->

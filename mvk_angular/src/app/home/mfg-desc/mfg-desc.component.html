@@ -1,0 +1,151 @@
+<section *ngIf="type != 'company'">
+  <div class="row">
+    <div class="col-lg-12 mfg-lists">
+      <!-- <img class="number-one-batch" src="https://i.pinimg.com/736x/9c/69/d2/9c69d2174108df429690e75b322759e4.jpg" /> -->
+       <div class="d-flex align-items-center mb-3">
+        <a (click)="goTo('company', data)">
+          <h2 class="manufacture-heading mfg-lists pointer m-0 pe-2">
+            {{ data.company_name }}
+            <!-- <span class="fav-icons-s">
+              <mat-icon class="fav-active">favorite_border</mat-icon>
+            </span>
+            <span class="fav-icons-s">k
+              <mat-icon [style.color]="'red'" class="fav-active"
+                >favorite</mat-icon
+              >
+            </span> -->
+          </h2>
+        </a>
+        @if (isSignedIn) {
+        @if(!isFav) {
+          <span class="pointer" title="add to wishlist" (click)="addCompanyToFav()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="13" viewBox="0 0 16 13" fill="none">
+              <path d="M7.98396 12.912C7.8216 12.912 7.66111 12.8826 7.5025 12.8238C7.34375 12.7651 7.20403 12.6754 7.08333 12.5547L6.12667 11.6907C4.64375 10.3435 3.33521 9.03341 2.20104 7.7605C1.06701 6.48758 0.5 5.16466 0.5 3.79175C0.5 2.73189 0.86007 1.84196 1.58021 1.12196C2.30021 0.401817 3.19014 0.041748 4.25 0.041748C4.85792 0.041748 5.4909 0.195359 6.14896 0.502581C6.80715 0.809664 7.42417 1.38897 8 2.2405C8.57583 1.38897 9.19285 0.809664 9.85104 0.502581C10.5091 0.195359 11.1421 0.041748 11.75 0.041748C12.8099 0.041748 13.6998 0.401817 14.4198 1.12196C15.1399 1.84196 15.5 2.73189 15.5 3.79175C15.5 5.19661 14.9097 6.54702 13.7292 7.843C12.5486 9.13897 11.2564 10.4231 9.8525 11.6955L8.90063 12.5547C8.77993 12.6754 8.63757 12.7651 8.47354 12.8238C8.30951 12.8826 8.14632 12.912 7.98396 12.912ZM7.59292 3.10591C7.09403 2.30133 6.57535 1.72841 6.03687 1.38716C5.4984 1.04578 4.90278 0.875081 4.25 0.875081C3.41667 0.875081 2.72222 1.15286 2.16667 1.70841C1.61111 2.26397 1.33333 2.95841 1.33333 3.79175C1.33333 4.40716 1.5075 5.03828 1.85583 5.68508C2.20403 6.33203 2.67167 6.99473 3.25875 7.67321C3.84583 8.35154 4.52056 9.04543 5.28292 9.75487C6.04514 10.4643 6.83868 11.1945 7.66354 11.9455C7.75965 12.0311 7.87181 12.0738 8 12.0738C8.12819 12.0738 8.24035 12.0311 8.33646 11.9455C9.16132 11.1945 9.95486 10.4643 10.7171 9.75487C11.4794 9.04543 12.1542 8.35154 12.7413 7.67321C13.3283 6.99473 13.796 6.33203 14.1442 5.68508C14.4925 5.03828 14.6667 4.40716 14.6667 3.79175C14.6667 2.95841 14.3889 2.26397 13.8333 1.70841C13.2778 1.15286 12.5833 0.875081 11.75 0.875081C11.0972 0.875081 10.5016 1.04578 9.96313 1.38716C9.42465 1.72841 8.90597 2.30133 8.40708 3.10591C8.36319 3.18064 8.30389 3.23668 8.22917 3.27404C8.15444 3.31154 8.07806 3.33029 8 3.33029C7.92194 3.33029 7.84556 3.31154 7.77083 3.27404C7.69611 3.23668 7.63681 3.18064 7.59292 3.10591Z" 
+              fill="#5D5E5E"/>
+            </svg>
+          </span>
+          }
+          @else {
+          <span class="pointer" title="remove from wishlist" (click)="removeCompanyFromFav()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+              <path
+                d="M12.0518 19.3105L12.0517 19.3104C11.9214 19.2622 11.808 19.1897 11.7077 19.0893L11.6987 19.0804L11.6893 19.0718L10.4945 17.9929C10.4944 17.9927 10.4942 17.9926 10.4941 17.9924C8.65145 16.3184 7.02871 14.6934 5.62464 13.1176C4.26817 11.595 3.625 10.0551 3.625 8.48926C3.625 7.29102 4.02658 6.30765 4.82878 5.50561L4.82885 5.50554C5.6309 4.70333 6.61426 4.30176 7.8125 4.30176C8.48646 4.30176 9.20562 4.47181 9.97468 4.83086L9.9748 4.83091C10.6883 5.16381 11.3967 5.81128 12.0858 6.83028L12.5 7.44277L12.9142 6.83028C13.6033 5.81128 14.3117 5.1638 15.0252 4.83091L15.0253 4.83086C15.7944 4.47181 16.5135 4.30176 17.1875 4.30176C18.3857 4.30176 19.3691 4.70333 20.1712 5.50554L20.1712 5.5056C20.9734 6.30765 21.375 7.29102 21.375 8.48926C21.375 10.092 20.7053 11.6649 19.2918 13.2166C17.8278 14.8238 16.224 16.4177 14.4802 17.9982C14.4801 17.9983 14.48 17.9984 14.4799 17.9985L13.2908 19.0717L13.2813 19.0803L13.2722 19.0893C13.1747 19.1869 13.0603 19.2596 12.9233 19.3086C12.7684 19.3641 12.6214 19.3895 12.4799 19.3895C12.3387 19.3895 12.1968 19.3642 12.0518 19.3105Z"
+                fill="#D63333" stroke="#D63333" />
+            </svg>
+          </span>
+          }
+        }
+      </div>
+
+      <div class="company-credits">
+        <!-- <div>
+          <img src="/assets/images/verified-imgs.PNG" class="verfi-img" />
+        </div> -->
+        <!-- <div class="diamondwrap px-2">
+          <span class="material-icons diamond" *ngFor="let i of [0, 1, 2]"
+            >diamond</span
+          >
+        </div> -->
+        <div><span class="yrs">3 YRS</span></div>
+        <!-- <div>
+          <span class="staff"> 50+ Staff - 5,300+m2 - &#8377;10,000.00+ </span>
+        </div> -->
+      </div>
+
+      <!-- <section class="ratingWrap">
+        <span class="material-icons star_icon">star</span>
+        <span class="ratecount"> {{ data.company_rating }}(13)</span>
+        "Customer service"
+      </section> -->
+
+      <!-- <h3 class="second-sub-title">
+        <svg
+          class="filled-star star"
+          xmlns="http://www.w3.org/2000/svg"
+          height="14"
+          viewBox="0 96 960 960"
+          width="14"
+        >
+          <path
+            d="m185 1039 80-331L3 484l343-29 134-313 134 314 343 28-262 224 80 331-295-176-295 176Z"
+          />
+        </svg>
+
+        <span>{{ data.company_rating }} (13)</span> "Customer service"
+      </h3> -->
+
+      <section role="list" class="manf-list" *ngIf="data.company_desc">
+        <h3 class="manf-list-heading">Factory capability</h3>
+        <ul>
+          <li>Supplier assessment procedures</li>
+          <li>Full Customization</li>
+          <li>ODM service available</li>
+          <li>Minor customization</li>
+          <li>Finished product inspection</li>
+        </ul>
+        <!-- <section class="manf-list">
+          <span *ngIf="data.company_desc" class="manf-list-sublist">
+            {{ data.company_desc | sanitize}}
+          </span>
+          <ng-template class="manf-list-sublist"> No Description</ng-template>
+        </section> -->
+      </section>
+    </div>
+  </div>
+</section>
+
+<div *ngIf="type == 'company' && data" class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="manufacture-heading">{{ data.seller_account_name }}</h2>
+      <!-- <ul class="credits_list">
+        <li>
+          <img class="verified_img" src="../../../assets/images/verified_icon.png"/>
+        </li>
+        <li>
+          <div class="years">3 Yrs</div>
+        </li>
+        <li>50+Staff - 5,300+m2 - US100.00+</li>
+      </ul> -->
+      <!-- <div class="company-credits">
+        <div>
+          <img src="/assets/images/verified-imgs.PNG" class="verfi-img" />
+        </div>
+        <div class="diamondwrap">
+          <span class="material-icons diamond" *ngFor="let i of [0, 1, 2]"
+            >diamond</span
+          >
+        </div>
+        <div><span class="yrs">3 YRS</span></div>
+        <div><span class="staff"> 50+ Staff - 5,300+m2 - US100.00+ </span></div>
+      </div> -->
+      <!-- <section class="ratingWrap">
+        <span>
+          <ng-container *ngFor="let r of [0, 1, 2, 3, 4]">
+            <svg
+              [ngClass]="
+                data.seller_account_rating - 1 > r
+                  ? 'filled-star'
+                  : 'filled-star-gray'
+              "
+              xmlns="http://www.w3.org/2000/svg"
+              height="15"
+              viewBox="0 96 960 960"
+              width="15"
+            >
+              <path
+                d="m185 1039 80-331L3 484l343-29 134-313 134 314 343 28-262 224 80 331-295-176-295 176Z"
+              />
+            </svg>
+          </ng-container>
+        </span>
+        <span class="ratecount">
+          {{ data.seller_account_rating }} ({{
+            data.seller_account_reviews
+          }})</span
+        >
+        "very Satisfied"
+      </section> -->
+    </div>
+  </div>
+</div>

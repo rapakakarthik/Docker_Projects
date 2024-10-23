@@ -1,0 +1,55 @@
+<div class="main-section-s">
+  <button class="btn signUpbtn" (click)="skipDetails()" mat-raised-button color="primary">Skip</button>
+
+  <form [formGroup]="signupForm" (ngSubmit)="updateDetails(signupForm.value)">
+
+    <div class="signup-latest-fields">
+      <label class="label-name"> Owner Name : </label>
+      <mat-form-field appearance="outline">
+        <mat-label> Owner Name </mat-label>
+        <input formControlName="ownerName" matInput placeholder="Owner Name" />
+      </mat-form-field>
+    </div>
+
+    <div class="signup-latest-fields">
+      <label class="label-name"> Educational Institute Name : </label>
+      <mat-form-field appearance="outline">
+        <mat-label>Educational Institute Name</mat-label>
+        <input formControlName="schoolName" matInput placeholder="Institute Name" />
+      </mat-form-field>
+    </div>
+    <div class="signup-latest-fields">
+      <label class="label-name">Educational Institute Pincode : </label>
+      <mat-form-field appearance="outline">
+        <mat-label> Educational Institute Pincode </mat-label>
+        <input type="number" pattern="[0-9]{6}" (input)="pincodeVerify()" formControlName="pincode" matInput placeholder="Institute Pincode" />
+      </mat-form-field>
+    </div>
+    <div *ngIf="showPincode" class="signup-latest-fields">
+      <label class="label-name"></label>
+      <p>{{pinResponse}}</p>
+    </div>  
+    
+    <div *ngIf="showEmail" class="signup-latest-fields">
+      <label class="label-name"> Email : </label>
+      <app-email [mobileNumber]="mobileNumber" (emailValue)="updateEmailStatus($event)" (next)="hideEmail()"></app-email>
+    </div> <br>
+    
+    
+
+    <div *ngIf="false" class="signup-latest-fields">
+      <label class="label-name"> Gender: </label>
+      <mat-radio-group formControlName="gender">
+        <mat-radio-button  value="0"> <span class="pointer">Others</span> </mat-radio-button>
+        <mat-radio-button  value="1"> <span class="pointer">Male</span> </mat-radio-button>
+        <mat-radio-button  value="2"> <span class="pointer">Female</span> </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <button  type="submit" class="sign-up-vtwo" mat-raised-button color="primary">
+      Sign Up
+    </button>
+  </form> 
+</div>
+
+
+<!-- Not using -->

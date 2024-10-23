@@ -1,0 +1,216 @@
+<section *ngIf="showingChat">
+  <ng-container *ngIf="maximizeChat; else mini">
+    <section class="message-popup">
+      <section class="message-card-left">
+        <section class="chat-middle-wrapper">
+          <section class="chat-middle-inner">
+            <section class="chat-top message">
+              <h5>
+                <a class="mobileclose" (click)="maximizeChat = !maximizeChat">
+                  <mat-icon>arrow_back_ios</mat-icon>
+                </a>
+                {{ chatName }}
+              </h5>
+              <!-- <span class="fa-users-fa">
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </span> -->
+              <!-- <span class="search-icons">
+                <mat-icon>search</mat-icon>
+              </span> -->
+              <!-- <span> Local Time: 02:16 AM </span> -->
+            </section>
+            <section #listContainer class="chat-middle">
+              <section class="nochatmsg" *ngIf="messages.length <= 0">
+                No Messages
+              </section>
+              <ul>
+                <li *ngFor="let imageUrl of imageUrls$ | async">
+                  <img [src]="imageUrl.downloadURL" alt="Image" />
+                </li>
+              </ul>
+              <section *ngFor="let message of messages">
+                <div
+                  *ngIf="!message.from.includes('Buyer'); else buyer"
+                  class="chat-person-one"
+                >
+                  <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item">
+                      <div class="chat-imgg">
+                        <img [src]="sellerDetails.companyLogo ? sellerDetails.companyLogo : '../../../assets/images/user-avatar.png'" />
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <span class="chat-profile-name">
+                        {{ message.from }} {{ message.time | date }}
+                      </span>
+                      <p class="from_msg">{{ message.message }}</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <ng-template #buyer>
+                  <div class="chat-person-one second-person">
+                    <ul class="list-group list-group-horizontal">
+                      <li class="list-group-item">
+                        <div class="chat-imgg">
+                          <img [src]=" profilePhoto != null && '' ? profilePhoto : '../../../../assets/images/user-avatar-final.png'"/>
+                        </div>
+                      </li>
+                      <li class="list-group-item">
+                        <span class="chat-profile-name">
+                          {{ buyerName }} {{ message.time | date }}
+                        </span>
+                        <p class="to_msg" *ngIf="message.type != 'image'">{{ message.message }}</p>
+                        <div *ngIf="message.details != '' " class="card card-inquiry-details">
+                          <div *ngIf="message.details && message.details.inquiry_type == 'company'" class="card-body">
+                            <h5 class="card-title">Enquiry</h5>
+                            <section class="inquiry-h">
+                              <div>
+                                <img
+                                  class="img-inquiry"
+                                  src="https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-15.png"
+                                />
+                                <h5>Quantity: {{message.details.quantity}} </h5>
+                                <P>Description:  {{message.details.description}} </P>
+                              </div>
+                            </section>
+                          </div>
+                          <section *ngIf="message.details && message.details.inquiry_type == 'product'" class="section-inquiry-s">
+                            <ul class="list-group">
+                              <li class="list-group-item ls-drive-interface">
+                               Enquiry Type:  {{message.details.inquiry_type}}
+                              </li>
+                              <li class="list-group-item ls-drive-interface">
+                                <h5>{{message.details.product_name}}</h5>
+                              </li>
+                              <li class="list-group-item ls-drive-interface">
+                                {{message.details.quantity}}
+                              </li>
+                              <li class="list-group-item ls-drive-interface">
+                                <h5>{{message.details.units}}</h5>
+                              </li>
+                            </ul>
+                          </section>
+                          <div *ngIf="message && message.type == 'quotation'" class="card-body">
+                            <h5 class="card-title">Quotation</h5>
+                            <section  class="section-inquiry-s">
+                              <ul class="list-group">
+                                <li class="list-group-item ls-drive-interface">
+                                  Quotation Code:  {{message.details.QuotationCode}}
+                                </li>
+                                <li class="list-group-item ls-drive-interface">
+                                  <h5>{{message.details.ProductName}}</h5>
+                                </li>
+                                <li class="list-group-item ls-drive-interface">
+                                  {{message.details.Quantity}}
+                                </li>
+                                <li class="list-group-item ls-drive-interface">
+                                  <h5>{{message.details.Unit}}</h5>
+                                </li>
+                              </ul>
+                            </section>
+                          </div>
+                        </div>
+                        <div
+                          *ngIf="message.type == 'Image'"
+                          class="chat-image-avatar"
+                        >
+                          <img [src]="message.filePath" alt="" />
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </ng-template>
+              </section>
+            </section>
+            <section class="chat-bottom">
+              <emoji-mart class="emoji-mart"  *ngIf="showEmojiPicker" [showPreview]="false" (emojiSelect)="addEmoji($event)" title="Pick your emoji…"></emoji-mart>
+              <section class="chat-icons">
+                <!-- <img src="../../../../assets/svg/smiley.svg" alt="" /> -->
+                <a (click) ="toggleEmojiPicker()"> <img src="../../../../assets/svg/smiley.svg" title="Emoji" alt="" /></a>          
+                <img class="grey-out" title="Upcoming" src="../../../../assets/svg/image.svg" alt="" />
+
+                <label class="upload">
+                  <span class="files">
+                    <img src="../../../../assets/svg/file.svg" alt="" />
+                  </span>
+                  <input type="file" (change)="onFileSelected($event)" />
+                </label>
+                <img class="grey-out" title="Upcoming" src="../../../../assets/svg/copy.svg" alt="" />
+                <img class="grey-out" title="Upcoming" src="../../../../assets/svg/paste.svg" alt="" />
+                <img class="grey-out" title="Upcoming" src="../../../../assets/svg/chat.svg" alt="" />
+              </section>
+
+              <!-- <button (click)="uploadFile()">Upload</button> -->
+              <textarea
+                class="form-control border-0"
+                placeholder="Please type your message"
+                rows="2"
+                [(ngModel)]="message"
+                (keydown.enter)="updateData($event)"
+              ></textarea>
+              <button
+                [disabled]="!message"
+                (click)="updateData()"
+                class="btn btn-primary btn-send-chat"
+              >
+                Send
+              </button>
+            </section>
+          </section>
+        </section>
+      </section>
+      <section class="message-card-right msg-popup">
+        <section class="chat-middle-wrapper">
+          <section class="chat-middle-inner">
+            <section class="chat-top message">
+              <h5>Messenger</h5>
+              <button (click)="maximizeChat = !maximizeChat">
+                <mat-icon>close</mat-icon>
+              </button>
+              <!-- <span> Local Time: 02:16 AM </span> -->
+            </section>
+            <section class="chat-middle listchat">
+              <section class="chat-list-card">
+                <ul *ngIf="chatList" class="list-group">
+                  <li class="nochatmsg" *ngIf="chatList.length <= 0">
+                    No Contacts
+                  </li>
+                  <li
+                    (click)="getMessagesFromSeller(seller)"
+                    class="list-group-item"
+                    *ngFor="let seller of chatList"
+                  >
+                    <div class="img-media">
+                      <img
+                        [src]="
+                          seller.company_image != ''
+                            ? seller.company_image
+                            : '../../../../assets/images/user-avatar.png'
+                        "
+                      />
+                    </div>
+                    <div class="list-card-chat">
+                      <!-- <h4> {{ seller.userName == "" ? "no name" : seller.userName }} </h4> -->
+                      <p>{{ seller.company_name == "" ? "No name" :  seller.company_name}}</p>
+                      <span class="">{{ seller.last_message }}</span>
+                    </div>
+                  </li>
+                </ul>
+              </section>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>
+  </ng-container>
+
+  <ng-template #mini>
+    <section class="smallMsg" (click)="maximizeChat = !maximizeChat">
+      <i class="fa fa-circle cricle-dot" aria-hidden="true"></i>
+      <img src="../../../../assets/svg/chat.svg" />
+      Messenger
+      <img class="img-arrow" src="../../../../assets/svg/key-arrow.png" />
+    </section>
+  </ng-template>
+</section>

@@ -1,0 +1,62 @@
+// Alert Popup Modal start
+
+.modal_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px;
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 5px;
+
+  .title {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .close {
+    background: none;
+    border: none;
+  }
+}
+
+.modal_body {
+  text-align: center;
+  padding: 20px 15px 30px;
+
+  h2 {
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  p {
+    color: #777;
+    margin: 0;
+
+    span {
+      color: #000;
+    }
+  }
+
+  .image {
+    margin-bottom: 15px;
+
+    img {
+      width: 80px;
+      height: 80px;
+      background: #e6f8fe;
+      padding: 18px;
+      border-radius: 5px;
+    }
+  }
+
+  .text_btn {
+    margin: 20px 0 10px;
+  }
+
+  .primary_btn {
+    margin: 5px 0 25px;
+  }
+}
+
+// Alert Popup Modal stop

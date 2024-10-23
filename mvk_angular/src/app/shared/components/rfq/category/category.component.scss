@@ -1,0 +1,31 @@
+ul {
+  list-style: none;
+  padding: 5px 0 5px 10px;
+  margin: 0;
+}
+li {
+  list-style: none;
+  padding: 0 0 0px 0px;
+  margin: 0;
+}
+
+.list-item-heading {
+  font-size: 16px;
+  font-weight: 500;
+  & mat-icon {
+    position: relative;
+    top: 6px;
+  }
+}
+.list-item-last {
+  font-size: 14px;
+}
+.fieldsec {
+    margin-bottom: 20px;
+    & .mat-mdc-form-field {
+      width: 100%;
+    }
+}
+.filedsec-100p {
+    width: 100%;
+}

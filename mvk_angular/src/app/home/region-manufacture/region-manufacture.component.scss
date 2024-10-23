@@ -1,0 +1,130 @@
+app-mfg-list {
+  display: block;
+  border-bottom: 1px solid #cccccc4d;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  // height: 222px;
+}
+
+.loadersec {
+  min-height: 300px;
+  text-align: center;
+  padding-top: 50px;
+  & mat-spinner {
+    margin: 0 auto;
+  }
+}
+.loader-wrap {
+  padding-top: 30px;
+}
+.manu-loader {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  & > section.loader-img {
+    flex: 0 0 200px;
+  }
+  & .loader-product {
+    flex: 0 0 300px;
+    display: flex;
+    & section {
+      margin: 0 10px;
+    }
+  }
+  & .loader-desc {
+    flex: 1;
+  }
+
+  & .text-img-small {
+    width: 80px;
+    height: 100px;
+  }
+  & .text-img {
+    width: 120px;
+    height: 100px;
+  }
+  & .text-1 {
+    width: 100%;
+    height: 10px;
+    margin-bottom: 10px;
+  }
+  & .text-2 {
+    width: 100%;
+    height: 10px;
+    margin-bottom: 10px;
+  }
+  & .text-3 {
+    width: 100%;
+    height: 10px;
+    margin-bottom: 10px;
+  }
+  & .text-4 {
+    width: 100%;
+    height: 10px;
+    margin-bottom: 10px;
+  }
+  & .text-5 {
+    width: 100%;
+    height: 10px;
+    margin-bottom: 10px;
+  }
+}
+.man-list-tab-button {
+  height: auto;
+  display: inline;
+}
+button.btn-manf-list {
+  margin-bottom: 40px;
+  margin-top: 10px;
+  background: none !important;
+  border-radius: 28px;
+  box-shadow: none;
+  padding: 6px 20px;
+  font-weight: 400;
+  font-size: 12px;
+  color: #000 !important;
+  border: 1px solid #9b9f9f;
+  height: 32px;
+}
+
+//Fot item card
+.flex-list {
+  width: 33.3%;
+  &.gapflex {
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+    margin-bottom: 0px;
+    margin-top: 30px;
+  }
+  flex-basis: 1600px;
+}
+
+.cardsWarp {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.cardsWarp .itemBlocks {
+  padding: 10px;
+  width: 33%;
+}
+
+.flex-grid {
+  display: flex;
+  flex-flow: row warp;
+}
+
+@media screen and (max-width: 770px) {
+  .flex-grid {
+    flex-direction: column;
+    & .flex-list {
+      width: 100%;
+      flex-basis: auto;
+    }
+  }
+  button.btn-manf-list {
+    margin-bottom: 5px !important;
+  }
+}
+
+.tab-banner-chips-normal{ margin-bottom: 20px;}

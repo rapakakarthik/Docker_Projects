@@ -1,0 +1,52 @@
+<section class="main-container">
+  <div class="images-slider-two">
+  <!-- Top Banner Details -->
+  <section *ngIf="productsBanner" class="img-container"
+    [ngStyle]="{ 'background-image': 'url(' + setImageEncode(productsBanner?.banner) + ')' }">
+    <!-- [ngStyle]="{ 'background-image': 'url(' + recomendationsData.banner.banner + ')' }" -->
+    <div [style.color]="productsBanner.font_color">
+      <h2 class="h-mini" >{{titleText}}</h2>
+      <h1 class="h-sliders" >{{ productsBanner?.title }}</h1>
+      <p class="p-slider"> {{ productsBanner?.desc}} </p>
+    </div>
+  </section></div>
+
+  <!-- Main Section -->
+
+
+  <div *ngIf="productTypeData" class="hometabs newhometab">
+    <ng-container *ngFor="let type of productTypeData.recommendation_types; let i = index">
+      <mat-chip-option [class.selected]="selectedChipIndex === i" (click)="onChipSelected(type, i)">
+        {{type.type}}
+      </mat-chip-option>
+    </ng-container>
+  </div>
+
+  <!-- Product Loaders start-->
+  <section *ngIf="justForYouLoad" class="flex-wrap">
+    <section class="cardsWarp custom-flexs-list6">
+      <section class="product-cards-list second" *ngFor="let i of [0, 1, 2, 3, 4, 5]">
+        <section class="smart second"></section>
+        <section class="smart card-c-one"></section>
+        <section class="smart card-c-two"></section>
+      </section>
+    </section>
+  </section>
+
+  <section class="flex-wrap marT30 recom_products">
+    <section class="cardsWarp custom-flexs-list6">
+      <ng-container *ngFor="let item of collection | paginate: { itemsPerPage: 18, currentPage: p, totalItems: totalCount }">
+      <!-- <ng-container *ngFor="let data of showData"> -->
+        <section class="card1">
+          <app-product-card [styleClass]="'smallcard'" [item]="item" [description]="false" [price]="true" [qty]="true"
+            [linkTo]="'recomendation'">
+          </app-product-card>
+        </section>
+      </ng-container>
+      <section class="nodata" *ngIf="nodata"> No Products </section>
+    </section>
+    <section class="paginator">
+      <pagination-controls [maxSize]="5"  (pageChange)="onPageChange($event)"></pagination-controls>    
+    </section>
+  </section>
+</section>

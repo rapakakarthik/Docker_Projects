@@ -1,0 +1,117 @@
+.flex-list {
+    width: 33%;
+  }
+  
+  .flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .cardsWarp {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .custom-flexs-list {
+    width: 100%;
+    flex-wrap: wrap;
+    & .card1 {
+      width: 14.2%;
+      padding: 0 12px;
+    }
+  }
+  
+  .custom-flexs-list6 {
+    width: 100%;
+    flex-wrap: wrap;
+    & .card1 {
+      width: 16.66%;
+      padding: 0 18px;
+      margin-bottom: 20px;
+    }
+  }
+  
+  .chiplist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    & li {
+      padding-right: 10px;
+      width: 15%;
+      & span {
+        width: 100%;
+        height: 20px;
+        display: inline-block;
+      }
+    }
+  }
+  .toplist {
+    margin-bottom: 30px;
+  }
+  .bottomlist {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  .hometabs mat-chip-option {
+    margin-right: 10px;
+  }
+  .imgsmart {
+    height: 100px;
+    margin-bottom: 20px;
+  }
+  .line2 {
+    height: 25px;
+    margin-bottom: 10px;
+    width: 90px;
+  }
+  .line3 {
+    height: 10px;
+    width: 70px;
+  }
+  .hometabs mat-chip-option.active {
+    background: #f8f8f8 !important;
+    color: #000 !important;
+  }
+  .nodata {
+    width: 100%;
+    padding: 100px 0;
+    text-align: center;
+  }
+  @media screen and (max-width: 1300px) {
+    .custom-flexs-list6 {
+      & .card1 {
+        width: 20%;
+        padding: 0 16px;
+      }
+    }
+  }
+  
+  @media screen and (max-width: 770px) {
+    .custom-flexs-list6 .card1 {
+      width: 50%;
+    }
+  }
+  
+  .chips-banners {
+    & .tab-chips-banner {
+      border: 1px solid #9b9f9f;
+      background: #ffffff !important;
+      color: #000 !important;
+      height: 35px;
+      border-radius: 28px;
+      background-color: var(--white-10);
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    & .tab-chips-banner.active.mat-primary {
+      background: rgba(0, 170, 251, 0.1098039216) !important;
+      border: 1px solid #0075be;
+    }
+    & .tab-chips-banner.active.mat-primary span {
+      color: #00aafb !important;
+      font-weight: 500;
+    }
+  }
+  
+
+  .marTB20{ margin-top: 20px !important; margin-bottom: 20px !important;}

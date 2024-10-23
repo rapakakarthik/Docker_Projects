@@ -1,0 +1,21 @@
+img {
+  height: 100%;
+  object-fit: contain;
+}
+.carousel-item {
+  overflow: hidden;
+}
+
+.signincarousel h3 {
+  color: #0172a8;
+  font-size: 24px;
+  text-align: center;
+  margin: 0 0 15px 0;
+  letter-spacing: -1px;
+  font-weight: 500;
+}
+.signincarousel p {
+  color: #333333;
+  font-size: 12px;
+  text-align: center;
+}

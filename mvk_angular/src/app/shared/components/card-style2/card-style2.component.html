@@ -1,0 +1,48 @@
+<mat-card
+  *ngIf="isItem"
+  class="products-cards"
+  [ngClass]="{ bgopacity: item.product_type == 'product' }"
+>
+  <a (click)="route(item)" class="pointer">
+    <div class="card-height-img">
+      <img
+        class="product-imgs"
+        mat-card-image
+        [src]="item.product_image"
+        alt=""
+      />
+    </div>
+
+    <mat-card-content class="pl-0 card-content product-icons">
+      <mat-card-title class="product-heading">
+        {{ item.product_name }}
+      </mat-card-title>
+      <mat-card-subtitle
+        *ngIf="item.product_type == 'promotion'"
+        class="card-subtitle product-subtitle"
+      >
+        Customization services available Customization services available
+        Customization services available
+      </mat-card-subtitle>
+    </mat-card-content>
+  </a>
+</mat-card>
+
+<mat-card class="products-cards" *ngIf="!isItem">
+  <img
+    class="product-imgs"
+    mat-card-image
+    src="https://cdn.shopify.com/s/files/1/0558/3087/2250/products/LPBPNILENSY_1.jpg?v=1669793485"
+    alt="Photo of a Shiba Inu"
+  />
+
+  <mat-card-content class="pl-0 card-content product-icons">
+    <mat-card-title class="product-heading">
+      Top Ranking Suppliers
+    </mat-card-title>
+    <mat-card-subtitle class="card-subtitle product-subtitle">
+      Customization services available Customization services available
+      Customization services available
+    </mat-card-subtitle>
+  </mat-card-content>
+</mat-card>

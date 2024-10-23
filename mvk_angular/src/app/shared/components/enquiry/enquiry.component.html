@@ -1,0 +1,197 @@
+<ng-container *ngIf="form">
+  <h2 class="poptitle">
+    Enquiry <a (click)="closeRFQpopup()"><mat-icon>close</mat-icon></a>
+  </h2>
+  <div class="rfqformwrapper dialogrfqformwrapper">
+
+    <section *ngIf="formNumber === 2">
+      <div class="card rfq-card">
+        <div *ngIf="enquiryResponse" class="card-body">
+          <h5 class="id-num"> {{enquiryResponse.enquery_code}}</h5>
+          <ul class=" card-ul-rfq">
+            <li>
+              <div class="ls-name">Product Name :</div>
+              <div class="ls-sub-name">{{filledDetails.productName}}</div>
+            </li>
+            <li>
+              <div class="ls-name">Quantity :</div>
+              <div class="ls-sub-name">{{filledDetails.quantity}}</div>
+            </li>
+            <li>
+              <div class="ls-name">Units :</div>
+              <div class="ls-sub-name">{{filledDetails.unit.val}}</div>
+            </li>
+          </ul>
+          <div class="rfqsu">Enquiry Submited Successfully</div>
+          <div class="rfqtitle"> Please Updates below details for more information about your requirment</div>
+        </div>
+      </div>
+    </section>
+
+    <form [formGroup]="form" (ngSubmit)="submit(form)">
+
+      <ng-container *ngIf="formNumber == 1">
+        <section class="fieldsec filedsec-100p">
+          <label>*Product Name</label>
+          <mat-form-field appearance="outline" class="middlefiled">
+            <input [readonly]="productNameReadonly" matInput type="text" formControlName="product_name" />
+          </mat-form-field>
+        </section>
+
+        <section class="fieldsec filedBlock">
+          <section class="fieldsec filedsec-50p">
+            <label>*Enter Quantity</label>
+            <mat-form-field appearance="outline" class="middlefiled">
+              <input matInput type="text" appAllowNumbersOnly formControlName="quantity" />
+              <mat-error *ngIf="form.get('quantity')?.hasError('required')">
+                Quantity is required
+              </mat-error>
+            </mat-form-field>
+          </section>
+          <section class="fieldsec filedsec-50p">
+            <label>*Select Units</label>
+            <mat-form-field appearance="outline" class="middlefiled">
+              <mat-select formControlName="units">
+                <mat-option *ngFor="let u of units" [value]="u.id">
+                  {{ u.val }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </section>
+        </section>
+
+        <section class="fieldsec filedsec-100p">
+          <label>Enter Detail Description</label>
+          <mat-form-field appearance="outline" class="middlefiled">
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+          <ul class="destails_desc" *ngIf="questions && questions.length > 0">
+            <li
+              *ngFor="let q of questions"
+              (click)="addSentenceToDescription(q)"
+            >
+              {{ q }}
+            </li>
+          </ul>
+        </section>
+      </ng-container>
+
+      <ng-container *ngIf="formNumber == 2">
+        <section class="fieldsec filedBlock">
+          <section class="fieldsec filedsec-50p">
+            <label>Select Order Value</label>
+            <mat-form-field appearance="outline" class="middlefiled">
+              <mat-select formControlName="order_value">
+                <mat-option *ngFor="let o of orderval" [value]="o">
+                  {{ o }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </section>
+          <section class="fieldsec filedsec-50p">
+            <label>Select Currency</label>
+            <mat-form-field appearance="outline" class="middlefiled">
+              <mat-select formControlName="currency">
+                <mat-option *ngFor="let c of currency" [value]="c">
+                  {{ c }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </section>
+        </section>
+
+        <section class="fieldsec filedsec-100p">
+          <label>Required Frequency</label>
+          <mat-form-field appearance="outline" class="middlefiled">
+            <mat-select formControlName="required_frequency">
+              <mat-option *ngFor="let f of frequency" [value]="f">
+                {{ f }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('required_frequency')?.hasError('required')">
+              frequency Name is required
+            </mat-error>
+          </mat-form-field>
+        </section>
+        <section class="box-separate" *ngIf="attrData && attrData.length > 0">
+          <h2>Product attributes</h2>
+          <section class="attr_section">
+            <ng-container *ngFor="let attr of attrData">
+              <ng-container *ngIf="attr.type == 'selection-multi'">
+                <section class="fieldsec filedsec-100p">
+                  <label>{{ attr.name }}</label>
+                  <mat-form-field appearance="outline" class="middlefiled">
+                    <mat-select [formControlName]="attr.name" multiple>
+                      <mat-select-trigger>
+                        <!-- {{ form.controls[attr.name].value?.length }} option(s) selected -->
+                        {{form.controls[attr.name].value?.[0] || ''}}
+                        <span *ngIf=" (form.controls[attr.name].value?.length || 0) > 1 ">
+                          (+{{ (form.controls[attr.name].value?.length || 0) - 1 }}
+                          {{ form.controls[attr.name].value?.length === 2 ? "other" : "others" }})
+                        </span>
+                      </mat-select-trigger>
+                      <mat-option *ngFor="let opt of attr.options" [value]="opt">
+                        {{ opt }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+              </ng-container>
+
+              <ng-container *ngIf="attr.type == 'selection'">
+                <section class="fieldsec filedsec-100p">
+                  <label>{{ attr.name }}</label>
+                  <mat-form-field appearance="outline" class="middlefiled">
+                    <mat-select [formControlName]="attr.name">
+                      <mat-option *ngFor="let opt of attr.options" [value]="opt">
+                        {{ opt }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+              </ng-container>
+
+              <ng-container *ngIf=" attr.type == 'text' || attr.type == 'number' || attr.type == 'float' ">
+                <section class="fieldsec filedsec-100p">
+                  <label>{{ attr.name }}</label>
+                  <mat-form-field appearance="outline" class="middlefiled">
+                    <input matInput type="text" [formControlName]="attr.name" />
+                  </mat-form-field>
+                </section>
+              </ng-container>
+            </ng-container>
+          </section>
+        </section>
+      </ng-container>
+      <section class="fieldsec filedsec-100p">
+        <mat-checkbox formControlName="quote_from_others" class="termscheck" color="primary">
+          I want Quotes from other Sellers also
+        </mat-checkbox>
+      </section>
+
+      <section class="rfqbtnwrap">
+        <button [disabled]="form.invalid" mat-raised-button type="submit" class="primaryBtn rfq-button">
+          Send Enquiry
+        </button>
+        <button *ngIf="formNumber === 2" (click)="closeRFQpopup()" mat-raised-button type="submit"
+          class="primaryBtn rfq-button">
+          Skip
+        </button>
+      </section>
+    </form>
+  </div>
+</ng-container>
+
+
+<ng-template #thankyoutemplate>
+  <h2 class="poptitle">
+    Close <a (click)="closeConfirmation()"><mat-icon>close</mat-icon></a>
+  </h2>
+  <section class="confrmationpopup">
+    <mat-icon>check_circle</mat-icon>
+    <h3>Thank You</h3>
+    <p>Your Request for Enquiry has sent successfully.</p>
+
+    <p>We will get back to you.</p>
+  </section>
+</ng-template>

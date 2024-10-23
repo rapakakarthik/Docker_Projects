@@ -1,0 +1,158 @@
+<main class="buyer_accounts">
+  <!-- <app-chat-wrap></app-chat-wrap> -->
+  <!-- <app-header [search]="false" [className]="'account_header'"></app-header> -->
+  <section class="account_header">
+      <div class="logo">
+        <!-- <button class="menu_icon d-sm-block d-md-none" type="button" data-bs-toggle="accountMenu"
+          data-bs-target="#accountMenuExample" aria-controls="accountMenuExample">
+          <span class="pe-1"></span><i class="fa fa-bars"></i>
+        </button> -->
+        <button class="menu_icon d-sm-block d-md-none" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                <span class="pe-1"></span><i class="fa fa-bars"></i>
+        </button>
+        <app-logo></app-logo>
+      </div>
+      <div (mouseover)="showMenu = true" (mouseleave)="showMenu = false" class="accounts">
+        <div class="d-flex align-items-center justify-content-end">
+          <div class="profile_icon_v2">
+            <span class="notification">{{unreadCount}}</span>
+            @if (profilePhoto !== '') {
+              <img [src]="profilePhoto" class="p_icon" onerror="this.src='https://api.myverkoper.com/assets/seller/images/mvk-no-image.png'">
+            } @else {
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 30 30" fill="none">
+                <path d="M15 2.5C8.1 2.5 2.5 8.1 2.5 15C2.5 21.9 8.1 27.5 15 27.5C21.9 27.5 27.5 21.9 27.5 15C27.5 8.1 21.9 2.5 15 2.5ZM15 7.5C17.4125 7.5 19.375 9.4625 19.375 11.875C19.375 14.2875 17.4125 16.25 15 16.25C12.5875 16.25 10.625 14.2875 10.625 11.875C10.625 9.4625 12.5875 7.5 15 7.5ZM15 25C12.4625 25 9.4625 23.975 7.325 21.4C9.51451 19.6822 12.217 18.7485 15 18.7485C17.783 18.7485 20.4855 19.6822 22.675 21.4C20.5375 23.975 17.5375 25 15 25Z" fill="#B0B0B0"></path>
+              </svg>
+            }
+          </div>
+          <!-- <p class="title">My Account</p>
+          <img class="arrow_icon" src="../../assets/images/icons/arrow-down.png"> -->
+        </div>
+
+        <!-- Profile Header hover menu -->
+        <div *ngIf="showMenu" class="account_dropdown">
+          <div class="account_name">
+            <div>
+              <div class="profile_icon">
+                <img [src]="profilePhoto" [title]="userName" onerror="this.src='https://api.myverkoper.com/assets/seller/images/mvk-no-image.png'" [alt]="userName" />
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 28 28" fill="none">
+                  <path d="M14 4.66675C15.2377 4.66675 16.4247 5.15841 17.2998 6.03358C18.175 6.90875 18.6667 8.09574 18.6667 9.33341C18.6667 10.5711 18.175 11.7581 17.2998 12.6332C16.4247 13.5084 15.2377 14.0001 14 14.0001C12.7623 14.0001 11.5753 13.5084 10.7002 12.6332C9.82499 11.7581 9.33332 10.5711 9.33332 9.33341C9.33332 8.09574 9.82499 6.90875 10.7002 6.03358C11.5753 5.15841 12.7623 4.66675 14 4.66675ZM14 16.3334C19.1567 16.3334 23.3333 18.4217 23.3333 21.0001V23.3334H4.66666V21.0001C4.66666 18.4217 8.84332 16.3334 14 16.3334Z" fill="#777777"/>
+                </svg> -->
+              </div>
+            </div>
+            <div>
+              <p>Hello</p>
+              <p>{{userName}}</p>
+            </div>
+          </div>
+          <ul class="account_list">
+            <li (click)="showMenu = false" routerLink="/account/profile">My Profile</li>
+            <li (click)="logout()">Signout</li>
+          </ul>
+        </div>
+      </div>
+  </section>
+  <section class="acount_wrapper">
+    <section class="account_sidebar">
+      <app-menubar (hoverEmit)="onHover($event)"></app-menubar>
+    </section>
+    <section class="account_maincontent">
+      <router-outlet></router-outlet>
+    </section>
+  </section>
+
+  <div (mouseover)="onHover(true)" (mouseout)="onHover(false)" [ngClass]="{'active': isHovered}" class="menu_hover">
+
+    <h1>Account Overview</h1>
+
+    <ul>
+      <li class="ov_list" (click)="onHover(false)" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/account/profile">
+          My Profile
+        </a>
+      </li>
+      <li class="ov_droplist">
+        <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                              (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-description>
+                Account Settings
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ul>
+              <li class="ov_list" (click)="onHover(false)" routerLinkActive="active">
+                <a routerLink="/account/profile" [queryParams]="{'forget': 'password'}">
+                  Change Password
+                </a>
+              </li>
+              <li class="ov_list" (click)="onHover(false)" routerLinkActive="active" >
+                <a routerLink="/account/profile" [queryParams]="{'account': 'delete'}">
+                  Account delete request
+                </a>
+              </li>
+            </ul>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </li>
+      <!-- <li class="ov_list">Menu Item 3</li> -->
+    </ul>
+    
+
+  </div>
+</main>
+
+
+<!-- Mobile Menu -->
+<div class="offcanvas offcanvas-start mobile_menu" tabindex="-1" id="offcanvasExample"
+    aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="menu_list">
+            <li routerLink="">
+                <span class="ps-2">Home</span>
+            </li>
+            <li class="all_cat active" data-bs-dismiss="offcanvas" aria-label="Close" routerLink="/account/profile">
+                <span class="ps-2">My Profile</span>
+            </li>
+            <li>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Account Settings
+                                <span class="dropdown_icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none">
+                                        <path d="M16.9316 20.2781L12.8796 16.2506C12.8293 16.2005 12.7859 16.1457 12.7495 16.0862C12.713 16.0269 12.6948 15.9581 12.6948 15.8798C12.6948 15.7235 12.7428 15.5908 12.8388 15.4817C12.9348 15.3726 13.0613 15.318 13.2183 15.318H21.7816C21.9387 15.318 22.0652 15.374 22.1612 15.4861C22.2572 15.5979 22.3052 15.7283 22.3052 15.8773C22.3052 15.9147 22.2434 16.0393 22.12 16.251L18.087 20.2785C18.0048 20.3607 17.913 20.426 17.8117 20.4747C17.7103 20.5233 17.6064 20.5476 17.5 20.5476C17.3935 20.5476 17.2896 20.5233 17.1883 20.4747C17.0869 20.426 17.0013 20.3605 16.9316 20.2781Z" fill="#5F6368"/>
+                                    </svg>
+                                </span>
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li data-bs-dismiss="offcanvas" aria-label="Close" routerLink="/account/profile" [queryParams]="{'forget': 'password'}">Change Password</li>
+                                    <li data-bs-dismiss="offcanvas" aria-label="Close" class="pointer"  routerLink="/account/profile" [queryParams]="{'account': 'delete'}">Account Delete Request</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li data-bs-dismiss="offcanvas" aria-label="Close" routerLink="/account/viewdetails">
+                <span class="ps-2">Buying Leads</span>
+            </li>
+            <li data-bs-dismiss="offcanvas" aria-label="Close" routerLink="/account/messenger">
+                <span class="ps-2">Messages</span>
+            </li>
+            <li data-bs-dismiss="offcanvas" aria-label="Close" routerLink="/account/notifications">
+              <span class="ps-2">Notifications</span>
+            </li>
+            <li data-bs-dismiss="offcanvas" aria-label="Close" routerLink="/wishlist">
+              <span class="ps-2">Wishlist</span>
+            </li>
+        </ul>
+    </div>
+</div>

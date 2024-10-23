@@ -1,0 +1,267 @@
+<section class="v3_breadcrumb">
+  <div class="main-container">
+    <ul class="list">
+      <li>
+        <a routerLink="/">Home</a>
+      </li>
+      @for (category of categoryHierarchy; track category.cat_id) {
+      <li (click)="navToCat(category.cat_id, category.cat_name)" class="active pointer">
+        {{category.cat_name}}
+      </li>
+      }
+    </ul>
+  </div>
+</section>
+
+<section class="product_listing smb_space">
+  
+<div class="main-container">
+
+  <ul class="main_tabs">
+    <li (click)="showProductsFn('product')"  [ngClass]="{'active' : showProducts}">Products</li>
+    <li (click)="showProductsFn('manufacture')" [ngClass]="{'active' : !showProducts}">Suppliers</li>
+  </ul>
+  
+  
+  <div *ngIf="!hideChips" class="hometabs">
+    <mat-chip-listbox>
+      <mat-chip-option *ngFor="let chip of chips" [ngClass]="{'selected': chip.id == selectedChip}"
+        (click)="changeChip(chip)">
+        {{chip.name}}
+      </mat-chip-option>
+    </mat-chip-listbox>
+  </div>
+  
+  <!-- <div class="norecords" *ngIf="checkurl">Entered Wrong Products ID</div> -->
+
+  <div>
+    <!-- <app-media-card [category_id]="category_id"></app-media-card> -->
+    <!-- <div class="norecords" *ngIf="noDataFound">No Products Found</div> -->
+    <section *ngIf="!noDataFound" class="mobileonly">
+      <!-- <a class="filterIcon" (click)="filterIconfn()"><mat-icon>settings</mat-icon></a> -->
+      <button class="grey_stroked_btn" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#filterMenu" aria-controls="filterMenu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
+            <path d="M9.4822 15.375C9.37582 15.375 9.28682 15.3391 9.2152 15.2672C9.14357 15.1953 9.10776 15.1063 9.10776 15V12C9.10776 11.8938 9.14376 11.8047 9.21576 11.7328C9.28776 11.6609 9.37695 11.625 9.48332 11.625C9.5897 11.625 9.6787 11.6609 9.75032 11.7328C9.82195 11.8047 9.85776 11.8938 9.85776 12V13.125H15.4828C15.589 13.125 15.6781 13.161 15.7499 13.233C15.8218 13.305 15.8578 13.3942 15.8578 13.5006C15.8578 13.6069 15.8218 13.6959 15.7499 13.7676C15.6781 13.8392 15.589 13.875 15.4828 13.875H9.85776V15C9.85776 15.1063 9.82176 15.1953 9.74976 15.2672C9.67776 15.3391 9.58857 15.375 9.4822 15.375ZM3.48276 13.875C3.37651 13.875 3.28745 13.839 3.21557 13.767C3.1437 13.695 3.10776 13.6058 3.10776 13.4994C3.10776 13.3931 3.1437 13.3041 3.21557 13.2324C3.28745 13.1608 3.37651 13.125 3.48276 13.125H6.48276C6.58901 13.125 6.67807 13.161 6.74995 13.233C6.82182 13.305 6.85776 13.3942 6.85776 13.5006C6.85776 13.6069 6.82182 13.6959 6.74995 13.7676C6.67807 13.8392 6.58901 13.875 6.48276 13.875H3.48276ZM6.4822 10.875C6.37582 10.875 6.28682 10.8391 6.2152 10.7672C6.14357 10.6953 6.10776 10.6063 6.10776 10.5V9.375H3.48276C3.37651 9.375 3.28745 9.339 3.21557 9.267C3.1437 9.195 3.10776 9.10581 3.10776 8.99944C3.10776 8.89306 3.1437 8.80406 3.21557 8.73244C3.28745 8.66081 3.37651 8.625 3.48276 8.625H6.10776V7.5C6.10776 7.39375 6.14376 7.30469 6.21576 7.23281C6.28776 7.16094 6.37695 7.125 6.48332 7.125C6.5897 7.125 6.67869 7.16094 6.75032 7.23281C6.82194 7.30469 6.85776 7.39375 6.85776 7.5V10.5C6.85776 10.6063 6.82176 10.6953 6.74976 10.7672C6.67776 10.8391 6.58857 10.875 6.4822 10.875ZM9.48276 9.375C9.37651 9.375 9.28745 9.339 9.21557 9.267C9.1437 9.195 9.10776 9.10581 9.10776 8.99944C9.10776 8.89306 9.1437 8.80406 9.21557 8.73244C9.28745 8.66081 9.37651 8.625 9.48276 8.625H15.4828C15.589 8.625 15.6781 8.661 15.7499 8.733C15.8218 8.805 15.8578 8.89419 15.8578 9.00056C15.8578 9.10694 15.8218 9.19594 15.7499 9.26756C15.6781 9.33919 15.589 9.375 15.4828 9.375H9.48276ZM12.4822 6.375C12.3758 6.375 12.2868 6.33906 12.2152 6.26719C12.1436 6.19531 12.1078 6.10625 12.1078 6V3C12.1078 2.89375 12.1438 2.80469 12.2158 2.73281C12.2878 2.66094 12.3769 2.625 12.4833 2.625C12.5897 2.625 12.6787 2.66094 12.7503 2.73281C12.8219 2.80469 12.8578 2.89375 12.8578 3V4.125H15.4828C15.589 4.125 15.6781 4.161 15.7499 4.233C15.8218 4.305 15.8578 4.39419 15.8578 4.50056C15.8578 4.60694 15.8218 4.69594 15.7499 4.76756C15.6781 4.83919 15.589 4.875 15.4828 4.875H12.8578V6C12.8578 6.10625 12.8218 6.19531 12.7498 6.26719C12.6778 6.33906 12.5886 6.375 12.4822 6.375ZM3.48276 4.875C3.37651 4.875 3.28745 4.839 3.21557 4.767C3.1437 4.695 3.10776 4.60581 3.10776 4.49944C3.10776 4.39306 3.1437 4.30406 3.21557 4.23244C3.28745 4.16081 3.37651 4.125 3.48276 4.125H9.48276C9.58901 4.125 9.67807 4.161 9.74995 4.233C9.82182 4.305 9.85776 4.39419 9.85776 4.50056C9.85776 4.60694 9.82182 4.69594 9.74995 4.76756C9.67807 4.83919 9.58901 4.875 9.48276 4.875H3.48276Z" fill="#666666"/>
+          </svg>
+          <span>Filter</span>
+      </button>
+    </section>
+
+    <section  *ngIf="!noDataFound" class="searchContainer" [ngClass]="mobilefilterOpen ? 'mobilefilterOpen' : ''">
+      <section class="fliterContainer">
+        <section class="mobilefilterheading">
+          <span><a (click)="backto()"><mat-icon>keyboard_backspace</mat-icon></a>Filter</span>
+          <ng-container *ngIf="!filterloader && !noDataFound">
+            <button mat-button class="clearfilter" *ngIf="checkedData.length" (click)="clearFilters()">
+              Clear all Filters
+            </button>
+          </ng-container>
+        </section>
+        <!-- @if (!filterloader) { -->
+          <app-filter [resultsPage]="false"  [filterData]="filterData" [category_id]="category_id" [class.hidden]="!showProducts" 
+            (filteredCheckData)="getFilteredData($event)"  (categoryChanged)="getCategoryProducts($event)"
+          >
+          </app-filter>
+        <!-- } -->
+        <section *ngIf="checkedData.length" class="filtercount">
+          <span>Selected {{ checkedData.length }}</span>
+          <button mat-button (click)="backto()">Apply</button>
+        </section>
+        <ng-container *ngIf="filterloader && !noDataFound">
+          <section class="smart text-box-filter" *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7]"></section>
+        </ng-container>
+      </section>
+
+      
+      <section class="data-container product_listing">
+        <section class="displayfilters" *ngIf="!loader && checkedData.length > 0">
+            <mat-chip-listbox>
+              <mat-chip-option (click)="clearFilter(check)" *ngFor="let check of (showAllFilter ? checkedData : checkedData.slice(0,2))">
+                {{ check.name }}
+                <img src="../../assets/svg/cancel-icon.svg" alt="" />
+              </mat-chip-option>
+              @if(!showAllFilter){
+              <mat-chip-option class="border-0">
+                <button class="underline_btn pe-3" *ngIf="checkedData.length > 2" (click)="clickAllFilters()">
+                  +{{ checkedData.length - 2 }}
+                </button>
+              </mat-chip-option>
+              }
+              <mat-chip-option *ngIf="checkedData.length" class="clearfilter" (click)="clearFilters()">
+                Clear all Filters
+              </mat-chip-option>
+            </mat-chip-listbox>
+        </section>
+
+        @if (showProducts) {
+           <!-- list & grid view buttons start -->
+          <div class="filter_view">
+            <!-- list icon -->
+            <span (click)="changeView('list_view')" [ngClass]="{ 'list_active' : viewClass === 'list_view' }">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 30 30" fill="none">
+                    <path d="M16.25 6.25H26.25M16.25 11.25H22.5M16.25 18.75H26.25M16.25 23.75H22.5M3.75 6.25C3.75 5.91848 3.8817 5.60054 4.11612 5.36612C4.35054 5.1317 4.66848 5 5 5H10C10.3315 5 10.6495 5.1317 10.8839 5.36612C11.1183 5.60054 11.25 5.91848 11.25 6.25V11.25C11.25 11.5815 11.1183 11.8995 10.8839 12.1339C10.6495 12.3683 10.3315 12.5 10 12.5H5C4.66848 12.5 4.35054 12.3683 4.11612 12.1339C3.8817 11.8995 3.75 11.5815 3.75 11.25V6.25ZM3.75 18.75C3.75 18.4185 3.8817 18.1005 4.11612 17.8661C4.35054 17.6317 4.66848 17.5 5 17.5H10C10.3315 17.5 10.6495 17.6317 10.8839 17.8661C11.1183 18.1005 11.25 18.4185 11.25 18.75V23.75C11.25 24.0815 11.1183 24.3995 10.8839 24.6339C10.6495 24.8683 10.3315 25 10 25H5C4.66848 25 4.35054 24.8683 4.11612 24.6339C3.8817 24.3995 3.75 24.0815 3.75 23.75V18.75Z" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+
+            <!-- grid icon -->
+            <span (click)="changeView('grid_view')" [ngClass]="{ 'grid_active' : viewClass === 'grid_view' }">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 30 30" fill="none">
+                    <path d="M11.25 16.5C11.8467 16.5 12.419 16.7371 12.841 17.159C13.2629 17.581 13.5 18.1533 13.5 18.75V24.75C13.5 25.3467 13.2629 25.919 12.841 26.341C12.419 26.7629 11.8467 27 11.25 27H5.25C4.65326 27 4.08097 26.7629 3.65901 26.341C3.23705 25.919 3 25.3467 3 24.75V18.75C3 18.1533 3.23705 17.581 3.65901 17.159C4.08097 16.7371 4.65326 16.5 5.25 16.5H11.25ZM24.75 16.5C25.3467 16.5 25.919 16.7371 26.341 17.159C26.7629 17.581 27 18.1533 27 18.75V24.75C27 25.3467 26.7629 25.919 26.341 26.341C25.919 26.7629 25.3467 27 24.75 27H18.75C18.1533 27 17.581 26.7629 17.159 26.341C16.7371 25.919 16.5 25.3467 16.5 24.75V18.75C16.5 18.1533 16.7371 17.581 17.159 17.159C17.581 16.7371 18.1533 16.5 18.75 16.5H24.75ZM11.25 18H5.25C5.05109 18 4.86032 18.079 4.71967 18.2197C4.57902 18.3603 4.5 18.5511 4.5 18.75V24.75C4.5 24.9489 4.57902 25.1397 4.71967 25.2803C4.86032 25.421 5.05109 25.5 5.25 25.5H11.25C11.4489 25.5 11.6397 25.421 11.7803 25.2803C11.921 25.1397 12 24.9489 12 24.75V18.75C12 18.5511 11.921 18.3603 11.7803 18.2197C11.6397 18.079 11.4489 18 11.25 18ZM24.75 18H18.75C18.5511 18 18.3603 18.079 18.2197 18.2197C18.079 18.3603 18 18.5511 18 18.75V24.75C18 24.9489 18.079 25.1397 18.2197 25.2803C18.3603 25.421 18.5511 25.5 18.75 25.5H24.75C24.9489 25.5 25.1397 25.421 25.2803 25.2803C25.421 25.1397 25.5 24.9489 25.5 24.75V18.75C25.5 18.5511 25.421 18.3603 25.2803 18.2197C25.1397 18.079 24.9489 18 24.75 18ZM11.25 3C11.8467 3 12.419 3.23705 12.841 3.65901C13.2629 4.08097 13.5 4.65326 13.5 5.25V11.25C13.5 11.8467 13.2629 12.419 12.841 12.841C12.419 13.2629 11.8467 13.5 11.25 13.5H5.25C4.65326 13.5 4.08097 13.2629 3.65901 12.841C3.23705 12.419 3 11.8467 3 11.25V5.25C3 4.65326 3.23705 4.08097 3.65901 3.65901C4.08097 3.23705 4.65326 3 5.25 3H11.25ZM24.75 3C25.3467 3 25.919 3.23705 26.341 3.65901C26.7629 4.08097 27 4.65326 27 5.25V11.25C27 11.8467 26.7629 12.419 26.341 12.841C25.919 13.2629 25.3467 13.5 24.75 13.5H18.75C18.1533 13.5 17.581 13.2629 17.159 12.841C16.7371 12.419 16.5 11.8467 16.5 11.25V5.25C16.5 4.65326 16.7371 4.08097 17.159 3.65901C17.581 3.23705 18.1533 3 18.75 3H24.75ZM11.25 4.5H5.25C5.05109 4.5 4.86032 4.57902 4.71967 4.71967C4.57902 4.86032 4.5 5.05109 4.5 5.25V11.25C4.5 11.4489 4.57902 11.6397 4.71967 11.7803C4.86032 11.921 5.05109 12 5.25 12H11.25C11.4489 12 11.6397 11.921 11.7803 11.7803C11.921 11.6397 12 11.4489 12 11.25V5.25C12 5.05109 11.921 4.86032 11.7803 4.71967C11.6397 4.57902 11.4489 4.5 11.25 4.5ZM24.75 4.5H18.75C18.5511 4.5 18.3603 4.57902 18.2197 4.71967C18.079 4.86032 18 5.05109 18 5.25V11.25C18 11.4489 18.079 11.6397 18.2197 11.7803C18.3603 11.921 18.5511 12 18.75 12H24.75C24.9489 12 25.1397 11.921 25.2803 11.7803C25.421 11.6397 25.5 11.4489 25.5 11.25V5.25C25.5 5.05109 25.421 4.86032 25.2803 4.71967C25.1397 4.57902 24.9489 4.5 24.75 4.5Z" fill="#CCCCCC"/>
+                </svg>
+            </span>
+          </div>
+          <!-- list & grid view buttons stop -->
+
+          <div class="row mt-5" *ngIf="!loader && collection.length > 0" [ngClass]="{ listwrap: itemType == 'list' }">
+            <div [ngClass]="{
+                'col-md-12 col-sm-12 list_view': viewClass === 'list_view',
+                'col-sm-4 grid_view': viewClass === 'grid_view'
+              }" *ngFor="let item of collection | paginate: { itemsPerPage: 12, currentPage: p, totalItems: totalCount }">
+                <div class="list_details">
+                    <div class="product_details">
+                        <div (click)="goTo(item.product_id, item.product_name)" class="image pointer">
+                          <img [src]="item.product_image"/>
+                        </div>
+                        <div class="details pointer">
+                            <div (click)="goTo(item.product_id, item.product_name)" class="w-100">
+                              <h2 class="product_name">{{ item.product_name }}</h2>
+                              <p><b>{{ item.product_price }}</b> /piece</p>
+                              <p class="text_red fw_500">{{ item.product_quantity }} {{ item.product_unit_type }} (Min,order)</p>
+          
+                              <div class="company">
+                                  <div class="name fw_500">{{ item.company_name }}</div>
+                              </div>
+                            </div>
+
+                            <div class="actions">
+                                <app-chat-now [class]="'product_details_btn'" [sellerDetails]="getSellerDetails(item)"></app-chat-now>
+                                <app-contactsupplier [btnstyle]="true" [sellerDetails]="getSellerDetails(item)" [class]="'product_details_btn'"></app-contactsupplier>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section *ngIf="totalCount > 12" class="paginator">
+              <pagination-controls [maxSize]="5" (pageChange)="onPageChange2($event)"></pagination-controls>    
+            </section>
+          </div>
+
+        <!-- <section class="data-container-wrap" *ngIf="!loader && collection.length > 0"
+          [ngClass]="{ listwrap: itemType == 'list' }">
+          <ng-container
+            *ngFor="let item of collection | paginate: { itemsPerPage: 12, currentPage: p, totalItems: totalCount }">
+            <section class="card-section">
+              <app-product-card [styleClass]="'smallcard'" [item]="item" [itemType]="itemType" [description]="true"
+                [discountPrice]="true" [companyDetails]="true" [actions]="true" [qty]="true" [linkTo]="'productlist'"
+                [showFav]="true"></app-product-card>
+
+              <ng-container *ngIf="item && item?.more_products.length > 0 && itemType == 'list'">
+                <ul class="productimages">
+                  <li *ngFor="let pimage of item?.more_products">
+                    <div>
+                      <img class="products-cards-images" mat-card-image [src]="pimage.product_image" />
+                    </div>
+                  </li>
+                </ul>
+                <p class="sponsor-text">Top sponsor listing</p>
+              </ng-container>
+            </section>
+          </ng-container>
+        </section> -->
+        <!-- <section *ngIf="!loader && collection.length > 1" class="paginator">
+          <pagination-controls [maxSize]="5" (pageChange)="onPageChange2($event)"></pagination-controls>
+        </section> -->
+        <section class="data-container-wrap" *ngIf="loader">
+          <section class="card-section" *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8]">
+            <section class="manu-loader">
+              <section class="loader-desc">
+                <section class="smart box-1"></section>
+                <section class="smart text-box1"></section>
+                <section class="smart text-box2"></section>
+              </section>
+            </section>
+          </section>
+        </section>
+        }
+        @else {
+        <!-- Suppliers code -->
+        @if (!loader) {
+        <section class="data-container-wrap supplier_listing" *ngIf="collection.length > 0 && msg == 'Company Data found'">
+          <ng-container *ngFor="let item of collection | paginate: { itemsPerPage: 18, currentPage: p, totalItems: totalCount }">
+            <section class="mfg-section">
+            <app-mfg-list [showProductImages]="false" [item]="item"></app-mfg-list>
+            </section>
+          </ng-container>
+          <section *ngIf="collection.length > 18" class="paginator">
+            <pagination-controls [maxSize]="5" (pageChange)="onPageChange2($event)"></pagination-controls>    
+          </section>
+        </section>
+        }
+        @else {
+          <!-- loader start -->
+          <section class="loader-wrap">
+            <section class="manu-loader" *ngFor="let i of [1, 2, 3, 4]">
+                <section class="loader-img">
+                    <section class="text-img"></section>
+                </section>
+                <section class="loader-desc">
+                    <section *ngFor="let i of [1, 2, 3, 4, 5]" [class]="'smart text-' + i"></section>
+                </section>
+
+                <section class="loader-product">
+                    <section *ngFor="let i of [0, 1, 2]" class="text-img-small"></section>
+                </section>
+            </section>
+          </section>
+          <!-- loader end -->
+        }
+        }
+      </section>
+
+    </section>
+
+    <!-- If no products found -->
+    <section *ngIf="noDataFound && showProducts" class="no_products">
+      <h1>No Products found for {{categoryHierarchy[categoryHierarchy.length - 1].cat_name}} </h1>
+      <!-- <p>Try Checking your spelling or use ore general terms</p> -->
+      <p>Check each product page for other buying options</p>
+
+      <!-- Recommendations -->
+      <section *ngIf="recommendedProducts.length > 0" class="likesec">
+        <h2 class="smallTitle">Recommended Products</h2>
+        <app-multi-carousel [screenName]="'likedetails'" [catData]="recommendedProducts"></app-multi-carousel>
+      </section>
+    </section>
+
+    <!-- If no suppliers found -->
+    <section *ngIf="noDataFound && !showProducts" class="no_products">
+      <h1>No Suppliers found for {{categoryHierarchy[categoryHierarchy.length - 1].cat_name}} </h1>
+      <p>Check each product page for other buying options</p>
+    </section>
+  </div>
+</div>
+</section>
+
+
+
+<!-- Mobile Filter Menu -->
+<div class="offcanvas offcanvas-start mobile_menu filterMobile" tabindex="-1" id="filterMenu"
+    aria-labelledby="filterMenuLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Filter</h5>
+        <div>
+          <span class="select_count">2 Selected</span>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+    </div>
+    <div class="offcanvas-body">
+    <!-- @if (!filterloader) { -->
+    <app-filter [resultsPage]="false"  [filterData]="filterData" [category_id]="category_id" [class.hidden]="!showProducts" 
+    (filteredCheckData)="getFilteredData($event)"  (categoryChanged)="getCategoryProducts($event)"
+    >
+    </app-filter>
+    <!-- } -->
+       
+    </div>
+</div>

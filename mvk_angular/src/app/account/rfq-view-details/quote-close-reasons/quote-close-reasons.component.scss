@@ -1,0 +1,36 @@
+.closedailogpopup {
+    padding: 20px;
+  }
+  .closeList {
+  }
+  .poptitle {
+    background: #f8f8f8;
+    color: #000;
+    padding: 10px 20px;
+    & a {
+      float: right;
+    }
+  }
+  
+  .modal_header{
+    padding: 10px;
+    border-bottom: 1px solid #D9D9D9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    h3{
+      margin: 0;
+      color: #000;
+      font-weight: 500;
+      font-size: 18px;
+    }
+  }
+
+  .modal_body{
+    padding: 20px;
+  }
+
+  .icon_close img{
+    width: 25px;
+  }

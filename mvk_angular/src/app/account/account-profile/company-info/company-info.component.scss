@@ -1,0 +1,84 @@
+
+.col-lg-12.header-form
+{
+    padding-bottom: 15px;
+    border-bottom: 1px solid #d9d9d9;
+    margin-bottom: 15px;
+    margin-top: 20px;
+& h3 
+{
+    margin-bottom: 0px;
+    display: inline;
+    font-weight: 500;
+    font-size: 20px;
+    font-family: inter;
+    color: #0e0e0e;
+    margin-right: 40px;
+}   
+& span
+{
+    color: #545454;
+    font-size: 14px;
+    font-family: inter;
+}
+}
+
+.main-form
+{
+& label 
+{
+    font-size: 14px;
+    font-family: inter;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 10px;
+
+}   
+}
+.business-type-fields
+{
+& li.list-group-item {
+    width: 100%;
+    border: none;
+    padding-left: 0px;
+& label 
+{
+    color: #333333;
+    font-weight: normal;
+    font-family: inter;
+    margin-left: 10px;
+}   
+} 
+}
+
+
+.row.main-form
+{
+& 
+::ng-deep .mat-mdc-text-field-wrapper
+{
+    // border: solid 1px #b0b0b0 ;
+    background-color: #fff;
+    border-radius: 4px !important;
+    outline: 1px solid #b0b0b0;
+    margin-bottom: 20px;
+    box-shadow: none;
+
+}
+& ::ng-deep mat-label {
+    color: red;
+    font-size: 14px;
+    color: #545454;
+    font-family: 'Inter';
+}
+& ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+    border-bottom-color: white;
+}
+
+}
+
+.close-btn {
+    margin-left: 15px;
+}
+
+

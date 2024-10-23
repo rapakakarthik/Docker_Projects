@@ -1,0 +1,71 @@
+<section class="signup_popup">
+    <!-- <a class="popclose" (click)="close()"><mat-icon>close</mat-icon></a> -->
+    <section class="innersec step1 mobilesectionsignup">
+    
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <img class="signup_img" src="/assets/images/popup1.png"/>
+                <h1>Welcome To MyVerkoper!</h1>
+                <h2>Complete your profile now to purchase from leading brands and get a chance to connect with leading sellers for your exclusive requirements</h2>
+            </div>
+        </div>
+    
+        <!--Step 2 user name and email section -->
+        <ng-container *ngIf="currentSlide == 2">
+            <!-- User Name -->
+            <ng-container>
+                <h3>Tell Us About Yourself</h3>
+                <p>What should we call you?</p>
+                <section>
+                    <mat-form-field  appearance="outline" class="smallfiled w-100">
+                        <input appRejectSpecialCharacters matInput  [formControl]="user_name" placeholder="Name">
+                    </mat-form-field>
+                  <div *ngIf="nameRequired" class="error_msg">Name is required</div> 
+                </section>
+            </ng-container>
+            <!-- User Email -->
+            <ng-container *ngIf="showEmail">
+              <h3 class="formTitles mt-4 mb-4">Email Id</h3>
+                <section>
+                <app-email
+                    [userName]="user_name.value"
+                    [mobileNumber]="mobileNumber"
+                    (next)="emailUpdated()"
+                    (emitError)="nameError($event)"
+                ></app-email>
+                <p [style.color]="'red'" *ngIf="showEmailError">Email must be Verified</p>
+                </section>
+            </ng-container>
+        </ng-container>
+        
+        <!--Step 3 Business Details section -->
+        <ng-container *ngIf="currentSlide == 3">
+            <!-- School name and pincode -->
+            <ng-container *ngIf="signupStepsData[1]">
+                <form [formGroup]="form1" (ngSubmit)="submitStep3(form1.value)">
+                    <h3 class="formTitles">{{ signupStepsData[1].step_title }}</h3>
+                    <p class="formslogan">{{ signupStepsData[1].step_description }}</p>
+                    <section>
+                        <mat-form-field appearance="outline" class="smallfiled w-100">
+                            <input appRejectSpecialCharacters matInput formControlName="school_name" placeholder="School Name">
+                        </mat-form-field>
+                    </section>
+                    <section style="width: 65%">
+                        <h3 class="formTitles">{{ signupStepsData[3].step_title }}</h3>
+                        <p class="formslogan">{{ signupStepsData[3].step_description }}</p>
+                        <mat-form-field appearance="outline" class="smallfiled w-100">
+                            <input appAllowNumbersOnly matInput type="text" maxlength="6" (input)="pincodeVerify()" pattern="[0-9]{6}" formControlName="pincode"
+                                placeholder="Pincode">
+                        </mat-form-field>
+                        <p [style.color]="isPincodeValid ? 'green' : 'red'">{{pinResponse}}</p>
+                    </section>
+                    <button [disabled]="!form1.valid || !isPincodeValid" class="primary_btn py-2">Submit</button>
+                    <!-- <div class="d-flex justify-content-between">
+                        <button mat-raised-button class="primaryBtn bigbtn" [disabled]="!form1.valid || !isPincodeValid"
+                            type="submit" color="primary">Next</button>
+                    </div> -->
+                </form>
+            </ng-container>
+        </ng-container>
+    </section>
+</section>

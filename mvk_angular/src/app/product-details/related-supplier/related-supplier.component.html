@@ -1,0 +1,31 @@
+<section *ngIf="suppliersFound" class="main-container">
+  <h1 class="mainTitle mt-4">
+    Related Products and Suppliers
+  </h1>
+  <section class="product_details sm_space">
+    <div class="row" *ngFor="let supplier of otherSuppliers">
+      <div (click)="goToProduct(supplier.product_name, supplier.product_id)" class="col-lg-2 col-md-3 col-3 pointer">
+        <div class="product_img">
+          <img [src]="supplier.image" />
+        </div>
+      </div>
+      <div (click)="goToProduct(supplier.product_name, supplier.product_id)" class="col-lg-7 col-md-9 col-9 pointer">
+        <div class="product_desc">
+          <h1 class="smallTitle">{{supplier.product_name}}</h1>
+          <p><b>Lead Time:</b> 2 days</p>
+          <p class="price">₹{{supplier.product_price}}</p>
+          <p class="company_name">{{supplier.company_name}}</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-12">
+        <div class="product_actions">
+          <app-contactsupplier [btnstyle]="true" [class]="'sec_btn'"
+            [sellerDetails]="getSellerDetails(supplier)"></app-contactsupplier>
+          <button (click)="goToCompany(supplier.company_name, supplier.seller_id)" class="grey_stroked_btn">View Company
+            Profile</button>
+          <app-chat-now [class]="'product_details_btn'" [sellerDetails]="getSellerDetails(supplier)"></app-chat-now>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

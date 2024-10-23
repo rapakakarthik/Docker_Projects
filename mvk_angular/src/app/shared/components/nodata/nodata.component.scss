@@ -1,0 +1,15 @@
+.no-data-mention  {
+
+    & img {
+         width: 150px !important;
+         margin: auto;
+         display: block;
+         margin-top: 10px;
+     }
+    & p {
+         /* margin: auto; */
+         text-align: center;
+         color: rgba(0, 0, 0, 0.6);
+     }
+   
+ }

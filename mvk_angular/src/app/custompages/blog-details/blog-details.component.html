@@ -1,0 +1,194 @@
+<app-header [search]="false"></app-header>
+
+@if (false) {
+<main *ngIf="blogDetails"  class="container">
+  <section class="main-blog-banner">
+   <section class="breadlist"><a class="next-breadcrumb-text" routerLink="/blog">Business Blogs</a> <a> <mat-icon class="icons">chevron_right</mat-icon> {{blogDetails.blog_title}}</a></section>
+    <div class="heading-blog">
+      <p class="heading-p">
+        <span> {{blogDetails.created_at.slice(0,10)}} </span>
+      </p>
+      <h1> {{blogDetails.blog_title}} </h1>
+      <!-- [include]="['copy', 'facebook', 'email', 'messenger', 'mix', 'line', 'linkedin', 'pinterest', 'print', 'reddit', 'sms', 'telegram', 'tumblr', 'twitter', 'viber', 'vk', 'xing', 'whatsapp']" -->
+      <share-buttons theme="modern-dark"
+        [include]="['facebook', 'linkedin', 'twitter', 'whatsapp', 'copy']"
+        [showIcon]="true"
+        [showText]="false"
+        [description]="blogDetails.blog_title"
+        class="pt-5">
+      </share-buttons>
+      <!-- twitterAccount="rodrigokamada" -->
+      <section class="discription">
+        <div class="heading-description">
+          {{blogDetails.blog_sub_title}}
+        </div>
+        <!-- <div class="social-media-icons">
+          <ul class="list-group">
+            <li><i class="fa fa-twitter" aria-hidden="true"></i> Tweet</li>
+            <li><i class="fa fa-linkedin" aria-hidden="true"></i> Link</li>
+            <li><i class="fa fa-facebook" aria-hidden="true"></i> Post</li>
+          </ul>
+        </div> -->
+      </section>
+      <div class="image-blogg">
+        <img
+          [src]="blogDetails.blog_image"
+        />
+      </div>
+      <section [innerHTML]="dynamicHtmlContent" class="heading-p hed-img blog-description">
+      
+      </section>
+    </div>
+    <!-- Comment Section -->
+    <div class="container contact-section">
+      <div class="row">
+        <div class="col-lg-12">
+          <h2 class="contact-section">Please Leave a Comment:</h2>
+          <form [formGroup]="commentForm" (ngSubmit)="contactUs(commentForm.value)">
+          <mat-form-field appearance="outline" class="w-50 middlefiled">
+            <mat-label> Full Name </mat-label>
+            <input type="text" formControlName="username" matInput placeholder="Full Name" />
+          </mat-form-field>
+          <section class="w-50 input-fileds-email">
+            <mat-form-field appearance="outline" class="w-100 middlefiled">
+              <mat-label> Email Address </mat-label>
+              <input type="text" formControlName="email" matInput placeholder="Email Address" />
+            </mat-form-field>
+            <mat-error *ngIf="Email?.hasError('invalidEmail') && Email?.value?.length > 5 ">
+              Please enter a valid email address.
+            </mat-error>
+          </section>
+          <!-- <section class="w-50 input-fileds-phone">
+            <mat-form-field appearance="outline" class="w-100 middlefiled">
+              <mat-label> Phone Number </mat-label>
+              <input type="number" formControlName="phone" matInput placeholder="Phone Number" />
+            </mat-form-field>
+            <mat-error *ngIf="Phone?.hasError('pattern')">
+              Please enter a valid Phone Number.
+            </mat-error>
+          </section> -->
+        
+          <mat-form-field appearance="outline" class="w-100 middlefiled">
+            <mat-label>Add a Comment</mat-label>
+            <textarea rows="6" formControlName="comment" matInput></textarea>
+          </mat-form-field>
+          <button *ngIf="submitBtn; else loader" [disabled]="commentForm.invalid" type="submit" mat-raised-button color="primary" class="contact-req">
+            Add a Comment
+          </button>
+          <ng-template #loader>
+            <button type="button" mat-raised-button color="primary" class="contact-req ">
+              <div class="spinner-border text-primary"></div>
+            </button>
+          </ng-template>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recommended Blogs -->
+  <section *ngIf="recommendBlogs && recommendBlogs.length > 0"  class="recomadation-section">
+    <h1>Up next</h1>
+
+    <section class="main-card-section">
+      <div class="card" *ngFor="let blog of recommendBlogs">
+        <a [routerLink]="['../',blog.url_slug]">
+        <img
+          [src]="blog.blog_image"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{blog.blog_title}}</h5>
+          <p class="card-text">{{blog.blog_sub_title}}</p>
+        </div>
+      </a>
+      </div>
+    </section>
+  </section>
+</main>
+}
+
+@if(!blogNotFound) {
+<section *ngIf="blogDetails" class="blog_details sm_space">
+  <div class="main-container">
+    <div class="row justify-content-center">
+      <div class="col-1">
+        <div class="blog_nav">
+          <ul>
+            @if (tableOfContent.length > 0) {
+            <li (click)="openSidebar()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16" fill="none">
+                <path d="M1.5 6.5C0.67 6.5 0 7.17 0 8C0 8.83 0.67 9.5 1.5 9.5C2.33 9.5 3 8.83 3 8C3 7.17 2.33 6.5 1.5 6.5ZM1.5 0.5C0.67 0.5 0 1.17 0 2C0 2.83 0.67 3.5 1.5 3.5C2.33 3.5 3 2.83 3 2C3 1.17 2.33 0.5 1.5 0.5ZM1.5 12.5C0.67 12.5 0 13.18 0 14C0 14.82 0.68 15.5 1.5 15.5C2.32 15.5 3 14.82 3 14C3 13.18 2.33 12.5 1.5 12.5ZM5.5 15H17.5C18.05 15 18.5 14.55 18.5 14C18.5 13.45 18.05 13 17.5 13H5.5C4.95 13 4.5 13.45 4.5 14C4.5 14.55 4.95 15 5.5 15ZM5.5 9H17.5C18.05 9 18.5 8.55 18.5 8C18.5 7.45 18.05 7 17.5 7H5.5C4.95 7 4.5 7.45 4.5 8C4.5 8.55 4.95 9 5.5 9ZM4.5 2C4.5 2.55 4.95 3 5.5 3H17.5C18.05 3 18.5 2.55 18.5 2C18.5 1.45 18.05 1 17.5 1H5.5C4.95 1 4.5 1.45 4.5 2Z" fill="#017EB9"/>
+              </svg>
+            </li>
+            }
+            <li (click)="shareToFb()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                <path d="M22.9166 12.5C22.9166 6.75 18.2499 2.08334 12.4999 2.08334C6.74992 2.08334 2.08325 6.75 2.08325 12.5C2.08325 17.5417 5.66659 21.7396 10.4166 22.7083V15.625H8.33325V12.5H10.4166V9.89584C10.4166 7.88542 12.052 6.25 14.0624 6.25H16.6666V9.375H14.5833C14.0103 9.375 13.5416 9.84375 13.5416 10.4167V12.5H16.6666V15.625H13.5416V22.8646C18.802 22.3438 22.9166 17.9063 22.9166 12.5Z" fill="#017EB9"/>
+              </svg>
+            </li>
+            <li (click)="shareOnWhatsApp()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                <path d="M19.8438 5.11458C18.8888 4.14992 17.7513 3.38507 16.4976 2.86463C15.2439 2.3442 13.8992 2.0786 12.5417 2.08333C6.85425 2.08333 2.21883 6.71875 2.21883 12.4062C2.21883 14.2292 2.698 16 3.59383 17.5625L2.1355 22.9167L7.60425 21.4792C9.11467 22.3021 10.8126 22.7396 12.5417 22.7396C18.2293 22.7396 22.8647 18.1042 22.8647 12.4167C22.8647 9.65625 21.7918 7.0625 19.8438 5.11458ZM12.5417 20.9896C11.0001 20.9896 9.48967 20.5729 8.16675 19.7917L7.85425 19.6042L4.60425 20.4583L5.46883 17.2917L5.2605 16.9687C4.40398 15.601 3.94919 14.02 3.948 12.4062C3.948 7.67708 7.80217 3.82291 12.5313 3.82291C14.823 3.82291 16.9793 4.71875 18.5938 6.34375C19.3933 7.13954 20.0269 8.0861 20.4578 9.12856C20.8887 10.171 21.1085 11.2887 21.1043 12.4167C21.1251 17.1458 17.2709 20.9896 12.5417 20.9896ZM17.2501 14.5729C16.9897 14.4479 15.7188 13.8229 15.4897 13.7292C15.2501 13.6458 15.0834 13.6042 14.9063 13.8542C14.7293 14.1146 14.2397 14.6979 14.0938 14.8646C13.948 15.0417 13.7917 15.0625 13.5313 14.9271C13.2709 14.8021 12.4376 14.5208 11.4584 13.6458C10.6876 12.9583 10.1772 12.1146 10.0209 11.8542C9.87508 11.5937 10.0001 11.4583 10.1355 11.3229C10.2501 11.2083 10.3959 11.0208 10.5209 10.875C10.6459 10.7292 10.698 10.6146 10.7813 10.4479C10.8647 10.2708 10.823 10.125 10.7605 10C10.698 9.875 10.1772 8.60416 9.96883 8.08333C9.7605 7.58333 9.54175 7.64583 9.3855 7.63541H8.8855C8.70842 7.63541 8.43758 7.69791 8.198 7.95833C7.96883 8.21875 7.30217 8.84375 7.30217 10.1146C7.30217 11.3854 8.22925 12.6146 8.35425 12.7812C8.47925 12.9583 10.1772 15.5625 12.7605 16.6771C13.3751 16.9479 13.8542 17.1042 14.2292 17.2187C14.8438 17.4167 15.4063 17.3854 15.8543 17.3229C16.3543 17.25 17.3855 16.6979 17.5938 16.0937C17.8126 15.4896 17.8126 14.9792 17.7397 14.8646C17.6668 14.75 17.5105 14.6979 17.2501 14.5729Z" fill="#017EB9"/>
+              </svg>
+            </li>
+            <li (click)="shareOnLinkedIn()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="26" viewBox="0 0 25 26" fill="none">
+                <path d="M19.7917 3.25C20.3442 3.25 20.8741 3.46949 21.2648 3.86019C21.6555 4.25089 21.875 4.7808 21.875 5.33333V19.9167C21.875 20.4692 21.6555 20.9991 21.2648 21.3898C20.8741 21.7805 20.3442 22 19.7917 22H5.20833C4.6558 22 4.12589 21.7805 3.73519 21.3898C3.34449 20.9991 3.125 20.4692 3.125 19.9167V5.33333C3.125 4.7808 3.34449 4.25089 3.73519 3.86019C4.12589 3.46949 4.6558 3.25 5.20833 3.25H19.7917ZM19.2708 19.3958V13.875C19.2708 12.9744 18.9131 12.1106 18.2762 11.4738C17.6394 10.8369 16.7756 10.4792 15.875 10.4792C14.9896 10.4792 13.9583 11.0208 13.4583 11.8333V10.6771H10.5521V19.3958H13.4583V14.2604C13.4583 13.4583 14.1042 12.8021 14.9062 12.8021C15.293 12.8021 15.664 12.9557 15.9374 13.2292C16.2109 13.5027 16.3646 13.8736 16.3646 14.2604V19.3958H19.2708ZM7.16667 9.04167C7.6308 9.04167 8.07591 8.85729 8.4041 8.5291C8.73229 8.20091 8.91667 7.7558 8.91667 7.29167C8.91667 6.32292 8.13542 5.53125 7.16667 5.53125C6.69978 5.53125 6.25201 5.71672 5.92186 6.04686C5.59172 6.37701 5.40625 6.82478 5.40625 7.29167C5.40625 8.26042 6.19792 9.04167 7.16667 9.04167ZM8.61458 19.3958V10.6771H5.72917V19.3958H8.61458Z" fill="#017EB9"/>
+              </svg>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-8 col-sm-11 col-11">
+        <h1 class="blog_title">{{blogDetails.blog_title}}</h1>
+        <h2>{{blogDetails.blog_sub_title}}</h2>
+        <div class="d-flex align-items-center justify-content-between py-3">
+          <div class="logo_name">
+            <img src="/assets/images/favicon.ico"/>
+            <p>MyVerkoper Pvt Ltd</p>
+          </div>
+          <p class="text_primary fw_500 m-0">{{blogDetails.created_at.slice(0, 10)}}</p>
+        </div>
+        <img class="blog_img" [src]="blogDetails.blog_image"/>
+        <!-- <h3>Introduction</h3>
+        <p>In the ever-evolving realm of education, where time is of the essence, the importance of procurement optimization for educational institutions cannot be overstated. The procurement process can pose significant challenges, placing a heavy burden on school administrators. Outdated methods, fragmented supplier networks, and a lack of transparency are common obstacles that they frequently encounter. MyVerkoper, the leading Business-to-business marketplace, is spearheading a transformative wave in procurement practices specifically tailored for Indian schools. With our cutting-edge platform, we are revolutionizing the way purchasing is conducted, offering a seamless and streamlined experience for educational institutions. Welcome to an insightful blog that delves into the intricate challenges that educational institutions encounter when it comes to procurement. This article sheds light on the various obstacles schools face and, more importantly, unveils how MyVerkoper is transforming purchasing practices in Indian schools.</p> -->
+        <section class="dynamic_blog" [innerHTML]="dynamicHtmlContent" ></section>
+      </div>
+    </div>
+  </div>
+
+  <!-- side bar for table of content -->
+<div class="blog_sidebar" [ngClass]="{'show' : applyClass}">
+  <div class="blog_sidebar_top">
+    <h1 class="title">Table of Contents</h1>
+    <div class="close">
+      <span (click)="closeSidebar()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <path d="M10.7538 19.4999L19.2462 10.5" stroke="black" stroke-linecap="round"/>
+          <path d="M19.4761 19.3852L10.5911 10.5002" stroke="black" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </div>
+  </div>
+  <ul class="list">
+    @for (table of tableOfContent; track table.id) {
+    <li (click)="scrollToHead(table.id)" class="pointer">{{table.text}}</li>
+    }
+    <!-- <li>Challenges in School Procurement</li> -->
+    <!-- <li>Simplifying Procurement with MyVerkoper</li> -->
+  </ul>
+</div>
+
+</section>
+}
+@else {
+<section class="text-center py-5">
+  <img style="width: 200px;" src="/assets/images/no_blogs.png">
+  <p>Blog Details Not Found</p>
+</section>
+}
+
+<app-footer></app-footer>
+

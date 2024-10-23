@@ -1,0 +1,25 @@
+<ng-container *ngIf="route != '/company'">
+  <a (click)="goTo(type.key)">
+    <mat-card>
+      <div class="product-images-latest">
+        <img class="products-cards-images" mat-card-image [src]="type?.img" />
+      </div>
+      <div class="supplierTitle">{{ type?.type }}</div>
+    </mat-card>
+  </a>
+</ng-container>
+
+<ng-container *ngIf="route == '/company'">
+  <a (click)="goTo(type)">
+    <mat-card>
+      <div class="product-images-latest pr-im-latest">
+        <img
+          class="products-cards-images"
+          mat-card-image
+          [src]="type?.company_images.image"
+        />
+      </div>
+      <div class="supplierTitle">{{ type?.account_name }}</div>
+    </mat-card>
+  </a>
+</ng-container>

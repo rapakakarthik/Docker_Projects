@@ -1,0 +1,564 @@
+.business_type{
+  padding: 10px 0;
+
+  h1{
+    font-size: 18px;
+  }
+
+  .mvk_checkbox{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+
+    label{
+      padding-left: 5px;
+    }
+  }
+
+  .primary_btn{
+    margin-top: 20px;
+  }
+}
+
+.modal_profile_img{
+  height: 100%;
+
+  & img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.header-profile {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding-top: 20px;
+  padding-bottom: 12px;
+
+  .v3_profile_img{
+    position: relative;
+    width: 100px;
+    height: 100px;
+
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0px 0px 2px #cbcbcb;
+    }
+
+    .img_hover{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      background: #22222279;
+      width: 100%;
+      height: 100%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5px;
+      border-radius: 50%;
+      cursor: pointer;
+
+      &.show{
+        display: flex;
+      }
+
+      p{
+        font-size: 10px;
+        margin: 0;
+        line-height: 16px;
+      }
+    }
+
+    .img_options{
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      box-shadow: 0px 0px 4px rgb(220 220 220);
+      padding: 10px;
+      width: 150px;
+      border-radius: 10px;
+      z-index: 1;
+      visibility: hidden;
+
+      ul{
+        margin: 0;
+        padding: 0;
+
+        li{
+          list-style: none;
+          padding: 5px;
+          cursor: pointer;
+
+          &:hover{
+            color: #02A8DF;
+          }
+
+          & .upload{
+            cursor: pointer;
+            
+            input{
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    &:hover .img_hover{
+      display: flex;
+    }
+  }
+  .v3_profile_img:hover .img_options {
+    visibility: visible; /* Show on hover */
+  }
+
+  // .profile-image {
+  //   position: relative;
+  //   width: 100px;
+  //   height: 100px;
+    
+  //   img{
+  //     width: 100%;
+  //     object-fit: cover;
+  //     border-radius: 50%;
+  //     width: 100px;
+  //     height: 100px;
+  //   }
+  
+  //   .upload{
+  //     position: absolute;
+  //     bottom: 0;
+  //     right: 0;
+  
+  //     input {
+  //       display: none;
+  //       // opacity: 0;
+  //       // visibility: hidden;
+  //       // position: absolute;
+  //     }
+  //   }
+  // }
+
+  .name {
+    color: #000000;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: inter !important;
+    margin-bottom: 3px;
+  }
+}
+
+
+section.contact-infrm {
+  display: flex;
+  & div {
+    width: 50%;
+  }
+}
+
+.profile_tabs{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin: 0;
+  padding: 40px 15px 25px;
+
+  li{
+    list-style: none;
+    font-weight: 500;
+    color: #848484;
+    cursor: pointer;
+  }
+
+  li.active{
+    position: relative;
+    color: #017DB9;
+  }
+
+  li.active:before{
+    position: absolute;
+    content: "";
+    background: #017DB9;
+    width: 100%;
+    height: 3px;
+    border-radius: 5px 5px 0 0;
+    bottom: -10px;
+  }
+}
+
+.profile-s {
+  & .country {
+    color: #545454;
+    font-size: 12px;
+    font-family: inter;
+  }
+  & .years {
+    font-size: 11px;
+    color: #2e3231;
+    font-weight: 500;
+    font-family: "Inter";
+    border: solid 1px #e6e6e6;
+    padding: 2px;
+    margin-left: 10px;
+    border-radius: 3px;
+  }
+  & p.text-data-one {
+    margin-bottom: 0px;
+    margin-top: 12px;
+    color: #0172a8;
+    font-family: inter;
+    font-weight: 500;
+    span {
+      color: #000;
+    }
+  }
+  & p.text-data-onet {
+    color: #000000;
+    font-size: 14px;
+    font-family: inter;
+  }
+}
+section.email-contrt {
+  & p {
+    color: #000;
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-family: inter;
+    width: 20ch;
+  }
+}
+section.contact-information-section {
+  margin-top: 15px;
+  padding: 0 12px;
+  & h2 {
+    // border-bottom: 1px solid #d9d9d9;
+    // padding-bottom: 5px;
+    margin-bottom: 0px;
+    font-size: 16px;
+  }
+}
+ul.list-group.contact-list-ul {
+  & li {
+    border: none;
+  }
+}
+.first-row {
+  color: #545454;
+  font-size: 14px;
+  font-family: "Inter";
+}
+.second-row {
+  color: #000000;
+  font-size: 14px;
+  font-family: inter;
+}
+
+.list2 {
+  padding-top: 100px;
+}
+.second-row.breakword {
+  word-break: break-word;
+}
+.editBtn {
+  color: #0172a8 !important;
+  font-size: 14px;
+  font-family: inter;
+  font-weight: 500;
+  & .mat-icon {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+    color: #0172a8;
+  }
+}
+
+.v3_profile{
+  padding: 15px;
+
+  .title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    h2{
+      font-size: 14px;
+    }
+  }
+}
+
+.row_form{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 0px;
+  align-items: flex-start;
+}
+
+.row_field{
+  display: grid;
+  grid-template-columns: 30% 70%;
+  align-items: center;
+  padding-bottom: 20px;
+  gap: 10px;
+}
+
+.form_field{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+}
+
+.field_control{
+  width: 72%;
+  position: relative;
+
+  .form-control{
+    font-size: 14px;
+    padding: 7px 10px;
+
+    &:focus{
+      outline: 0;
+      border-color: #02A8DF;
+      box-shadow: none;
+    }
+  }
+  
+  .icon{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(0%, -50%);
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .row_form{
+    grid-template-columns: 100%;
+  }
+  .update_password .row_field{
+    grid-template-columns: 20% 50%!important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile_tabs{
+    padding-left: 0;
+  }
+
+  .v3_profile{
+    padding: 0;
+  }
+
+  .row_form{
+    grid: none;
+  }
+
+  .row_field{
+    grid: none!important;
+
+    .field_control{
+      width: 100%;
+    }
+
+    label{
+      padding-bottom: 5px;
+    }
+  }
+
+  .update_password .row_field{
+    grid-template-columns: 100%!important;
+  }
+}
+
+
+@media screen and (max-width: 575px) {
+  .upload input{
+      width: 50%;
+  }
+  section.contact-infrm div{
+    word-break: break-all;
+  }
+}
+
+
+// Delete Account 
+
+.delete_account{
+  padding: 20px 0;
+
+  .da_subtitle{
+    background: #E6F8FE;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .da_conditions{
+    color: #5D5E5E;
+    padding: 10px 20px;
+  }
+
+  h3{
+    color: #000;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 0px 20px;
+  }
+
+  .row_field{
+    grid-template-columns: 10% 40%;
+    padding: 10px 20px;
+  }
+
+  .radio_row{
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    padding: 10px 20px;
+  }
+
+  .radio_field{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+  }
+
+  .text_btn{
+    margin-right: 20px;
+  }
+
+  .reason{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 10px 0;
+
+    .reason_title{
+      font-weight: 500;
+    }
+  }
+}
+
+// Update Password 
+
+.update_password{
+
+  .up_subtitle{
+    background: #E6F8FE;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .row_field{
+    grid-template-columns: 15% 40%;
+  }
+}
+
+// Alert Popup Modal start
+
+.modal_header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px;
+  border-bottom: 1px solid #D9D9D9;
+  padding-bottom: 5px;
+
+  .title{
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0;
+  }
+
+  .close{
+      background: none;
+      border: none;
+  }
+}
+
+.modal_body{
+  text-align: center;
+  padding: 20px 15px 30px;
+
+  h2{
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  p{
+    color: #777;
+    margin: 0;
+
+    span{
+      color: #000;
+    }
+  }
+
+  .image{
+      margin-bottom: 15px;
+
+      img{
+          width: 80px;
+          height: 80px;
+          background: #e6f8fe;
+          padding: 18px;
+          border-radius: 5px;
+      }
+  }
+
+  .text_btn{
+    margin: 20px 0 10px;
+  }
+
+  .primary_btn{
+    margin: 5px 0 25px;
+  }
+}
+
+// Alert Popup Modal stop
+
+.toast_msg{
+  display: flex;
+  align-items: baseline;
+  border-radius: 4px;
+  border: 1.5px solid #34A853;
+  background: #EAFFF5;
+  padding: 20px;
+  width: 350px;
+  gap: 15px;
+  position: fixed;
+  bottom: 5px;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  .msg{
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .close_toast{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .delete_account .row_field {
+    grid-template-columns: 25% 65%;
+  }
+}

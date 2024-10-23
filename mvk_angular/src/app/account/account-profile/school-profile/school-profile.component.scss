@@ -1,0 +1,271 @@
+.v3_profile {
+    padding: 15px;
+
+    .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+
+        h2{
+            font-size: 14px;
+        }
+    }
+
+    .row_form {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        gap: 0px;
+    }
+}
+
+
+.row_field {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    padding-bottom: 40px;
+
+    label{
+        padding-top: 7px;
+        color: #000;
+    }
+}
+
+// .form_field {
+//     display: flex;
+//     align-items: center;
+//     gap: 15px;
+// }
+
+.field_control {
+    width: 72%;
+    position: relative;
+
+    .form-control {
+        font-size: 14px;
+        padding: 7px 10px;
+
+        &:focus{
+            outline: 0;
+            border-color: #02A8DF;
+        }
+    }
+
+    .icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translate(0%, -50%);
+    }
+}
+
+.error_control{
+    .form-control{
+        border: 1px solid #D63333;
+        color: #D63333;
+    }
+}
+
+.row_radio {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 25px;
+
+    .radio_control {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+}
+
+.section_affiliation {
+    padding: 15px 0;
+
+    p {
+        font-weight: 500;
+        margin: 0;
+    }
+
+    .affiliation_row {
+        display: grid;
+        grid-template-columns: 40% 20% auto;
+        align-items: center;
+        padding: 20px 0;
+    }
+}
+
+.section_rooms {
+    padding: 25px 0;
+
+    .total_qty {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding-bottom: 10px;
+
+        p {
+            margin: 0;
+        }
+
+        input {
+            width: 50px;
+            text-align: center;
+            background: #fff;
+        }
+    }
+
+    .row_quantity {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+        width: 50%;
+        padding: 20px 0;
+    
+        p {
+            margin: 0;
+        }
+    }
+
+    .field_control {
+        width: 27%;
+    }
+}
+
+
+.radio_title {
+    padding-bottom: 15px;
+}
+
+.section_radio {
+    padding:0 20px 40px 0;
+
+    .reason_field{
+
+        label{
+            display: flex;
+            align-items: center;
+            padding: 30px 0 10px;
+            justify-content: space-between;
+
+            .reason_desc_count{
+                color: #8A8A8A;
+            }
+        }
+    }
+
+    .title h2 {
+        margin-bottom: 5px;
+    }
+}
+
+.row_radiobox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 30px;
+
+    .radiobox {
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        label {
+            border-radius: 4px;
+            border: 0.5px solid #CCC;
+            padding: 4px 10px;
+            color: #B0B0B0;
+            cursor: pointer;
+        }
+
+        input[type="radio"]:checked+label {
+            background: #02A8DF;
+            color: #fff;
+        }
+    }
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+
+    button {
+        border-radius: 4px;
+        background: #02A8DF;
+        width: 30px;
+        height: 30px;
+        color: #fff;
+        font-size: 18px;
+        line-height: 0px;
+        text-align: center;
+        border: none;
+    }
+
+    button:disabled {
+        background-color: #f0f0f0;
+        cursor: not-allowed;
+    }
+
+    input[type="number"] {
+        width: 3em;
+        text-align: center;
+        border: none;
+    }
+
+    input[type="number"]:focus {
+        outline: none;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .section_rooms .row_quantity{
+        width: 100%;
+    }
+
+    .section_rooms .field_control{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .v3_profile {
+        padding: 0;
+
+        .row_form {
+            grid: none;
+        }
+    }
+
+    .row_field {
+        grid: none;
+
+        label {
+            padding-bottom: 5px;
+        }
+    }
+
+    .field_control {
+        width: 100%;
+    }
+
+    .section_affiliation .affiliation_row {
+        grid: none;
+        gap: 5px;
+    }
+
+    .section_rooms .row_quantity{
+        width: 100%;
+    }
+
+    .section_rooms .field_control{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .row_field{
+        padding-bottom: 20px;
+    }
+}

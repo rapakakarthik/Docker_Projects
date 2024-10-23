@@ -1,0 +1,37 @@
+<div class="main-container">
+  <h1>Top Ranking - Products</h1>
+  <section class="topbox">
+    <h3>Top Ranking Products</h3>
+    <h2>Most popular</h2>
+    <p>
+      Products are automatically ranked based on buyer inquires. Updated daily
+    </p>
+  </section>
+  <!-- Loaders start-->
+  <section *ngIf="topProductLoad" class="cardsWarp custom-flexs-list6">
+    <!-- <section class="cardsWarp flex-wrap"> -->
+    <section
+      class="product-cards-list card1"
+      *ngFor="let i of [0, 1, 2, 3, 4, 5]"
+    >
+      <section class="smart second"></section>
+      <section class="smart card-c-one"></section>
+      <section class="smart card-c-two"></section>
+    </section>
+  </section>
+  <!-- Loaders Ends-->
+  <section class="cardsWarp custom-flexs-list6">
+    <ng-container *ngFor="let product of products">
+      <section class="card1">
+        <app-product-card
+          [item]="product"
+          [description]="true"
+          [price]="true"
+          [qty]="true"
+          [styleClass]="'smallcard'"
+          [linkTo]="'/product'"
+        ></app-product-card>
+      </section>
+    </ng-container>
+  </section>
+</div>

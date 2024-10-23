@@ -1,0 +1,233 @@
+<section class="rfq-mainsection">
+  <!-- Rfq Details -->
+  <section>
+    <div *ngIf="rfqDetails" class="row">
+      <div class="col-lg-7">
+        <div class="media rfq-media">
+          <img
+            [src]="rfqDetails.attachments"
+            class="mr-3 rfq-media-image"
+            alt="..."
+            appSafeImage=""
+          />
+          <div class="media-body">
+            <h3 class="mt-0">{{ rfqDetails.product_name }}</h3>
+            <span class="rfq-price-data">
+              Quantity required:
+              <b> {{ rfqDetails.quantity }} Piece/Pieces </b>
+            </span>
+            <span class="rfq-price-data">Expiration Time: <b> {{ rfqDetails.valid_to }} </b></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="rfq-buttons">
+          <button class="approved-btn">
+            {{ rfqDetails.status }}
+          </button>
+        </div>
+        <div class="rfq-second-buttons">
+          <button (click)="editRfq()" class="stroked_btn me-2">
+            Add Details
+          </button>
+          <button (click)="postRfqAgain()" class="stroked_btn me-2">
+            Post Again
+          </button>
+          <button (click)="closeRfq()" class="stroked_btn">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="rfq_quotes_row">
+    <!-- Quotes -->
+    <section *ngIf="quoteCount > 0">
+      <div class="row">
+        <div class="col-lg-12 mt-4">
+          <ng-container *ngIf="quoteCount > 1; else singleQuote">
+            <h3 class="quotations-heading">All {{quoteCount}} quotations comparison</h3>
+          </ng-container>
+          <ng-template #singleQuote>
+            <h3 class="quotations-heading">Quotation Details</h3>
+          </ng-template>
+          <ul *ngIf="quotations" class="list-group list-group-horizontal rfq-list-table">
+            <li class="list-group-item pt-3">Company Name</li>
+            @for (i of [0,0,0,0]; track $index) {
+            <li *ngFor="let quote of quotations" class="list-group-item pt-3">
+              <span class="icon_close" type="button" (click)="closeQuote(quote.pk_quote_id)"><img src="../.././../../assets/images/close_icon.png"></span>
+              <p>{{ quote.seller_company_name || "No Name" }}</p>
+              <app-chat-now [det]="quote" [btnstyle]="true"></app-chat-now>
+              <button (click)="addNote(quote)" class="underline_btn my-2" > 
+                Add notes 
+              </button>
+            </li>
+          }
+          </ul>
+          <ul *ngIf="false" class="list-group list-group-horizontal rfq-list-table">
+            <li class="list-group-item">Vendor Comparison</li>
+            <ng-container *ngFor="let quote of quotations">
+              <li class="list-group-item rfq_closelist">
+                <span class="button-comparison" mat-raised-button color="primary">
+                  Competitive Price
+                </span>
+                <span class="button-comparison" mat-raised-button color="primary">
+                  Verified Seller
+                </span>
+              </li>
+            </ng-container>
+          </ul>
+          <ul class="list-group list-group-horizontal rfq-list-table">
+              <li class="list-group-item">Note</li>
+              @for (i of [0,0,0,0]; track $index) {
+              @for (quote of quotations; track quote.pk_quote_id) {
+              <li class="list-group-item">
+                <span color="primary">
+                  {{quote.note ?? '-'}}
+                </span>
+              </li>
+              }
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quotation details -->
+    <section>
+      <div class="row">
+        <div class="col-lg-12 mt-4">
+          <h3 class="quotations-heading">Quotation information</h3>
+          <ul *ngIf="quotations" class="list-group list-group-horizontal rfq-list-table">
+            <li class="list-group-item"> Product </li>
+            @for (i of [0,0,0,0]; track $index) {
+            <li *ngFor="let quote of quotations" class="list-group-item">
+              <img class="quotations-img" [src]="quote.prod_img" />
+              <p class="qu-information">{{ quote.product_name }}</p>
+              @if(quote.fk_product_id && quote.fk_product_id > 0) {
+                <button class="chat-now-button border-0" (click)="showDetails(quote.fk_product_id)" mat-stroked-button color="primary"> 
+                  Viewproduct details 
+                </button>
+              }
+            </li>
+          }
+          </ul>
+          <ul *ngIf="quotations" class="list-group list-group-horizontal rfq-list-table">
+            <li class="list-group-item">Unit Price</li>
+            @for (i of [0,0,0,0]; track $index) {
+            <li *ngFor="let quote of quotations" class="list-group-item">
+              <p class="list-text-data-vendors">
+                {{ quote.fob_price | inidanCurrency }} Piece
+              </p>
+            </li>
+          }
+          </ul>
+          <ul *ngIf="quotations" class="list-group list-group-horizontal rfq-list-table">
+            <li class="list-group-item">Discount Percentage</li>
+            @for (i of [0,0,0,0]; track $index) {
+            <li *ngFor="let quote of quotations" class="list-group-item">
+              <p class="list-text-data-vendors">
+                {{ quote.discount}}%
+              </p>
+            </li>
+          }
+          </ul>
+          <ul *ngIf="quotations" class="list-group list-group-horizontal rfq-list-table">
+            <li class="list-group-item">Shipping Charges</li>
+            @for (i of [0,0,0,0]; track $index) {
+            <li *ngFor="let quote of quotations" class="list-group-item">
+              <p class="list-text-data-vendors"> {{quote.shipping_charges | inidanCurrency}} </p>
+            </li>
+          }
+          </ul>
+          <ul *ngIf="quotations" class="list-group list-group-horizontal rfq-list-table">
+            <li class="list-group-item">Product Description</li>
+            @for (i of [0,0,0,0]; track $index) {
+            <li *ngFor="let quote of quotations" class="list-group-item">
+              <p class="list-text-data-vendors"> {{quote.prod_description}} </p>
+            </li>
+          }
+          </ul>
+          <ul *ngIf="quotations" class="list-group list-group-horizontal rfq-list-table">
+            <li class="list-group-item">Delivery Time</li>
+            @for (i of [0,0,0,0]; track $index) {
+            <li *ngFor="let quote of quotations" class="list-group-item">
+              <p class="list-text-data-vendors"> Less than {{quote.delivery_time}} Days</p>
+            </li>
+          }
+          </ul>
+          <ul *ngIf="quotations" class="list-group list-group-horizontal rfq-list-table">
+            <li class="list-group-item">Valid Upto</li>
+            @for (i of [0,0,0,0]; track $index) {
+            <li *ngFor="let quote of quotations" class="list-group-item">
+              <p class="list-text-data-vendors"> {{quote.valid_date}}</p>
+            </li>
+          }
+          </ul>
+          <ul *ngIf="quotations" class="list-group list-group-horizontal rfq-list-table">
+            <li class="list-group-item">Sample Available</li>
+            @for (i of [0,0,0,0]; track $index) {
+            <li *ngFor="let quote of quotations" class="list-group-item">
+              <p class="list-text-data-vendors"> {{quote.offer_sample == 1 ? 'Yes' : 'No'}}</p>
+            </li>
+          }
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- company details -->
+    <section>
+      <div class="row">
+        <div class="col-lg-12 mt-4">
+          <h3 class="quotations-heading">Company information</h3>
+
+          <ul *ngIf="quotations" class="list-group list-group-horizontal rfq-list-table">
+            <li class="list-group-item">Brand Name</li>
+            @for (i of [0,0,0,0]; track $index) {
+            <li *ngFor="let quote of quotations" class="list-group-item">
+              <p class="list-text-data-vendors vends"> {{quote.seller_brand_name ?? '-'}} </p>
+            </li>
+          }
+          </ul>
+          <ul class="list-group list-group-horizontal rfq-list-table">
+            <li class="list-group-item">MyVerkoper.com experience</li>
+            @for (i of [0,0,0,0]; track $index) {
+            <li *ngFor="let quote of quotations" class="list-group-item">
+              <p class="list-text-data-vendors vends">-</p>
+            </li>
+          }
+          </ul>
+          <ul class="list-group list-group-horizontal rfq-list-table">
+            <li class="list-group-item">Business Type</li>
+            @for (i of [0,0,0,0]; track $index) {
+            <li *ngFor="let quote of quotations" class="list-group-item">
+              <p class="list-text-data-vendors vends">
+                {{ quote.business_type ?? "-" }}
+              </p>
+            </li>
+          }
+          </ul>
+          <ul class="list-group list-group-horizontal rfq-list-table">
+            <li class="list-group-item">Main Products</li>
+            @for (i of [0,0,0,0]; track $index) {
+            <li *ngFor="let quote of quotations" class="list-group-item">
+              <p class="list-text-data-vendors vends">
+                {{ quote.main_products ?? "-" }}
+              </p>
+            </li>
+          }
+          </ul>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section *ngIf="showQuoteDetails" class="footer-popup">
+    <app-rfq-quotation-details
+      [id]="productId"
+      (hide)="showDetails(productId)"
+    ></app-rfq-quotation-details>
+  </section>
+</section>

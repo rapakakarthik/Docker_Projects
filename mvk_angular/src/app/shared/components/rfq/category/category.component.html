@@ -1,0 +1,40 @@
+<ul>
+  <li *ngFor="let category of categories">
+    <span class="list-item-last" *ngIf="category.children.length == 0">
+      <mat-checkbox (click)="selectlist(category)" color="primary"></mat-checkbox> {{ category.name }}
+    </span>
+    <span  class="list-item-heading" *ngIf="category.children.length > 0">
+      {{ category.name }} 
+      <mat-icon *ngIf="!category.show" (click)="onCategoryClick(category)">chevron_right</mat-icon> 
+      <mat-icon *ngIf="category.show" (click)="onCategoryClick(category)">expand_more</mat-icon>
+    </span>
+    <ul *ngIf="category.children && category.children.length ">
+      <app-category [categoriesnew]="category.children"></app-category>
+    </ul>
+  </li>
+</ul>
+<ul *ngIf="showOthers">
+  <li>
+    <span class="list-item-last">
+      <mat-checkbox [(ngModel)]="showInput" color="primary"></mat-checkbox> Others
+    </span>
+  </li>
+  <section *ngIf="showInput" class="fieldsec filedsec-100p">
+    <label>*Product Name</label>
+    <mat-form-field appearance="outline" class="middlefiled">
+      <input matInput type="text" placeholder="Category Name" [(ngModel)]="otherValue"/>
+      <mat-error>Product Name required</mat-error>
+    </mat-form-field>
+  </section>
+  <section  *ngIf="showInput" class="rfqbtnwrap">
+    <button
+      (click)="addCategory()"
+      [disabled]="!otherValue"
+      mat-raised-button
+      type="button"
+      class="primaryBtn rfq-button"
+    >
+      Add
+    </button>
+  </section>
+</ul>

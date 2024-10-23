@@ -1,0 +1,139 @@
+<div class="main-container">
+  <ng-container *ngIf="!loader">
+    <!-- Main categories list -->
+    <div class="tab-banner-chips-normal">
+      <div class="mobiletabwrapper linetabstyle">
+        <ul>
+          <li *ngFor="let category of mainCategoryData; let i=index"> 
+             <button (click)="setActiveTab(i)" [class.selectedtab]="i === activeTab">{{ category.room_name }}</button>
+            </li>
+            </ul></div>
+      <mat-tab-group
+        disableRipple
+        (selectedIndexChange)="getSubCategory2($event)"
+        #tabGroup class="onlydesktop"
+      >
+        <mat-tab *ngFor="let category of mainCategoryData">
+          <ng-template mat-tab-label>
+            <div class="chipcls">{{ category.room_name }}</div>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+
+    <!-- Sub Categories List based on category ID -->
+    <section class="tab-banner-chips">
+      <div class="mobiletabwrapper btntabstyle marTB20"  *ngIf="subCategoryData && subCategoryData.length > 1" >
+        <ul>
+          <li>  <button (click)="setSubActiveTab(0)" [class.selectedtab]="0 === subActiveTab">All</button></li>
+          <li *ngFor="let category of subCategoryData; let i=index"> 
+             <button (click)="setSubActiveTab(i + 1)" [class.selectedtab]="i+1 === subActiveTab">{{ category.sub_room }}</button>
+            </li>
+            </ul></div>
+      <mat-tab-group
+        *ngIf="subCategoryData && subCategoryData.length > 1"
+        disableRipple
+        (selectedTabChange)="onTabClick($event)"
+        #subTabGroup class="onlydesktop"
+      >
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="chipcls">All</div>
+          </ng-template>
+        </mat-tab>
+        <mat-tab *ngFor="let cat of subCategoryData">
+          <ng-template mat-tab-label>
+            <div class="chipcls">{{ cat.sub_room }}</div>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </section>
+
+    <div
+      *ngIf="leastCategories && leastCategories.length > 1"
+      class="tab-banner-chips-normal"
+    >
+    <div class="mobiletabwrapper linetabstyle" >
+      <ul>
+        <li> 
+          <button (click)="setSubActiveTab1(0)" [class.selectedtab]="0 === subActiveTab1">All</button>
+         </li>
+        <li *ngFor="let category of leastCategories; let i=index"> 
+           <button (click)="setSubActiveTab1(i + 1)" [class.selectedtab]="i + 1 === subActiveTab1">{{ category.category_name }}</button>
+          </li>
+          </ul></div>
+      <mat-tab-group
+        disableRipple
+        (selectedIndexChange)="getLeastCategory($event)"
+        #leastTabGroup class="onlydesktop"
+      >
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="chipcls">All</div>
+          </ng-template>
+        </mat-tab>
+        <mat-tab *ngFor="let category of leastCategories">
+          <ng-template mat-tab-label>
+            <div class="chipcls">{{ category.category_name }}</div>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </ng-container>
+
+  <!-- Category Loader -->
+  <ng-container *ngIf="loader">
+    <ul class="chiplist toplist">
+      <li *ngFor="let i of [0, 1]"><span class="smart smartsmall"></span></li>
+    </ul>
+    <ul class="chiplist bottomlist">
+      <li *ngFor="let i of [0, 1, 2, 3, 4, 5]">
+        <span class="smart smartsmall"></span>
+      </li>
+    </ul>
+  </ng-container>
+
+  <ng-container *ngIf="!dataloader">
+    <section class="flex-wrap marT30">
+      <section class="cardsWarp custom-flexs-list6">
+        <ng-container *ngFor="let data of collection | paginate: { itemsPerPage: 15, currentPage: p, totalItems: totalCount }">
+          <section class="card1">
+            <app-product-card
+              [styleClass]="'smallcard'"
+              [item]="data"
+              [description]="true"
+              [price]="true"
+              [qty]="true"
+              [linkTo]="'recomendations'"
+            ></app-product-card>
+          </section>
+        </ng-container>
+        <!-- <mat-paginator
+          *ngIf="!(showData.length == 0)"
+          (page)="onPageChange($event)"
+          [length]="totalItems"
+          [pageSize]="18"
+          [pageSizeOptions]="[18, 36]"
+        ></mat-paginator> -->
+        <section *ngIf="collection.length != 0" class="paginator">
+          <pagination-controls [maxSize]="5"  (pageChange)="onPageChange2($event)"></pagination-controls>    
+        </section>
+        <section class="nodata" *ngIf="noDataFound">
+          No Products
+        </section>
+      </section>
+    </section>
+  </ng-container>
+
+  <ng-container *ngIf="dataloader">
+    <section class="flex-wrap marT30">
+      <section class="cardsWarp custom-flexs-list6">
+        <section class="card1" *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8]">
+          <section class="smart imgsmart"></section>
+          <section class="smart line2"></section>
+          <section class="smart line3"></section>
+        </section>
+      </section>
+    </section>
+  </ng-container>
+</div>

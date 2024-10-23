@@ -1,0 +1,86 @@
+<app-header></app-header>
+
+<div class="page-content1 main-container">
+  <div class="container contact-section">
+    <div class="row">
+      <div class="col-lg-6">
+        <h2 class="contact-section mb-4">Get in touch with Us</h2>
+        <p class="contact-section-p">
+          <span class="white-circle"
+            ><i class="fa fa-map-marker" aria-hidden="true"></i
+          ></span>
+          3rd Floor, Akshaya Space Building,<br />
+          RBI Colony, Kavuri Hills Phase 2,<br />
+          Madhapur, Hyderabad-500081
+        </p>
+        <p class="contact-section-p1">
+          <span class="white-circle"
+            ><i class="fa fa-phone" aria-hidden="true"></i
+          ></span>
+          +91 9666604766
+        </p>
+        <p class="contact-section-p2">
+          <span class="white-circle"
+            ><i class="fa fa-envelope" aria-hidden="true"></i
+          ></span>
+          grievances&#64;myverkoper.com
+        </p>
+        <div class="mt-4"><iframe src="https://www.google.com/maps/embed?pb=!1m22!1m8!1m3!1d76821.44046531281!2d78.35327239379687!3d17.437721518515087!3m2!1i1024!2i768!4f13.1!4m11!3e6!4m3!3m2!1d17.438171999999998!2d78.393!4m5!1s0x3bcb93be8e4812b1%3A0x256f8b2ec733ee7c!2smyverkoper!3m2!1d17.4381828!2d78.3929642!5e0!3m2!1sen!2sin!4v1697004479356!5m2!1sen!2sin" width="75%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      </div>
+      <div class="col-lg-6 mt-5 mt-lg-0">
+        <h2 class="contact-section mb-4">Let's Start a Conversation</h2>
+        <form class="cont_form" [formGroup]="contactForm">
+        <!-- <section class="w-50 input-fileds-email">
+          <mat-form-field appearance="outline" class="w-100 middlefiled">
+            <mat-label>Salutation</mat-label>
+            <mat-select formControlName="salutation" class="w-100">
+              <mat-option *ngFor="let option of salutation" [value]="option.value">{{option.key}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </section> -->
+        <mat-form-field appearance="outline" class="w-100 middlefiled">
+          <mat-label> Full Name </mat-label>
+          <input type="text" formControlName="fullname" matInput placeholder="Full Name" />
+        </mat-form-field>
+        <section class="w-50 input-fileds-email">
+          <mat-form-field appearance="outline" class="w-100 middlefiled">
+            <mat-label> Email Address </mat-label>
+            <input type="text" formControlName="email" matInput placeholder="Email Address" />
+          </mat-form-field>
+          <mat-error *ngIf="Email?.hasError('invalidEmail') && Email?.value?.length > 5 ">
+            Please enter a valid email address.
+          </mat-error>
+        </section>
+        <section class="w-50 input-fileds-phone">
+          <mat-form-field appearance="outline" class="w-100 middlefiled">
+            <mat-label> Phone Number </mat-label>
+            <input type="number" formControlName="phone" matInput placeholder="Phone Number" />
+          </mat-form-field>
+          <mat-error *ngIf="Phone?.hasError('pattern')">
+            Please enter a valid Phone Number.
+          </mat-error>
+        </section>
+        <mat-form-field appearance="outline" class="w-100 middlefiled">
+          <mat-label> Subject </mat-label>
+          <input type="text" formControlName="subject" matInput placeholder="Subject" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100 middlefiled">
+          <mat-label>Message</mat-label>
+          <textarea formControlName="message" matInput></textarea>
+        </mat-form-field>
+        <button *ngIf="submitBtn; else loader" [disabled]="contactForm.invalid" type="submit" (click)="contactUs(contactForm.value)" mat-raised-button color="primary" class="contact-req">
+          Submit
+        </button>
+        <ng-template #loader>
+          <button type="button" mat-raised-button color="primary" class="contact-req ">
+            <div class="spinner-border text-primary"></div>
+          </button>
+        </ng-template>
+        <!-- <div><img src="./../../../../assets/images/favicon.jpg"/></div> -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

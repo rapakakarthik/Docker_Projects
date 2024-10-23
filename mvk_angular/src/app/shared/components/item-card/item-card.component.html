@@ -1,0 +1,56 @@
+<a *ngIf="item" (click)="route2(item)" class="pointer">
+<!-- <a *ngIf="item" (click)="route(item.parent_category_id, item.product_id)" class="pointer"> -->
+  <mat-card>
+    <section class="card-imagewrap">
+      <img class="card-img" mat-card-image
+      [lazyLoad] ="item.product_image ?? 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'"/>
+    </section> 
+    <mat-card-content class="card-content">
+      <mat-card-title class="card-price">
+        {{ item.product_price | inidanCurrency }}
+      </mat-card-title>
+      <div class="re-label">Trending Now</div>
+    </mat-card-content>
+    <mat-card-actions class="card-rating">
+      <ng-container *ngFor="let r of [0, 1, 2, 3, 4]">
+        <svg [ngClass]="
+            item.product_rating > r ? 'filled-star' : 'filled-star-gray'
+          " xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 96 960 960" width="12">
+          <path d="m185 1039 80-331L3 484l343-29 134-313 134 314 343 28-262 224 80 331-295-176-295 176Z" />
+        </svg>
+      </ng-container>
+
+      <Span class="rating-number"> {{ item.product_rating }}.0</Span>
+    </mat-card-actions>
+  </mat-card>
+</a>
+
+<a *ngIf="seller" routerLink="/products/topmanufacture">
+  <mat-card *ngIf="seller">
+    <section class="card-imagewrap">
+      <img class="card-img" mat-card-image [lazyLoad] ="seller.image" alt="" />
+    </section>
+    <mat-card-content class="card-content">
+      <div class="label-1">{{ seller.name }}</div>
+    </mat-card-content>
+  </mat-card>
+</a>
+
+
+
+<a *ngIf="recomendationItems" (click)="route2(recomendationItems)" class="pointer">
+  <mat-card>
+    <section class="card-imagewrap">
+      <img class="card-img" mat-card-image
+      [title]="recomendationItems.prod_name"
+      [lazyLoad] ="recomendationItems?.prod_img ?? 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'"/>
+    </section>
+    <mat-card-content class="card-content">
+      <mat-card-title class="card-price">
+        {{ recomendationItems.prod_pricing | inidanCurrency }}
+      </mat-card-title>
+    
+    </mat-card-content>
+   
+  </mat-card>
+</a>

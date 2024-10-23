@@ -1,0 +1,116 @@
+<section class="page-wrap">
+  <section class="flex-wrap">
+    <!-- Loaders Start -->
+    <ng-container *ngIf="productLoad">
+      <section class="flex-list gapflex" *ngFor="let j of [0, 1, 2]">
+        <h2 class="smallTitle"><span class="smart products-listing"></span></h2>
+        <section class="cardsWarp">
+          <section class="product-cards-list" *ngFor="let i of [0, 1, 2]">
+            <section class="smart"></section>
+            <section class="smart card-one"></section>
+            <section class="smart card-one"></section>
+            <section class="smart card-one"></section>
+          </section>
+        </section>
+      </section>
+    </ng-container>
+    <!-- Loaders End -->
+
+    <!-- Showing New Arrivals -->
+    <ng-container *ngFor="let product of newArrivals">
+      <section class="flex-list gapflex">
+        <h2 class="smallTitle">{{ product.title }}</h2>
+        <section class="cardsWarp" *ngIf="product.products.length > 0">
+          <ng-container *ngFor="let item of product.products.slice(0, 3)">
+            <app-item-card
+              class="itemBlocks"
+              [linkTo]="'/recommendations'"
+              [item]="item"
+            ></app-item-card>
+          </ng-container>
+        </section>
+      </section>
+    </ng-container>
+  </section>
+
+  <!-- Loader Starts -->
+  <section *ngIf="homeCategoryLoad" class="flex-row-category">
+    <section class="cardsWarp">
+      <section
+        class="product-cards-list second"
+        *ngFor="let i of [0, 1, 2, 3, 4, 5]"
+      >
+        <section class="smart second"></section>
+      </section>
+    </section>
+  </section>
+  <!-- Loader Ends -->
+
+  <!-- Books, E-learning, Stationary -->
+  <ng-container *ngFor="let category of CategoryData; let i = index">
+    <section class="flex-row-category" [ngClass]="i == 0 ? 'marT20' : ''">
+      <img class="img-sidenavbar" [src]="category.category_image" />
+      <h2 class="smallTitle titlesec">
+        {{ category.category_name }}
+        <a (click)="route2(category.category_id, category.category_name)">
+        <!-- <a [routerLink]="['/category', category.category_id]"> -->
+            <svg
+              class="arrow-rights-products"
+              xmlns="http://www.w3.org/2000/svg"
+              height="24"
+              width="24"
+            >
+              <path
+                d="m14.725 18.675-1.05-1.05 4.875-4.875H2.4v-1.5h16.15l-4.875-4.875 1.05-1.05 6.7 6.675Z"
+            /></svg>
+          </a>
+      </h2>
+
+      <section class="cardsWarp custom-flexs-list">
+        <app-multi-carousel
+          [catData]="category.products"
+          [screenName]="'home'"
+        ></app-multi-carousel>
+      </section>
+    </section>
+  </ng-container>
+
+  <app-quotebanner></app-quotebanner>
+
+  <!-- Loaders start-->
+  <section *ngIf="justForYouLoad" class="flex-wrap">
+    <section class="cardsWarp custom-flexs-list6">
+      <section
+        class="product-cards-list second"
+        *ngFor="let i of [0, 1, 2, 3, 4, 5]"
+      >
+        <section class="smart second"></section>
+        <section class="smart card-c-one"></section>
+        <section class="smart card-c-two"></section>
+      </section>
+    </section>
+  </section>
+  <!-- Loaders Ends-->
+
+  <section class="flex-wrap">
+    <section class="">
+      <h2>Products</h2>
+      <section class="cardsWarp custom-flexs-list6">
+        <ng-container *ngFor="let product of productData">
+          <section class="card1">
+            <app-product-card
+              [styleClass]="'smallcard'"
+              [item]="product"
+              [description]="true"
+              [price]="true"
+              [qty]="true"
+              [linkTo]="linkTo"
+            ></app-product-card>
+          </section>
+        </ng-container>
+      </section>
+    </section>
+  </section>
+
+  <app-region *ngIf="false"></app-region>
+</section>

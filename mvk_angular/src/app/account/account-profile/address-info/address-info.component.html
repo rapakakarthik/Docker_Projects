@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row">
+      <div class="col-lg-12 header-form">
+        <h3> Address Information </h3>
+        <span> Accurate and verified Address will help to build trust with suppliers. </span>
+      </div>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submit(form)">
+      <div mat-dialog-content>
+      <div class="row main-form">
+
+         <!-- Address -->
+         <div class="col-lg-12">
+          <label> *Address:</label>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field class="w-100 middlefiled">
+            <input formControlName="country_name" placeholder="Country"  class="w-100 middlefiled" matInput>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field class="w-100 middlefiled">
+            <input formControlName="state_name" placeholder="State"  class="w-100 middlefiled" matInput>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field class="w-100 middlefiled"> 
+            <input formControlName="city_name" placeholder="City" class="w-100 middlefiled" matInput>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field class="w-100 middlefiled"> 
+            <input formControlName="user_pincode" type="number" placeholder="Pincode" class="w-100 middlefiled" matInput>
+          </mat-form-field>
+        </div>  
+
+        <!-- Land Mark -->
+        <div class="col-lg-12">
+          <label> *Land Mark:</label>
+        </div>
+        <div class="col-lg-12">
+          <mat-form-field class="w-100 middlefiled">
+            <input formControlName="land_mark" class="w-100 middlefiled" placeholder="Land Mark" matInput>
+          </mat-form-field>
+        </div>
+  
+        <!-- Locality Area Field -->
+        <div class="col-lg-12">
+          <label> *Locality Area:</label>
+        </div>
+        <div class="col-lg-12">
+          <mat-form-field class="w-100 middlefiled">
+            <input formControlName="locality_area" placeholder="Locality Area" class="w-100 middlefiled" matInput>
+          </mat-form-field>
+        </div>       
+        </div>
+      </div>
+  
+  
+      <div mat-dialog-actions align="end">
+        <!-- Update Button -->
+        <section class="rfqbtnwrap">
+          <button [disabled]="form.invalid" mat-raised-button type="submit" class="primaryBtn rfq-button">
+            Update Details
+          </button>
+        </section>
+        <section class="rfqbtnwrap">
+          <button type="button" (click)="closeDialog()" mat-raised-button color="warn" class="close-btn">
+            Close
+          </button>
+        </section>
+        </div>
+    </form>
+  </div>

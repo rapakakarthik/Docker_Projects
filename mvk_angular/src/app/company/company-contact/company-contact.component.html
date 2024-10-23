@@ -1,0 +1,133 @@
+<section>
+  <!-- Company Contact Information -->
+  <section class="header-setion">
+    <h2 class="mainTitle">Company contact information</h2>
+  </section>
+  <section class="profile-section">
+    <div class="row">
+      <div class="col-lg-3">
+        <!-- Seller Company User Details -->
+        <div *ngIf="companyProfile" class="card company-page-card">
+          <img [src]="companyProfile.seller_company_logo" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h3 class="card-title">{{ companyProfile.seller_company_name }}</h3>
+            <!-- <p>Sales Director</p> -->
+            <app-chat-now [sellerDetails]="sellerDetails" class="btn btn-primary chatnow"></app-chat-now>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <section class="contact-details-list">
+          <!-- Seller Company Details -->
+          @if (contactDetails.length > 0) {
+          <section *ngIf="contactDetails[0].details.length > 0" class="lists">
+            <div class="myTable">
+              <table>
+                <tbody>
+                  @for (contact of contactDetails[0].details; track $index) {
+                  <tr>
+                    <td width="50%"> {{contact.key}} </td>
+                    <td width="5%">:</td>
+                    <th width="45%">{{contact.val ?? '-'}}</th>
+                  </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+          }
+
+          <section>
+            <app-contactsupplier [class]="'primary_btn'" [sellerDetails]="sellerDetails" [btnstyle]="true"></app-contactsupplier>
+          </section>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- Company Basic Information -->
+  @if (contactDetails.length > 1) {
+  <section class="header-setion">
+    <h2 class="mainTitle">Company Basic information</h2>
+  </section>
+  <section class="profile-section">
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6">
+        <section class="contact-details-list">
+          <section *ngIf=" contactDetails[1].details.length > 0" class="lists">
+            <div class="myTable">
+              <table>
+                <tbody>
+                  @for (contact of contactDetails[1].details; track $index) {
+                  <tr>
+                    <td width="50%">{{contact.key}}</td>
+                    <td width="5%">:</td>
+                    <th width="45%">{{ contact.val ?? '-' }}</th>
+                  </tr>
+                  <tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
+  </section>
+  }
+
+  <!-- <section class="msg_supplier">
+    <div class="msg_row">
+      <label class="msg_label">To :</label>
+      <div class="name">George</div>
+    </div>
+    <div class="msg_row d-sm-inherit">
+      <label class="msg_label"><span class="text_error">*</span>Message :</label>
+      <div>
+        <div class="msg_textarea">
+          <textarea rows="4" class="form-control" placeholder="Enter your inquiry details such as product name, color, size, MOQ, FOB, etc."></textarea>
+          <div class="text_error">Content Required</div>
+        </div>
+        <div class="msg_checkbox">
+          <input type="checkbox"/>
+          <label>I agree to share my <b>Business Card</b> to the supplier </label>
+        </div>
+        <button class="primary_btn">Chat Now</button>
+      </div>
+    </div>
+  </section> -->
+  
+<!-- Company Contact Form -->
+<section *ngIf="false" class="header-setion">
+  <h2 class="mainTitle">Send Message to Supplier</h2>
+  <section class="send-message-box">
+    <form>
+      <div class="form-group row frm-suppler">
+        <label class="col-sm-2 col-form-label">
+          To :
+        </label>
+        <div *ngIf="companyProfile" class="col-sm-10">
+          <p class="form-control-plaintext"> {{companyProfile.seller_account_name}} </p>
+        </div>
+      </div>
+      <div class="form-group row frm-suppler">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Message:</label>
+        <div class="col-sm-10">
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <div class="form-group form-check check-out">
+            <mat-checkbox color="primary">I agree to share my <b> Bussiness Card </b> to the supplier</mat-checkbox>
+            <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1" /> -->
+            <label class="form-check-label" for="exampleCheck1">
+              I agree to share my <b> Bussiness Card </b> to the supplier
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submitt">
+            Send
+          </button>
+        </div>
+      </div>
+    </form>
+  </section>
+</section>
