@@ -1,3 +1,0 @@
-<section class="container" [formGroup]="multiSelect">
-        <p class="select" (click)="applyColor(com)" [class.applyBorderColor]="multiSelect.get(com)?.value" *ngFor="let com of company"><mat-checkbox  [formControlName]="com">{{com | uppercase}}</mat-checkbox></p>
-</section>
