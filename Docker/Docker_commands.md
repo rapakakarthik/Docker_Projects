@@ -42,7 +42,7 @@
 - **`docker-compose ps`**: List services managed by Compose.
 
 ### Image Management
-- **`docker build -t <image_name> .  `**: Build an image from a Dockerfile.
+- **`docker build -t <image_name>:<tag> .`**: Build an image from a Dockerfile.
 - **`docker run -d -p 80:80 --name <container name > <image_name> `**: Run container form Image.
 
 ### Docker Push Custom Image to Docker private Registry or ECR -Elastic Container Registry.
